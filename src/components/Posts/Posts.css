@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+.backgroundcoloring{
+  background-color: #F0F8FF;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.title{
+   text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+    color: red;
+ }
+
+.desc{
+  text-align: center;
+}
+
+.track-line {
+  height: 2px !important;
+  background-color: #488978;
+  opacity: 1;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-top: 0px;
+  background-color: #488978;
+  border-radius: 50%;
+  display: inline-block
+}
+
+.big-dot {
+  height: 25px;
+  width: 25px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  background-color: #488978;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.big-dot i {
+  font-size: 12px;
+}
+
+.card-stepper {
+  z-index: 0
+}
