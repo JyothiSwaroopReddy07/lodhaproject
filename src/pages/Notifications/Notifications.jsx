@@ -1,7 +1,7 @@
 import React from 'react';
 import './Notifications.css';
 import Modals from '/src/components/Modals/Modals.jsx';
-import NavBar from '/src/components/NavBar';
+import NavBar from '/src/components/NavBar/NavBar';
 
 function Notifications() {
   let Notification = [

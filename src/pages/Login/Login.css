@@ -10,9 +10,9 @@
 
 .form1{
   padding: 5px 5px 5px 10px;
-  height: 40px;
+  height: 50px !important;
   width: 80%;
-  margin-left:10%;
+  margin-left:10% !important;
   border-radius: 10px;
 }
 
@@ -36,9 +36,11 @@
 }
 
 #login{
-  height: 40px;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+#login:hover{
+  background-color: #BFA008;
 }
 
 .login-container{
@@ -47,7 +49,7 @@
   border-radius: 10px;
 }
 
-@media (max-width: 780px) {
+@media only screen and (max-width: 780px) {
   .rounded-tr-lg-0 {
     border-top-right-radius: 0.5rem;
     border-bottom-left-radius: 0rem;

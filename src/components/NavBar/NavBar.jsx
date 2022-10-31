@@ -4,9 +4,9 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
-import '../styles/header.css';
-import { useGlobalContext } from '../Context/StateContext';
-import Dropdown from './Dropdown.jsx';
+import './NavBar.css';
+import { useGlobalContext } from '/src/Context/StateContext';
+import Dropdown from '../DropDown/Dropdown';
 
 function Header() {
 

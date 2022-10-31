@@ -2,7 +2,7 @@ import React from 'react';
 import './Complaints.css';
 import Accordion from 'react-bootstrap/Accordion';
 import Posts from '/src/components/Posts/Posts';
-import NavBar from '/src/components/NavBar';
+import NavBar from '/src/components/NavBar/NavBar';
 
 
 function Complaints() {

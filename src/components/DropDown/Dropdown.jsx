@@ -1,5 +1,5 @@
 import React from 'react';
-import '/src/styles/sidenav.css';
+import './Dropdown.css';
 import Accordion from 'react-bootstrap/Accordion';
 function Dropdown() {
 

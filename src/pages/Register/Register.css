@@ -9,9 +9,10 @@
 }
 
 .form1{
+  
   padding: 5px 5px 5px 10px;
-  height: 200px;
-  width: 80%;
+  height: 50px !important;
+  width: 80% !important;
   margin-left:10%;
   border-radius: 10px;
 }
@@ -20,6 +21,8 @@
   font-weight: bold;
   margin: 0 !important; 
   padding-left: 20px;
+  align-items: center;
+  justify-content: center;
   text-align : center;
   color: #bfa008 !important;
   text-transform: uppercase;
@@ -29,15 +32,30 @@
   font-size: 45px;
   
 }
+#name{
+  border: 1px solid #000!important;
+  margin-bottom: 0 !important;
+}
+#uname, #parking, #mob, #flat, #block{
+   border: 1px solid #000!important;
+}
 
 #pass{
+  
+   border: 1px solid #000!important;
   height: 40px;
   border-radius: 10px;
 }
 
 #login{
+  align-items: center !important;
+  justify-content: center !important;
+  text-align : center !important;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+#login:hover{
+  background-color: #BFA008;
 }
 
 .login-container{

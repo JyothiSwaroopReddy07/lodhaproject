@@ -11,10 +11,10 @@ import {
   MDBCheckbox
 }
   from 'mdb-react-ui-kit';
-import './ItSupportLogin.css';
-import NavBar from '/src/components/NavBar';
+import './Login.css';
+import NavBar from '/src/components/NavBar/NavBar';
 
-function ItSupportLogin() {
+function Login() {
   return (
     <>
       <NavBar/>
@@ -30,17 +30,22 @@ function ItSupportLogin() {
           <MDBCol md='8'>
 
             <MDBCardBody className="mx-auto">
-              <h1 class='heading'>IT Support Login</h1>
+              <div style={{display:"flex", justifyContent: "center", alignItems: "center", marginBottom: "5%"}}>
+              <img src="/src/assests/user.svg" style={{width:"70px", height : "70px"}}></img>
+              <h1 className='heading'>User Login</h1>
+                </div>
+              <div>
               <MDBInput wrapperClass='mb-4' placeholder='Email address' className='form1' id='uname' type='email' />
+                </div>
               <MDBInput wrapperClass='mb-4' placeholder='Password' className='form1' id='pass' type='password' />
 
               <div className="d-flex justify-content-around mx-4 mb-4 form1">
                 <MDBCheckbox name='flexCheck' value='' label='Remember me' />
                 <a href="!#">Forgot password?</a>
               </div>
-
-              <MDBBtn className="mb-4 form1 " id = "login">Login</MDBBtn>
-
+              
+              <MDBBtn className="mb-4 form1" id = "login">Login</MDBBtn>
+                 
             </MDBCardBody>
 
           </MDBCol>
@@ -53,4 +58,4 @@ function ItSupportLogin() {
   );
 }
 
-export default ItSupportLogin;
+export default Login;

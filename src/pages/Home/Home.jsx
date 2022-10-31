@@ -8,7 +8,7 @@ import {
 } from 'mdb-react-ui-kit';
 import Location from '/src/components/Location/Location';
 import Contact from '/src/components/ContactUs/Contact';
-import NavBar from '/src/components/NavBar';
+import NavBar from '/src/components/NavBar/NavBar';
 import Carousels from '/src/components/Carousel/Carousel';
 import Facilities from '/src/components/Facilities/facilities';
 
