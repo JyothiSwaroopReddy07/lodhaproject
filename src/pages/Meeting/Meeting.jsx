@@ -75,7 +75,7 @@ function Meeting() {
                       </label>
                        
                       <div class="mb-3">
-                        <button type="submit" class="btn btn-dark px-3 w-100">Submit</button>
+                        <button type="submit" class="btn btn-dark px-3 w-100 submitButton">Submit</button>
                       </div>
                     </form>
                   </div>

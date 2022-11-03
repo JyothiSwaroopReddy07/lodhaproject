@@ -42,3 +42,7 @@
 .textInput{
     height: 35px !important;
 }
+
+.submitButton:hover{
+   color: gold !important;
+}

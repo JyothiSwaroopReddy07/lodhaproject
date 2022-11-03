@@ -6,6 +6,7 @@ import Notifications from './pages/Notifications/Notifications'
 import Home from './pages/Home/Home'
 import Register from './pages/Register/Register'
 import Meeting from './pages/Meeting/Meeting'
+import GoogleForms from './pages/GoogleForms/GoogleForms'
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
           <Route path='/Register' element={<Register />} />
           <Route path='/Complaints' element={<Complaints />} />
           <Route path = '/Meeting' element = {<Meeting />} />
+          <Route path='/Forms' element = {<GoogleForms />} />
           <Route path='/Notifications' element={<Notifications />} />
         </Routes>
       </Router>
