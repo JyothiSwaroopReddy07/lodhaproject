@@ -5,6 +5,7 @@ import Complaints from './pages/Complaints/Complaints'
 import Notifications from './pages/Notifications/Notifications'
 import Home from './pages/Home/Home'
 import Register from './pages/Register/Register'
+import Meeting from './pages/Meeting/Meeting'
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
           <Route path='/User' element={<Login />} />
           <Route path='/Register' element={<Register />} />
           <Route path='/Complaints' element={<Complaints />} />
+          <Route path = '/Meeting' element = {<Meeting />} />
           <Route path='/Notifications' element={<Notifications />} />
         </Routes>
       </Router>
