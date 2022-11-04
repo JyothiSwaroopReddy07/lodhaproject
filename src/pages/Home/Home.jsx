@@ -14,7 +14,7 @@ import Facilities from '/src/components/Facilities/facilities';
 function Home() {
   return (
     <>
-      <div style={{ marginTop: "20px", width: "100%" }}>
+      <div style={{ marginTop: "60px", width: "100%" }}>
         <video width="100%" autoplay="" muted loop playsinline>
           <source src="src/assests/home.mp4" type="video/mp4"></source>
         </video>

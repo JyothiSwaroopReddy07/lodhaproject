@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react'
+import Table from 'react-bootstrap/Table';
 import "./KeyContactsAndMails.css"
-import { useTable } from "react-table";
+import Datadisplay from '/src/components/DisplayData/DisplayData';
 
 function KeyContactsAndMails() {
 
@@ -11,6 +12,7 @@ function KeyContactsAndMails() {
         ["504", "mnmvncvcbn", "bjsreddy742@gmail.com", "1309324892", "430/A",  "Swap"],
     ]);
   const columns = ["Flat No","Owner Name","Email","Mobile Number", "Parking Slot", "Property Registered Name"]
+  const [DisplayData, setDisplayData] = useState(Userdata);
 
 //   useEffect(() => {
 //     (async () => {
@@ -18,36 +20,43 @@ function KeyContactsAndMails() {
 //       setUserData(result.data);
 //     })();
 //   }, []);
+  const [search, setSearch] = useState('');
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, Userdata });
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+    if(search === '' || search === null || search === undefined){
+      setDisplayData(Userdata);
+    }else {
+      const data = Userdata.filter((item) => {
+        item[0].includes(search);
+      })
+      setDisplayData(data);
+    }
+  };
 
   return (
     <>
-        <table {...getTableProps()}>
-        <thead>
-            {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+      <div style={{ marginTop: "60px", width: "100%" }}>
+        <label htmlFor="search">
+          Search by Task:
+          <input id="search" type="text" onChange={handleSearch} />
+        </label>
+        <div className="container">
+          <Table responsive>
+            <thead>
+              <tr>
+                <th>#</th>
+                {columns.map((ele, index) => (
+                  <th key={index}>{ele}</th>
                 ))}
-            </tr>
-            ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-            {rows.map((row, i) => {
-            prepareRow(row);
-            return (
-                <tr {...row.getRowProps()}>
-                {row.cells.map(cell => {
-                    return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
-                })}
-                </tr>
-            );
-            })}
-        </tbody>
-        </table>
+              </tr>
+            </thead>
+            <Datadisplay props={DisplayData}/>
+          </Table>
+        </div>
+      </div>
     </>
-  );
-}
+    );
+  }
 
 export default KeyContactsAndMails;
