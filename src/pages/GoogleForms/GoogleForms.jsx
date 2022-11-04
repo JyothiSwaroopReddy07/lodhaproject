@@ -19,7 +19,6 @@ function MyVerticallyCenteredModal(props) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p>Host Name :  {props.Host}</p>
                 <p>
                     Description : {props.Description}
                 </p>
@@ -43,20 +42,18 @@ function GoogleForms() {
             Heading: "Welcome Message",
             Description: "Hello this is sai Krishna",
             Link: "https://www.google.com",
-            HostName: "sai krishna", 
             
         },
         {
             Heading: "Welcome Message",
             Description: "Hello this is sai Krishna",
             Link: "https://www.google.com",
-            HostName: "sai krishna"
         },
         {
             Heading: "Welcome Message",
             Description: "Hello this is sai Krishna",
             Link: "https://www.google.com",
-            HostName: "sai krishna"
+
         }
     ];
     return (
@@ -71,7 +68,7 @@ function GoogleForms() {
                             <Button variant="primary" onClick={() => setModalShow(true)} className="modalButton">
                                 <div style={{display:"flex", flexDirection:"row"}}>
                                     <span className="Heading">
-                                          Meeting Title: {item.Heading}
+                                          <u>Survey Title</u> : {item.Heading}
                                     </span>
                                     <span className="view">
                                        <button className="Viewbutton" style={{padding:"3px", borderRadius:"5px"}}>More &rarr;</button>
@@ -85,7 +82,6 @@ function GoogleForms() {
                                 Desc={item.Description}
                                 Title={item.Heading}
                                 Link={item.Link}
-                                Host={item.HostName}
                             />
                         </>
                     ))
