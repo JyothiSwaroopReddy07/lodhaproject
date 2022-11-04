@@ -12,12 +12,10 @@ import {
 }
   from 'mdb-react-ui-kit';
 import './Login.css';
-import NavBar from '/src/components/NavBar/NavBar';
 
 function Login() {
   return (
     <>
-      <NavBar/>
     <MDBContainer className='my-3'>
       <MDBCard className='p-5 login-container'>
 

@@ -8,14 +8,12 @@ import {
 } from 'mdb-react-ui-kit';
 import Location from '/src/components/Location/Location';
 import Contact from '/src/components/ContactUs/Contact';
-import NavBar from '/src/components/NavBar/NavBar';
 import Carousels from '/src/components/Carousel/Carousel';
 import Facilities from '/src/components/Facilities/facilities';
 
 function Home() {
   return (
     <>
-      <NavBar />
       <div style={{ marginTop: "20px", width: "100%" }}>
         <video width="100%" autoplay="" muted loop playsinline>
           <source src="src/assests/home.mp4" type="video/mp4"></source>

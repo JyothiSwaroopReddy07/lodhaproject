@@ -2,7 +2,6 @@ import React from 'react';
 import './Complaints.css';
 import Accordion from 'react-bootstrap/Accordion';
 import Posts from '/src/components/Posts/Posts';
-import NavBar from '/src/components/NavBar/NavBar';
 
 
 function Complaints() {
@@ -19,7 +18,6 @@ function Complaints() {
 
   return (
     <>
-      <NavBar/>
       <div className="middle" style = {{marginTop : "100px"}}>
         <Accordion defaultActiveKey="0">
           <Accordion.Item eventKey="0">
