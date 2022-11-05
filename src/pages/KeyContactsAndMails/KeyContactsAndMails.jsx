@@ -1,62 +1,84 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, { useState } from "react";
 import Table from 'react-bootstrap/Table';
-import "./KeyContactsAndMails.css"
-import Datadisplay from '/src/components/DisplayData/DisplayData';
 
 function KeyContactsAndMails() {
+  const [searchVal, setSearchVal] = useState(null);
+  const UserData = [
+    ["501", "Jyothi Swaroop Reddy", "bjsreddy742002@gmail.com", "9849863395", "431/A",  "Swaroop"],
+    ["502", "dsgnjsng", "bjsreddy@gmail.com", "2496856069", "433/A",  "Swar"],
+    ["503", "eortrotyhmkgj", "bjsredd2002@gmail.com", "2483940403", "432/A",  "op"],
+    ["504", "mnmvncvcbn", "bjsreddy742@gmail.com", "1309324892", "430/A",  "Swap"],
+  ];
+  const userColumns = ["Flat No", "Owners Name", "Email", "Phone", "ParkingSlot", "Property Registered Name"];
 
-  const [Userdata, setUserData] = useState([
-        ["501", "Jyothi Swaroop Reddy", "bjsreddy742002@gmail.com", "9849863395", "431/A",  "Swaroop"],
-        ["502", "dsgnjsng", "bjsreddy@gmail.com", "2496856069", "433/A",  "Swar"],
-        ["503", "eortrotyhmkgj", "bjsredd2002@gmail.com", "2483940403", "432/A",  "op"],
-        ["504", "mnmvncvcbn", "bjsreddy742@gmail.com", "1309324892", "430/A",  "Swap"],
-    ]);
-  const columns = ["Flat No","Owner Name","Email","Mobile Number", "Parking Slot", "Property Registered Name"]
-  const [DisplayData, setDisplayData] = useState(Userdata);
+  const [value, setValue] = useState('');
+  const [dataSource, setDataSource] = useState(UserData);
+  const [tableFilter, setTableFilter]= useState([]);
 
-//   useEffect(() => {
-//     (async () => {
-//       const result = await axios("https://api.tvmaze.com/search/shows?q=snow");
-//       setUserData(result.data);
-//     })();
-//   }, []);
-  const [search, setSearch] = useState('');
-
-  const handleSearch = (event) => {
-    setSearch(event.target.value);
-    if(search === '' || search === null || search === undefined){
-      setDisplayData(Userdata);
-    }else {
-      const data = Userdata.filter((item) => {
-        item[0].includes(search);
+  const filterData = (e) => {
+    if(e.target.value!== ''){
+      setValue(e.target.value);
+      const filterTable = dataSource.filter((ele)=>{
+        if(ele[0].indexOf(value)>=0){
+          return true;
+        }
+        return false;
       })
-      setDisplayData(data);
+      console.log(filterData);
+      setTableFilter([...filterTable]);
     }
-  };
+    else{
+      setValue(e.target.value);
+      setDataSource([...dataSource]);
+    }
+  }
 
   return (
     <>
-      <div style={{ marginTop: "60px", width: "100%" }}>
-        <label htmlFor="search">
-          Search by Task:
-          <input id="search" type="text" onChange={handleSearch} />
-        </label>
-        <div className="container">
-          <Table responsive>
+      <div style={{marginTop: "60px"}}>
+        <div className="container mt-5">
+          <br/><br/>
+          <div className="input-group mt-5 mb-3">
+              <input style={{height:"30px"}} type="text" className="form-control" placeholder="search flat number" aria-describedby="basic-addon1" aria-label="Username" value={value} onChange={filterData} />
+          </div>
+          <Table responsive >
             <thead>
               <tr>
                 <th>#</th>
-                {columns.map((ele, index) => (
+                {userColumns.map((ele, index) => (
                   <th key={index}>{ele}</th>
                 ))}
               </tr>
             </thead>
-            <Datadisplay props={DisplayData}/>
+            <tbody>
+              {
+                value.length > 0 ? tableFilter.map((ele,i)=> {
+                  return (<tr>
+                    <td>{i+1}</td>
+                    {ele.map((ele1, index) => (
+                      <td key={index}>{ele1}</td>
+                    ))}
+                    <td><button className="btn btn-primary">Edit</button></td>
+                    <td><button className="btn btn-danger">Delete</button></td>
+                  </tr>)
+                }): dataSource.map((ele,i)=> {
+                  return (<tr>
+                    <td>{i+1}</td>
+                    {ele.map((ele1, index) => (
+                      <td key={index}>{ele1}</td>
+                    ))}
+                    <td><button className="btn btn-primary">Edit</button></td>
+                    <td><button className="btn btn-danger">Delete</button></td>
+                  </tr>)
+                })
+              }
+            </tbody>
           </Table>
         </div>
       </div>
     </>
-    );
-  }
+
+  );
+}
 
 export default KeyContactsAndMails;
