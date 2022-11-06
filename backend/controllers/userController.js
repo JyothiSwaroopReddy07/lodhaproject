@@ -13,6 +13,12 @@ exports.createUser = async(req,res,next)=> {
 // Get Single User
 exports.getUser = async(req,res) => {
     const UserData = await User.findById(req.params.id)
+    if(!UserData) {
+        return res.status(500).json({
+            success: false,
+            message: "User not found"
+        })
+    }
     res.status(200).json({
         success: true,
         UserData
