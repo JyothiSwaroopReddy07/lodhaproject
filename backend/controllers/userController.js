@@ -1,4 +1,6 @@
 const User = require("../models/UserModel");
+const ErrorHandler = require("../utils/errorhandler")
+
 
 // Create User
 exports.createUser = async(req,res,next)=> {
@@ -11,13 +13,10 @@ exports.createUser = async(req,res,next)=> {
 }
 
 // Get Single User
-exports.getUser = async(req,res) => {
+exports.getUser = async(req,res,next) => {
     const UserData = await User.findById(req.params.id)
     if(!UserData) {
-        return res.status(500).json({
-            success: false,
-            message: "User not found"
-        })
+        return next(new ErrorHandler("User not found",404));
     }
     res.status(200).json({
         success: true,
@@ -38,10 +37,7 @@ exports.getAllusers = async(req,res) => {
 exports.updateUser = async(req,res,next)=> {
     let user1 = await User.findById(req.params.id);
     if(!user1){
-        return res.status(500).json({
-            success: false,
-            message: "User not Found"
-        })
+        return next(new ErrorHandler("User not found",404));
     }
     user1 = await User.findByIdAndUpdate(req.params.id, req.body, {new: true, 
         runValidator: true, useFindAndModify: false})
@@ -57,10 +53,7 @@ exports.updateUser = async(req,res,next)=> {
 exports.deleteUser = async(req,res,next) => {
     const user1 = await User.findById(req.params.id);
     if(!user1) {
-        return res.status(500).json({
-            success: false,
-            message: "User not found"
-        })
+        return next(new ErrorHandler("User not found",404));
     }
     await user1.remove();
     res.status(200).json({

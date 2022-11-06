@@ -1,4 +1,5 @@
 const Complaint = require("../models/complaintModel");
+const ErrorHandler = require("../utils/errorhandler")
 
 // Create Complaint
 exports.createComplaint = async(req,res,next)=> {
@@ -23,10 +24,7 @@ exports.getAllComplaints = async(req,res) => {
 exports.updateComplaint = async(req,res,next)=> {
     let complaint1 = await Complaint.findById(req.params.id);
     if(!complaint1){
-        return res.status(500).json({
-            success: false,
-            message: "Complaint not Found"
-        })
+        return next(new ErrorHandler("Complaint not found",404));
     }
     complaint1 = await Complaint.findByIdAndUpdate(req.params.id, req.body, {new: true, 
         runValidator: true, useFindAndModify: false})
@@ -50,10 +48,7 @@ exports.getUserComplaints = async(req,res,next) => {
 exports.deleteComplaint = async(req,res,next) => {
     const complaint1 = await Complaint.findById(req.params.id);
     if(!complaint1) {
-        return res.status(500).json({
-            success: false,
-            message: "Complaint not found"
-        })
+        return next(new ErrorHandler("Complaint not found",404));
     }
     await complaint1.remove();
     res.status(200).json({
