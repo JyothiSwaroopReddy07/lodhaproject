@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Table from 'react-bootstrap/Table';
 
 function KeyContactsAndMails() {
-  const [searchVal, setSearchVal] = useState(null);
   const UserData = [
     ["501", "Jyothi Swaroop Reddy", "bjsreddy742002@gmail.com", "9849863395", "431/A",  "Swaroop"],
     ["502", "dsgnjsng", "bjsreddy@gmail.com", "2496856069", "433/A",  "Swar"],
@@ -68,7 +67,6 @@ function KeyContactsAndMails() {
                       <td key={index}>{ele1}</td>
                     ))}
                     <td><button className="btn btn-primary">Edit</button></td>
-                    <td><button className="btn btn-danger">Delete</button></td>
                   </tr>)
                 })
               }
