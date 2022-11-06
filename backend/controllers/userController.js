@@ -18,3 +18,21 @@ exports.getAllusers = async(req,res) => {
         UserData
     });
 }
+
+// Update User
+exports.updateUser = async(req,res,next)=> {
+    let user1 = await User.findById(req.params.id);
+    if(!user1){
+        return res.status(500).json({
+            success: false,
+            message: "User not Found"
+        })
+    }
+    user1 = await User.findByIdAndUpdate(req.params.id, req.body, {new: true, 
+        runValidator: true, useFindAndModify: false})
+ 
+    res.status(200).json({
+        success: true,
+        user1
+    })
+}
