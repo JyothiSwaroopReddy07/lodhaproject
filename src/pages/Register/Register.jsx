@@ -12,12 +12,10 @@ import {
 }
   from 'mdb-react-ui-kit';
 import './Register.css';
-import NavBar from '/src/components/NavBar/NavBar';
 
 function Register() {
   return (
     <>
-      <NavBar />
       <MDBContainer className='my-3'>
         <MDBCard className='p-5 login-container'>
 

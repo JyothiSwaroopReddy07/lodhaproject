@@ -1,7 +1,6 @@
 import React from 'react';
 import './Notifications.css';
 import Modals from '/src/components/Modals/Modals.jsx';
-import NavBar from '/src/components/NavBar/NavBar';
 
 function Notifications() {
   let Notification = [
@@ -26,7 +25,6 @@ function Notifications() {
   ];
   return (
     <>
-      <NavBar />
       <div className="items" style={{ marginTop: "100px" }}>
         <p className='header' >UPCOMING MEETINGS</p>
         <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>

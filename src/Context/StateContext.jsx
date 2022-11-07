@@ -13,7 +13,6 @@ const AppProvider = ({ children }) => {
   const [Menu, setMenu] = useState(false);
 
 
-
   return (
     <AppContext.Provider value={{
       User, setUser,
