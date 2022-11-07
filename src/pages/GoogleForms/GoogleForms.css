@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+.header {
+    text-align: center;
+    font-weight: bold;
+    margin: 8px;
+    font-size: 25px;
+    color: #675a0e;
+}
+
+.header:first-letter {
+    font-size: 40px;
+    font-weight: normal;
+}
+
+.items {
+    position: absolute;
+    margin: auto;
+    right: 0;
+    left: 0;
+    margin-top: 1%;
+    width: 75%;
+    height: auto;
+    /*background-color: #edf6f7;*/
+    background-color: #eae7d1;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.btn-primary {
+    background-color: #36454f;
+}
+
+.NotifyBar {
+    padding: 20px;
+    background-color: #e6e6e6;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    color: black;
+    border-color: gold;
+    border-width: 1px;
+}
+
+
+.modalButton {
+    margin-left: 5%;
+    width: 90% !important;
+    text-align: center;
+    justify-content: center;
+    height: 80px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: #E6E6E6;
+    color: #000000;
+    border: 1px solid gold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.modalButton:hover {
+    color: white;
+    background-color: #41403f !important;
+    border-color: gold !important;
+}
+
+.Heading {
+    width: 75%;
+    padding: 3px;
+}
+
+.view {
+    justify-content: center;
+    text-align: center;
+    width: 25%;
+}
+
+.Viewbutton:hover{
+background-color: rgb(233, 222, 156);
+}
