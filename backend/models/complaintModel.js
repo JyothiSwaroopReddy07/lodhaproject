@@ -4,8 +4,9 @@ const complaintSchema = mongoose.Schema({
     Issue: {
         type: String,
         required: [true, "Please Enter Issue Type"],
-        enum : ['NEW','STATUS'],
-        default: ''
+        enum : ['Plumbing','Carpentery','Mosquitoes','Hygenie','Gardening','Electrician','Other'],
+        default: 'Other',
+        required: true
     },
     Description: {
         type: String,
@@ -20,10 +21,9 @@ const complaintSchema = mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    user: {
-        type: mongoose.Schema.ObjectId,
-        ref: "User",
-        required: true,
+    FlatNo: {
+        type: String,
+        required: [true,"Please Enter Flat Number"]
     }
 
 })

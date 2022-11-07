@@ -1,6 +1,16 @@
 const Complaint = require("../models/complaintModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const mongoose = require('mongoose')
+
+
+// Add new enum type to complaint
+// exports.addnewenum = catchAsyncErrors(async(req,res,next)=> {
+
+
+
+// });
+
 
 // Create Complaint
 exports.createComplaint = catchAsyncErrors(async(req,res,next)=> {

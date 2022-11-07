@@ -15,7 +15,7 @@ exports.createUser = catchAsyncErrors(async(req,res,next)=> {
 
 // Get Single User
 exports.getUser = catchAsyncErrors(async(req,res,next) => {
-    const UserData = await User.findById(req.params.id)
+    const UserData = await User.find({FlatNo: req.params.FlatNo})
     if(!UserData) {
         return next(new ErrorHandler("User not found",404));
     }
