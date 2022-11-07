@@ -1,15 +1,21 @@
 const Complaint = require("../models/complaintModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
-const mongoose = require('mongoose')
+const complaint_types = require("../models/complaintModel");
 
 
 // Add new enum type to complaint
-// exports.addnewenum = catchAsyncErrors(async(req,res,next)=> {
+exports.addNewEnum = catchAsyncErrors(async(req,res,next)=> {
+    const userRole = req.params.role;
+    if(userRole === 'admin')
+    {
+        const newType = req.params.complaintType;
+        if(complaint_types.find(newType) === undefined){
+            complaint_types.push(newType);
+        }
+    }
 
-
-
-// });
+});
 
 
 // Create Complaint
