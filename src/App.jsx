@@ -7,9 +7,10 @@ import Home from './pages/Home/Home'
 import Register from './pages/Register/Register'
 import Meeting from './pages/Meeting/Meeting'
 import GoogleForms from './pages/GoogleForms/GoogleForms'
-import Emergency from './pages/Emergency/Emergency'import NavBar from '/src/components/NavBar/NavBar'
-import KeyContactsAndMails from './pages/KeyContactsAndMails/KeyContactsAndMails'
+import Emergency from './pages/Emergency/Emergency'
 import NavBar from '/src/components/NavBar/NavBar'
+import KeyContactsAndMails from './pages/KeyContactsAndMails/KeyContactsAndMails'
+
 
 export default function App() {
   return (

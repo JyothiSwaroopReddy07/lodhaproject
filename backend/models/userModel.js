@@ -34,6 +34,11 @@ const userSchema = mongoose.Schema({
     Role: {
         type: String,
         required: [true, "Please Enter Role"]
+    }, 
+    Dues: {
+        type: Number,
+        required: [true],
+        default: 0
     }
 })
 

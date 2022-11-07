@@ -29,13 +29,24 @@ function Meeting() {
                       </label>
 
                       <label class="d-block mb-4">
+                        <span class="d-block mb-2 labels">Meeting Link</span>
+                        <textarea
+                          name="meetingLink"
+                          id = "link"
+                          rows = "1"
+                          class="form-control"
+                          placeholder="Enter the Meeting Link "
+                        ></textarea>
+                      </label>
+
+                      <label class="d-block mb-4">
                         <span class="d-block mb-2 labels">Meeting Description</span>
                         <textarea
                           name="meetingDesc"
                           id = "desc"
                           rows = "3"
                           class="form-control"
-                          placeholder="Enter the Meeting Description"
+                          placeholder="Enter the Meeting Description "
                         ></textarea>
                       </label>
 
@@ -73,6 +84,8 @@ function Meeting() {
                           defaultValue = "00:00"
                         ></input>
                       </label>
+
+                     
                        
                       <div class="mb-3">
                         <button type="submit" class="btn btn-dark px-3 w-100 submitButton">Submit</button>
