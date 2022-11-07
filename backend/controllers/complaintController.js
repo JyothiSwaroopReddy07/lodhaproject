@@ -39,7 +39,7 @@ exports.updateComplaint = catchAsyncErrors(async(req,res,next)=> {
 // get User Complaints
 exports.getUserComplaints = catchAsyncErrors(async(req,res,next) => {
     const complaints = await Complaint.find({user: req.params.id});
-    res.status(201).json({
+    res.status(200).json({
         success:true,
         complaints
     })
