@@ -1,6 +1,7 @@
 const User = require("../models/UserModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const UserApiFeatures = require("../utils/apifeatures");
 
 // Create User
 exports.createUser = catchAsyncErrors(async(req,res,next)=> {
@@ -26,11 +27,23 @@ exports.getUser = catchAsyncErrors(async(req,res,next) => {
 
 // Get All users
 exports.getAllusers = catchAsyncErrors(async(req,res) => {
-    const UserData = await User.find()
-    res.status(200).json({
-        success: true,
-        UserData
-    });
+    console.log(req);
+    if(req.query !== null || req.query!== undefined || req.query!== "")
+    {
+        const userapiFeature = new UserApiFeatures(User.find(),req.query).search();
+        const user_query = await userapiFeature.query;
+        res.status(200).json({
+            success: true,
+            user_query
+        });
+    }else{
+        const UserData = await User.find()
+        res.status(200).json({
+            success: true,
+            UserData
+        });
+    }
+    
 })
 
 // Update User
