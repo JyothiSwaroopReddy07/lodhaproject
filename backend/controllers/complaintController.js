@@ -28,7 +28,7 @@ exports.createComplaint = catchAsyncErrors(async(req,res,next)=> {
     const complaint1 = await Complaint.find(req.body);
 
     if(complaint1 !== undefined ){
-        return next(new ErrorHandler("Compalint All Ready exsists",404));
+        return next(new ErrorHandler("Compalint Already exsists",404));
     }
     const complaint = await Complaint.create(req.body);
     res.status(201).json({

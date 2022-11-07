@@ -8,7 +8,7 @@ exports.createUser = catchAsyncErrors(async(req,res,next)=> {
     const user1 = await User.find(req.body);
 
     if(user1 !== undefined ){
-        return next(new ErrorHandler("User All Ready present",404));
+        return next(new ErrorHandler("User Already present",404));
     }
     const user = await User.create(req.body);
 
