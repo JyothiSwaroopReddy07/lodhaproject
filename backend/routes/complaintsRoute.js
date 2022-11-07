@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllComplaints, createComplaint, updateComplaint, deleteComplaint, getUserComplaints} = require("../controllers/complaintController");
+const { getAllComplaints, createComplaint, updateComplaint, deleteComplaint, getUserComplaints, addNewEnum} = require("../controllers/complaintController");
 const router = express.Router();
 
 router.route('/AddComplaintType').post(addNewEnum);

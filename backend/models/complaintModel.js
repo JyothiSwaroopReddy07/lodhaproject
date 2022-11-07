@@ -30,6 +30,5 @@ const complaintSchema = mongoose.Schema({
 
 })
 
-module.exports = mongoose.model("Complaint", complaintSchema);
-
-module.exports = complaint_types;
+const Complaint = mongoose.model("Complaint", complaintSchema);
+module.exports = { Complaint, complaint_types };

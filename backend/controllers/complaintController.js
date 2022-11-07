@@ -1,7 +1,6 @@
-const Complaint = require("../models/complaintModel");
+const {Complaint, complaint_types} = require("../models/complaintModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
-const complaint_types = require("../models/complaintModel");
 
 
 // Add new enum type to complaint
@@ -12,16 +11,26 @@ exports.addNewEnum = catchAsyncErrors(async(req,res,next)=> {
         const newType = req.params.complaintType;
         if(complaint_types.find(newType) === undefined){
             complaint_types.push(newType);
+            return res.status(201).json({
+                success: true
+            })
         }
     }
-
+    res.status(400).json({
+        success:false
+    })
+    
 });
 
 
 // Create Complaint
 exports.createComplaint = catchAsyncErrors(async(req,res,next)=> {
-    const complaint = await Complaint.create(req.body);
+    const complaint1 = await Complaint.find(req.body);
 
+    if(complaint1 !== undefined ){
+        return next(new ErrorHandler("Compalint All Ready exsists",404));
+    }
+    const complaint = await Complaint.create(req.body);
     res.status(201).json({
         success: true,
         complaint
