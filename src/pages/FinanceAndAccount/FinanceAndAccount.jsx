@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import Table from 'react-bootstrap/Table';
-import './KeyContactsAndMails.css'
+import './FinanceAndAccount.css'
 
-function KeyContactsAndMails() {
+function FinanceAndAccount() {
   const UserData = [
-    ["501", "Jyothi Swaroop Reddy", "bjsreddy742002@gmail.com", "9849863395", "431/A", "Swaroop"],
-    ["502", "dsgnjsng", "bjsreddy@gmail.com", "2496856069", "433/A", "Swar"],
-    ["503", "eortrotyhmkgj", "bjsredd2002@gmail.com", "2483940403", "432/A", "op"],
-    ["504", "mnmvncvcbn", "bjsreddy742@gmail.com", "1309324892", "430/A", "Swap"],
+    ["501", "Jyothi Swaroop Reddy", "bjsreddy742002@gmail.com", "9849863395"],
+    ["502", "dsgnjsng", "bjsreddy@gmail.com", "2496856069"],
+    ["503", "eortrotyhmkgj", "bjsredd2002@gmail.com", "2483940403"],
+    ["504", "mnmvncvcbn", "bjsreddy742@gmail.com", "1309324892"],
   ];
-  const userColumns = ["Flat No", "Owners Name", "Email", "Phone", "Parking Slot", "Property Registered Name"];
+  const userColumns = ["Flat No", "Owners Name", "Email", "Phone"];
 
   const [value, setValue] = useState('');
   const [dataSource, setDataSource] = useState(UserData);
@@ -42,11 +42,11 @@ function KeyContactsAndMails() {
 
           <br /><br />
          
-          <p id="title">KEY CONTACTS AND MAILS</p>
+          <p id="title6">FINANCE AND ACCOUNT</p>
           <div style={{ marginLeft: "5px", height: "3px", width: "300px", backgroundColor: "gold" }}></div>
           <div className="input-group mt-5 mb-3" style={{ border: "1px solid black", width: "90%", borderRadius: "6px", }}>
             <i className="fa fa-search" style={{ color: "gold", height: "30px", width: "30px", padding: "6px", paddingLeft: "10px" }}></i>
-            <input style={{ height: "30px", border: "none", padding: "5px" }} type="text" className="form-control" placeholder="search flat number" aria-describedby="basic-addon1" aria-label="Username" value={value} onChange={filterData} ></input>
+            <input style={{ height: "30px", border: "none", padding: "5px" }} type="text" className="form-control" placeholder="Search Flat Number" aria-describedby="basic-addon1" aria-label="Username" value={value} onChange={filterData} ></input>
           </div>
           <Table responsive style={{ margin: "5px 0px 20px 10px", width: "90%", backgroundColor: "snow", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px", borderRadius: "10px" }}>
             <thead>
@@ -65,7 +65,7 @@ function KeyContactsAndMails() {
                     {ele.map((ele1, index) => (
                       <td key={index}>{ele1}</td>
                     ))}
-                    <td><button className="btn btn-primary" >Edit</button></td>
+                    <td><button className="btn btn-primary" >Add Dues</button></td>
                     <td><button className="btn btn-danger">Delete</button></td>
                   </tr>)
                 }) : dataSource.map((ele, i) => {
@@ -74,7 +74,7 @@ function KeyContactsAndMails() {
                     {ele.map((ele1, index) => (
                       <td key={index}>{ele1}</td>
                     ))}
-                    <td><button className="btn btn-primary">Edit</button></td>
+                    <td><button className="btn btn-primary">Add Dues</button></td>
                     <td><button className="btn btn-danger">Delete</button></td>
                   </tr>)
                 })
@@ -88,4 +88,4 @@ function KeyContactsAndMails() {
   );
 }
 
-export default KeyContactsAndMails;
+export default FinanceAndAccount;

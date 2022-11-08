@@ -8,14 +8,14 @@
 
 }
 
-#title{
+#title6{
     font-size: 25px;
     font-weight: bolder;
     margin: 0px;
     letter-spacing: 2px;
 }
 
-#title::first-letter{
+#title6:first-letter{
     font-weight: normal;
     font-size: 33px;
 }

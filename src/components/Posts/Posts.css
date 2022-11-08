@@ -1,14 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 
 .backgroundcoloring{
-  background-color: #F0F8FF;
+  margin-top: 40px !important;
+  background-color: ghostwhite;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .title{
    text-align: center;
     font-size: 30px;
     font-weight: 800;
-    color: red;
+    color:red;
  }
 
 .desc{

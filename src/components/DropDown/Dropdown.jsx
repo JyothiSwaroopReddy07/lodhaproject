@@ -13,7 +13,8 @@ function Dropdown() {
               <a href='/Finance'>Finance & Account</a>
               <a href='/FM'>FM</a>
               <a href='/Cultural'>Cultural Section</a>
-              <a href='/Complaints'>Complaints & Help desk</a>
+              <a href='/HelpDesk'>Help Desk</a>
+              <a href='/Complaints'>Complaints</a>
               <a href='/LegalUpdate'>Legal Update</a>
               <a href='/Purchase'>Purchase & Audit Section</a>
               <a href='/KeyContacts'>Key Contacts & Email ids</a>
