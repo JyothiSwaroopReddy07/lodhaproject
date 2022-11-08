@@ -17,7 +17,7 @@ function Login() {
   return (
     <>
     <MDBContainer className='my-3'>
-      <MDBCard className='p-5 login-container'>
+      <MDBCard className='p-5 login-container LoginContainer'>
 
         <MDBRow className='g-0 d-flex align-items-center'>
 
@@ -30,7 +30,7 @@ function Login() {
             <MDBCardBody className="mx-auto">
               <div style={{display:"flex", justifyContent: "center", alignItems: "center", marginBottom: "5%"}}>
               <img src="/src/assests/user.svg" style={{width:"70px", height : "70px"}}></img>
-              <h1 className='heading'>User Login</h1>
+              <h1 className='LoginHeading'>User Login</h1>
                 </div>
               <div>
               <MDBInput wrapperClass='mb-4' placeholder='Email address' className='form1' id='uname' type='email' />
@@ -42,7 +42,7 @@ function Login() {
                 <a href="!#">Forgot password?</a>
               </div>
               
-              <MDBBtn className="mb-4 form1" id = "login">Login</MDBBtn>
+              <MDBBtn className="mb-4 form1" id = "loginButton">Login</MDBBtn>
                  
             </MDBCardBody>
 

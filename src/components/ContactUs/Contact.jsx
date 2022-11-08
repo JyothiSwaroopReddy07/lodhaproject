@@ -45,11 +45,11 @@ function Contact() {
                         <div id="Card-content">
                             <span>
                                 <div id="Input-text">
-                                    <input type="text" required="required"/>
+                                    <input type="text" className="textInputContact" required="required"/>
                                     <small>Name</small>
                                 </div>   
                                  <div id="Input-text">
-                                    <input type="text" required="required"/>
+                                    <input type="text" className="textInputContact" required="required"/>
                                     <small>E-mail</small>
                                 </div>   
                                 <div id="Textarea">

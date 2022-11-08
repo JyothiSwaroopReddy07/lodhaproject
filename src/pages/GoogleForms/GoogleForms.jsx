@@ -58,8 +58,8 @@ function GoogleForms() {
     ];
     return (
         <>
-            <div className="items" style={{ marginTop: "100px" }}>
-                <p className='header' >GOOGLE FORMS</p>
+            <div className="FormItems" style={{ marginTop: "100px" }}>
+                <p className='FormHeader' >GOOGLE FORMS</p>
                 <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>
                 {
 
@@ -67,10 +67,10 @@ function GoogleForms() {
                         <>
                             <Button variant="primary" onClick={() => setModalShow(true)} className="modalButton">
                                 <div style={{display:"flex", flexDirection:"row"}}>
-                                    <span className="Heading">
+                                    <span className="FormHeading">
                                           <u>Survey Title</u> : {item.Heading}
                                     </span>
-                                    <span className="view">
+                                    <span className="FormView">
                                        <button className="Viewbutton" style={{padding:"3px", borderRadius:"5px"}}>More &rarr;</button>
                                     </span>
                                 </div>

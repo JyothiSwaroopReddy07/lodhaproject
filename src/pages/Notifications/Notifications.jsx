@@ -25,8 +25,8 @@ function Notifications() {
   ];
   return (
     <>
-      <div className="items" style={{ marginTop: "100px" }}>
-        <p className='header' >UPCOMING MEETINGS</p>
+      <div className="MeetingItems" style={{ marginTop: "100px" }}>
+        <p className='MeetingHeader' >UPCOMING MEETINGS</p>
         <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>
         {
 

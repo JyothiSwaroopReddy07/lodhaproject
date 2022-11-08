@@ -1,8 +1,8 @@
-.btn{
+.key-contact-btn{
     border: none !important;
 }
 
-.btn:hover{
+.key-contact-btn:hover{
    background-color: #d19c29 !important;
    color : rgb(251, 251, 251) !important ;
 

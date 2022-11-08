@@ -43,7 +43,7 @@ function FinanceAndAccount() {
           <br /><br />
          
           <p id="title6">FINANCE AND ACCOUNT</p>
-          <div style={{ marginLeft: "5px", height: "3px", width: "300px", backgroundColor: "gold" }}></div>
+          <div style={{ marginLeft: "5px", height: "3px", width: "250px", backgroundColor: "gold" }}></div>
           <div className="input-group mt-5 mb-3" style={{ border: "1px solid black", width: "90%", borderRadius: "6px", }}>
             <i className="fa fa-search" style={{ color: "gold", height: "30px", width: "30px", padding: "6px", paddingLeft: "10px" }}></i>
             <input style={{ height: "30px", border: "none", padding: "5px" }} type="text" className="form-control" placeholder="Search Flat Number" aria-describedby="basic-addon1" aria-label="Username" value={value} onChange={filterData} ></input>
@@ -65,8 +65,8 @@ function FinanceAndAccount() {
                     {ele.map((ele1, index) => (
                       <td key={index}>{ele1}</td>
                     ))}
-                    <td><button className="btn btn-primary" >Add Dues</button></td>
-                    <td><button className="btn btn-danger">Delete</button></td>
+                    <td><button className="btn btn-primary fin-dues" >Add Dues</button></td>
+                    <td><button className="btn btn-danger fin-dues">Delete</button></td>
                   </tr>)
                 }) : dataSource.map((ele, i) => {
                   return (<tr>
@@ -74,8 +74,8 @@ function FinanceAndAccount() {
                     {ele.map((ele1, index) => (
                       <td key={index}>{ele1}</td>
                     ))}
-                    <td><button className="btn btn-primary">Add Dues</button></td>
-                    <td><button className="btn btn-danger">Delete</button></td>
+                    <td><button className="btn btn-primary fin-dues">Add Dues</button></td>
+                    <td><button className="btn btn-danger findues">Delete</button></td>
                   </tr>)
                 })
               }

@@ -65,8 +65,8 @@ function KeyContactsAndMails() {
                     {ele.map((ele1, index) => (
                       <td key={index}>{ele1}</td>
                     ))}
-                    <td><button className="btn btn-primary" >Edit</button></td>
-                    <td><button className="btn btn-danger">Delete</button></td>
+                    <td><button className="btn btn-primary key-contact-btn" >Edit</button></td>
+                    <td><button className="btn btn-danger key-contact-btn">Delete</button></td>
                   </tr>)
                 }) : dataSource.map((ele, i) => {
                   return (<tr>
@@ -74,8 +74,8 @@ function KeyContactsAndMails() {
                     {ele.map((ele1, index) => (
                       <td key={index}>{ele1}</td>
                     ))}
-                    <td><button className="btn btn-primary">Edit</button></td>
-                    <td><button className="btn btn-danger">Delete</button></td>
+                    <td><button className="btn btn-primary key-contact-btn">Edit</button></td>
+                    <td><button className="btn btn-danger key-contact-btn">Delete</button></td>
                   </tr>)
                 })
               }

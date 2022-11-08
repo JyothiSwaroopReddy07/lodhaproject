@@ -2,7 +2,7 @@
 *{
  font-family: 'Montserrat', sans-serif;
 }
-.notify{
+.ModalNotify{
   display: flex; 
   justify-content : space-between;
   flex-direction: row;

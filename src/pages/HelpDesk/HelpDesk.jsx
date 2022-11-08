@@ -14,7 +14,7 @@ function HelpDesk() {
                         <div class="col-md-10 col-lg-9 px-lg-2 col-xl-8 px-xl-0">
                             <form
                                 method="POST"
-                                className="w-100 rounded p-4 border backgroundcolor"
+                                className="w-100 rounded p-4 border backgroundcolor HelpDeskSection"
                                 action="/postComplaint"
                                 enctype="multipart/form-data"
                             >
@@ -47,7 +47,7 @@ function HelpDesk() {
                                 </label>
 
                                 <div class="mb-3">
-                                    <button type="submit" class="btn btn-dark px-3 w-100">Submit</button>
+                                    <button type="submit" class="btn btn-dark px-3 w-100 Help-desk-submit">Submit</button>
                                 </div>
                             </form>
                         </div>

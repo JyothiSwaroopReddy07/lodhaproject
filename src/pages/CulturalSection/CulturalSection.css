@@ -8,16 +8,26 @@
     border: 1px solid black !important;
   }
 .head{
-
     font-size: 18px;
 }
 
-.backgroundcolor{
+.CulturalSubmit{
+  border: none !important;
+}
+
+.CulturalSubmit:hover{
+  background-color: #d19c29 !important;
+  color : rgb(251, 251, 251) !important ;
+
+}
+
+
+.CulturalSection{
     margin-top: 50px;
     background-color:ghostwhite;
   }
   
-  #title4{
+#title4{
     margin-top: 100px !important;
     font-size: 25px;
     font-weight: bolder;

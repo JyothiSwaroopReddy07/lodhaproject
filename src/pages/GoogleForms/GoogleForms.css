@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 
-.header {
+.FormHeader {
     text-align: center;
     font-weight: bold;
     margin: 8px;
@@ -8,12 +8,12 @@
     color: #675a0e;
 }
 
-.header:first-letter {
+.FormHeader:first-letter {
     font-size: 40px;
     font-weight: normal;
 }
 
-.items {
+.FormItems {
     position: absolute;
     margin: auto;
     right: 0;
@@ -28,20 +28,6 @@
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-
-.btn-primary {
-    background-color: #36454f;
-}
-
-.NotifyBar {
-    padding: 20px;
-    background-color: #e6e6e6;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    color: black;
-    border-color: gold;
-    border-width: 1px;
-}
-
 
 .modalButton {
     margin-left: 5%;
@@ -63,12 +49,12 @@
     border-color: gold !important;
 }
 
-.Heading {
+.FormHeading {
     width: 75%;
     padding: 3px;
 }
 
-.view {
+.FormView {
     justify-content: center;
     text-align: center;
     width: 25%;

@@ -226,7 +226,7 @@
     box-sizing:border-box;
 }
 
-input[type='text']{
+.textInputContact{
     height:15px;
     width:100%;
     border:none;

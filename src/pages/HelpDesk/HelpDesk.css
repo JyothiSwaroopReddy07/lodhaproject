@@ -8,11 +8,19 @@
     border: 1px solid black !important;
 }
 .head{
-
     font-size: 18px;
 }
 
-.backgroundcolor{
+.Help-desk-submit{
+    border: none !important;
+}
+.Help-desk-submit:hover{
+    background-color: #d19c29 !important;
+    color : rgb(251, 251, 251) !important ;
+ 
+}
+
+.HelpDeskSection{
     margin-top: 50px;
     background-color:ghostwhite;
   }
