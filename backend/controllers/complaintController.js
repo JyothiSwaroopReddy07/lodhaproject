@@ -1,11 +1,38 @@
-const Complaint = require("../models/complaintModel");
+const {Complaint, complaint_types} = require("../models/complaintModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const UserApiFeatures = require("../utils/apifeatures");
+
+
+// Add new enum type to complaint
+exports.addNewEnum = catchAsyncErrors(async(req,res,next)=> {
+    const userRole = req.body.role;
+    if(userRole === 'admin')
+    {
+        const newType = (req.body.complaintType).toString();
+        if(complaint_types.indexOf(newType) < 0){
+            console.log("here")
+            complaint_types.push(newType); 
+            res.status(201).json({
+                success: true,
+                complaint_types
+            })
+        }
+    }
+    return next(new ErrorHandler("You can't make such requests",404));
+    
+});
+
 
 // Create Complaint
 exports.createComplaint = catchAsyncErrors(async(req,res,next)=> {
+    
+    const {Issue, Description, FlatNo} = req.body;
+    const complaint1 = await Complaint.find({Issue: Issue, Description: Description, FlatNo: FlatNo})
+    if(complaint1 && Object.keys(complaint1).length){
+        return next(new ErrorHandler("Complaint Already Exists",404));
+    }
     const complaint = await Complaint.create(req.body);
-
     res.status(201).json({
         success: true,
         complaint

@@ -1,11 +1,14 @@
 const mongoose = require("mongoose")
 
+const complaint_types = ['plumbing','carpentery','mosquitoes','hygenie','gardening','electrician','other'];
+
 const complaintSchema = mongoose.Schema({
     Issue: {
         type: String,
         required: [true, "Please Enter Issue Type"],
-        enum : ['NEW','STATUS'],
-        default: ''
+        enum : complaint_types,
+        default: 'Other',
+        required: true
     },
     Description: {
         type: String,
@@ -20,12 +23,12 @@ const complaintSchema = mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    user: {
-        type: mongoose.Schema.ObjectId,
-        ref: "User",
-        required: true,
+    FlatNo: {
+        type: String,
+        required: [true,"Please Enter Flat Number"]
     }
 
 })
 
-module.exports = mongoose.model("Complaint", complaintSchema);
+const Complaint = mongoose.model("Complaint", complaintSchema);
+module.exports = { Complaint, complaint_types };

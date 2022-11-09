@@ -10,6 +10,7 @@ import Location from '/src/components/Location/Location';
 import Contact from '/src/components/ContactUs/Contact';
 import Carousels from '/src/components/Carousel/Carousel';
 import Facilities from '/src/components/Facilities/facilities';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Home() {
   return (
