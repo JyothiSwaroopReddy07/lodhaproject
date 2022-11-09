@@ -5,12 +5,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
-import { useGlobalContext } from '/src/Context/StateContext';
 import Dropdown from '../DropDown/Dropdown';
 
 function Header() {
 
-  const { setMenu, Menu } = useGlobalContext();
+  const [Menu, setMenu] = useState(false);
 
   return (
     <div id="nav-container">
@@ -29,8 +28,6 @@ function Header() {
               <Nav.Link id="Menu" onClick={() => { setMenu(!Menu) }}>Menu</Nav.Link>
               <Nav.Link id="User" href="/User"> Login</Nav.Link>
               <Nav.Link id="register" href="/Register"> Sign Up</Nav.Link>
-              {/*<Nav.Link id="Admin" href="/Admin">Admin Login</Nav.Link>
-              <Nav.Link id="itsupport" href="/ItSupport">IT-Support Login</Nav.Link>*/}
             </Nav>
           </Navbar.Collapse>
         </Container>
