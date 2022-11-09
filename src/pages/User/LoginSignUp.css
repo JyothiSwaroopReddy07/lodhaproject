@@ -1,147 +1,53 @@
-.LoginSignUpContainer {
-    width: 100vw;
-    height: 100vh;
-    max-width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(231, 231, 231);
-    position: fixed;
-    top: 0%;
-    left: 0;
-  }
-  
-  .LoginSignUpBox {
-    background-color: white;
-    width: 25vw;
-    height: 70vh;
-    box-sizing: border-box;
-    overflow: hidden;
-  }
+
   .login_signUp_toggle {
+    width: 100%;
+    
     display: flex;
-    height: 3vmax;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
-  .login_signUp_toggle > p {
-    color: rgba(0, 0, 0, 0.678);
-    font: 300 1vmax "Roboto";
+  .LoginRegisterTitle{
+    color: black;
+    font-weight: bold;
     transition: all 0.5s;
     cursor: pointer;
     display: grid;
+    font-size: 25px;
     place-items: center;
-    width: 100%;
+    width: 90%;
+    margin: 0;
+    padding: 15px 0px 15px 15px;
+    letter-spacing: 2px;
+    border-radius: 10px;
   }
-  .login_signUp_toggle > p:hover {
-    color: tomato;
+
+  .LoginRegisterTitle:first-letter{
+    font-size: 40px;
   }
+
   
-  .LoginSignUpBox > div > button {
-    background-color: tomato;
+  .login_signUp_toggle > p:hover {
+    color: #BFA008;
+    background-color: #212529;
+  }
+ 
+  
+  .switchButton {
+    margin: 0px;
+    padding: 0px;
+
+    background-color: white;
     height: 3px;
     width: 50%;
     border: none;
     transition: all 0.5s;
   }
+
+
   
-  .loginForm,
-  .signUpForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: auto;
-    padding: 2vmax;
-    justify-content: space-evenly;
-    height: 70%;
-    transition: all 0.5s;
-  }
+  
   
   .signUpForm {
     transform: translateY(-100%) translateX(-100vmax);
-  }
-  
-  .loginForm > div,
-  .signUpForm > div {
-    display: flex;
-    width: 100%;
-    align-items: center;
-  }
-  .loginForm > div > input,
-  .signUpForm > div > input {
-    padding: 1vmax 4vmax;
-    padding-right: 1vmax;
-    width: 100%;
-    box-sizing: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.267);
-    border-radius: 4px;
-    font: 300 0.9vmax cursive;
-    outline: none;
-  }
-  
-  .loginForm > div > svg,
-  .signUpForm > div > svg {
-    position: absolute;
-    transform: translateX(1vmax);
-    font-size: 1.6vmax;
-    color: rgba(0, 0, 0, 0.623);
-  }
-  
-  .loginForm > a {
-    color: rgba(0, 0, 0, 0.651);
-    text-decoration: none;
-    align-self: flex-end;
-    transition: all 0.5s;
-    font: 500 0.8vmax "Gill Sans";
-  }
-  
-  .loginForm > a:hover {
-    color: black;
-  }
-  
-  #registerImage > img {
-    width: 3vmax;
-    border-radius: 100%;
-  }
-  #registerImage > input {
-    display: flex;
-    padding: 0%;
-  }
-  
-  #registerImage > input::file-selector-button {
-    cursor: pointer;
-    width: 100%;
-    z-index: 2;
-    height: 5vh;
-    border: none;
-    margin: 0%;
-    font: 400 0.8vmax cursive;
-    transition: all 0.5s;
-    padding: 0 1vmax;
-    color: rgba(0, 0, 0, 0.623);
-    background-color: rgb(255, 255, 255);
-  }
-  
-  #registerImage > input::file-selector-button:hover {
-    background-color: rgb(235, 235, 235);
-  }
-  
-  .loginBtn,
-  .signUpBtn {
-    border: none;
-    background-color: tomato;
-    color: white;
-    font: 300 0.9vmax "Roboto";
-    width: 100%;
-    padding: 0.8vmax;
-    cursor: pointer;
-    transition: all 0.5s;
-    border-radius: 4px;
-    outline: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.219);
-  }
-  
-  .loginBtn:hover,
-  .signUpBtn:hover {
-    background-color: rgb(179, 66, 46);
   }
   
   .shiftToLeft {
@@ -159,54 +65,178 @@
     transform: translateX(100%);
   }
   
-  @media screen and (max-width: 600px) {
-    .LoginSignUpContainer {
-      background-color: white;
-    }
-    .LoginSignUpBox {
-      width: 100vw;
-      height: 95vh;
-    }
-    .login_signUp_toggle {
-      height: 5vmax;
-    }
-    .login_signUp_toggle > p {
-      font: 300 1.5vmax "Roboto";
-    }
   
-    .loginForm,
-    .signUpForm {
-      padding: 5vmax;
-    }
-  
-    .loginForm > div > input,
-    .signUpForm > div > input {
-      padding: 2.5vmax 5vmax;
-      font: 300 1.7vmax cursive;
-    }
-  
-    .loginForm > div > svg,
-    .signUpForm > div > svg {
-      font-size: 2.8vmax;
-    }
-  
-    .loginForm > a {
-      font: 500 1.8vmax "Gill Sans";
-    }
-  
-    #registerImage > img {
-      width: 8vmax;
-      border-radius: 100%;
-    }
-  
-    #registerImage > input::file-selector-button {
-      height: 7vh;
-      font: 400 1.8vmax cursive;
-    }
-  
-    .loginBtn,
-    .signUpBtn {
-      font: 300 1.9vmax "Roboto";
-      padding: 1.8vmax;
-    }
-  }
+*{
+    font-family: 'Montserrat', sans-serif;
+   
+   }
+   
+   .rounded-t-5 {
+     border-top-left-radius: 0.5rem;
+     border-bottom-left-radius: 0.5rem;
+   }
+   
+   .form1{
+     padding: 5px 5px 5px 10px;
+     height: 50px !important;
+     width: 80%;
+     margin-left:10% !important;
+     border-radius: 10px;
+   }
+   
+   .LoginHeading{
+     font-weight: bold;
+     margin: 0 !important; 
+     padding-left: 20px;
+     text-align : center;
+     color: #bfa008 !important;
+     text-transform: uppercase;
+     font-size: 35px;
+   }
+   .LoginHeading:first-letter{
+     font-size: 45px;
+     
+   }
+   
+   #pass{
+     height: 40px;
+     border-radius: 10px;
+   }
+   
+   #loginButton{
+     
+     margin: 0px !important; 
+     border: none;
+     background-color: black !important;
+     border-radius: 10px;
+     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+   }
+   #loginButton:hover{
+     color: black;
+     font-weight: bold;
+     background-color: #BFA008 !important;
+   }
+   
+   .LoginContainer{
+     background-color: #FFFEF6;
+     margin-top: 0px;
+     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+     border-radius: 10px;
+   }
+   
+   @media only screen and (max-width: 780px) {
+     .rounded-tr-lg-0 {
+       border-top-right-radius: 0.5rem;
+       border-bottom-left-radius: 0rem;
+     }
+     .form1{
+       padding: 5px 5px 5px 10px;
+       width: 100%;
+       margin-left: 0%;
+     }
+     #loginButton{
+       margin-top : 0px;
+       margin-bottom: 10%;
+     }
+     .LoginHeading{
+         margin: 5% 5% 5% 0%;
+     }
+   }
+   
+   
+   *{
+    font-family: 'Montserrat', sans-serif;
+   
+   }
+   
+   .rounded-t-5 {
+     border-top-left-radius: 0.5rem;
+     border-bottom-left-radius: 0.5rem;
+   }
+   
+   .form1{
+     
+     padding: 5px 5px 5px 10px;
+     height: 50px !important;
+     width: 80% !important;
+     margin-left:10%;
+     border-radius: 10px;
+   }
+   
+   .RegisterHeading{
+     font-weight: bold;
+     margin: 0 !important; 
+     padding-left: 20px;
+     align-items: center;
+     justify-content: center;
+     text-align : center;
+     color: #bfa008 !important;
+     text-transform: uppercase;
+     font-size: 35px;
+   }
+   .RegisterHeading:first-letter{
+     font-size: 45px;
+     
+   }
+   #name{
+     border: 1px solid #000!important;
+     margin-bottom: 0 !important;
+   }
+   #RegUname, #parking, #mob, #flat, #block{
+      border: 1px solid #000!important;
+   }
+   
+   #RegPass{
+     
+      border: 1px solid #000!important;
+     height: 40px;
+     border-radius: 10px;
+   }
+   
+   #RegisterButton{
+     margin: 0px !important;
+     align-items: center !important;
+     justify-content: center !important;
+     text-align : center !important;
+     background-color: black !important;
+     border-radius: 10px;
+     border: none;
+     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+   }
+   #RegisterButton:hover{
+     background-color: #BFA008 !important;
+     color: black !important;
+     font-weight: bold;
+   }
+   
+   .registerContainer{
+     background-color:rgb(255, 254, 246);
+     margin-top: 375px ;
+     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+     border-radius: 10px;
+   }
+   
+   @media (max-width: 780px) {
+     .rounded-tr-lg-0 {
+       border-top-right-radius: 0.5rem;
+       border-bottom-left-radius: 0rem;
+     }
+     .form1{
+       padding: 5px 5px 5px 10px;
+       width: 100%;
+       margin-left: 0%;
+     }
+     #RegisterButton{
+       margin-top : 0px;
+       margin-bottom: 10%;
+     }
+     .RegisterHeading{
+         margin: 5% 5% 5% 0%;
+     }
+     .registerContainer{
+      margin-top: 350px !important;
+     }
+   }
+   
+   
+   
