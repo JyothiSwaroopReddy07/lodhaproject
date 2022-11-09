@@ -5,16 +5,16 @@ const UserApiFeatures = require("../utils/apifeatures");
 
 // Create User
 exports.createUser = catchAsyncErrors(async(req,res,next)=> {
-    const user1 = await User.find(req.body);
-
-    if(user1 !== undefined ){
-        return next(new ErrorHandler("User Already present",404));
+    const { FlatNo } = req.body;
+    const user1 = await User.find({FlatNo: FlatNo});
+    if(user1 && Object.keys(user1).length){
+        return next(new ErrorHandler("User Already Exists",404));
     }
     const user = await User.create(req.body);
 
     res.status(201).json({
         success: true,
-        user
+       user 
     })
 });
 

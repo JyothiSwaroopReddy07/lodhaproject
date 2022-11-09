@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const complaint_types = ['Plumbing','Carpentery','Mosquitoes','Hygenie','Gardening','Electrician','Other'];
+const complaint_types = ['plumbing','carpentery','mosquitoes','hygenie','gardening','electrician','other'];
 
 const complaintSchema = mongoose.Schema({
     Issue: {

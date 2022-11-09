@@ -19,4 +19,5 @@ class UserApiFeatures{
 
 }
 
-module.exports = UserApiFeatures
+
+module.exports = {UserApiFeatures}
