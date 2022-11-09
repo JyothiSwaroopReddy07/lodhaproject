@@ -31,11 +31,11 @@
   z-index: 100 !important;
 }
 
-#logo{
+#MeridianLogo{
   height: 35px;
   width: 130px;
 }
-.me-auto{
+.NavClass{
   margin-left: auto; 
   margin-right: 0;
   align-items: right;

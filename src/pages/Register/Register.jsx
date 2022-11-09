@@ -16,8 +16,8 @@ import './Register.css';
 function Register() {
   return (
     <>
-      <MDBContainer className='my-3'>
-        <MDBCard className='p-5 login-container'>
+      <MDBContainer className='my-3' >
+        <MDBCard className='p-5 login-container registerContainer'>
 
           <MDBRow className='g-0 d-flex align-items-center'>
 
@@ -30,16 +30,16 @@ function Register() {
               <MDBCardBody className="mx-auto">
                 <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "5%" }}>
                   <img src="/src/assests/user.svg" style={{ width: "70px", height: "70px" }}></img>
-                  <h1 className='heading'>Register</h1>
+                  <h1 className='RegisterHeading'>Register</h1>
                 </div>
                 <MDBInput wrapperClass='mb-4' placeholder='Name' className='form1' id='name' type='text' />
                 <div>
-                  <MDBInput wrapperClass='mb-4' placeholder='Email address' className='form1' id='uname' type='email' />
+                  <MDBInput wrapperClass='mb-4' placeholder='Email address' className='form1' id='RegUname' type='email' />
                 </div>
 
 
 
-                <MDBInput wrapperClass='mb-4' placeholder='Password' className='form1' id='pass' type='password' />
+                <MDBInput wrapperClass='mb-4' placeholder='Password' className='form1' id='RegPass' type='password' />
                 <MDBInput wrapperClass='mb-4' placeholder='Mobile Number' className='form1' id='mob' type='text' />
                 <MDBInput wrapperClass='mb-4' placeholder='Block' className='form1' id='block' type='text' />
                 <MDBInput wrapperClass='mb-4' placeholder='Flat Number' className='form1' id='flat' type='number' />
@@ -49,7 +49,7 @@ function Register() {
                   <a href="!#">Forgot password?</a>
                 </div>
 
-                <MDBBtn className="mb-4 form1" id="login">Register</MDBBtn>
+                <MDBBtn className="mb-4 form1" id="RegisterButton">Register</MDBBtn>
 
               </MDBCardBody>
 

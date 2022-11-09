@@ -40,7 +40,7 @@ function Facilities() {
 
 function Card(props) {
   return (
-    <div className="card" style={{ width: "300px", border: "none", marginTop: "50px", marginLeft: "20px",backgroundColor: "#f2d491"}} >
+    <div className="FacilityCard" style={{ width: "300px", border: "none", marginTop: "50px", marginLeft: "20px",backgroundColor: "#f2d491"}} >
       <div className="card_body" style={{ alignItems: "center", justifyContent: "center" }}>
         <img src={props.img} class="card_image" style={{ width: "100px" }} /><hr></hr>
         <h2 className="card_title" style={{fontSize: "24px", fontWeight: "bold", color: "#000", textTranform:"capitalize"}}>{props.title}</h2>

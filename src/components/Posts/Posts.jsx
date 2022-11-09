@@ -19,11 +19,11 @@ import {
 function Posts({ props }) {
   return (
     <>
-      <Card className="m-3 backgroundcoloring">
-        <Card.Header className="title">{props.Title}</Card.Header>
+      <Card className="m-3 backgroundcoloring PostBackground">
+        <Card.Header className="PostTitle">{props.Title}</Card.Header>
         <Card.Body>
-          <Card.Title className="desc"><img src={props.UserPic} /></Card.Title>
-          <Card.Text className="desc">
+          <Card.Title className="PostDesc"><img src={props.UserPic} /></Card.Title>
+          <Card.Text className="PostDesc">
             {props.Description}
           </Card.Text>
           <section style={{ backgroundColor: "#eee" }}>

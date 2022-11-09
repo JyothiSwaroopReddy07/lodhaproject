@@ -17,12 +17,12 @@ function Header() {
         <Container>
           <Navbar.Brand href="/">
             <a>
-              <img id="logo" src="/src/assests/lodhalogo.svg" alt="logo" />
+              <img id="MeridianLogo" src="/src/assests/lodhalogo.svg" alt="logo" />
             </a>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
+            <Nav className="me-auto NavClass">
             </Nav>
             <Nav>
               <Nav.Link id="Menu" onClick={() => { setMenu(!Menu) }}>Menu</Nav.Link>

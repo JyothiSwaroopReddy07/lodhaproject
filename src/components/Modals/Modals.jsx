@@ -50,7 +50,7 @@ function Modals({ props }) {
     <>
       <div>
         <Button variant="primary" onClick={() => setModalShow(true)} className="NotifyBar">
-          <div className="notify">
+          <div className="ModalNotify">
             <span className = 'Date'>
               {props.Heading}
             </span>

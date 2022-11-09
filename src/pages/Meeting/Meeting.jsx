@@ -5,37 +5,50 @@ function Meeting() {
     return (
         <>
        
-        <div class="container formDiv">
+        <div class="container MeetingDiv">
                 <div class="row mx-0 justify-content-center">
                   <div class="col-md-10 col-lg-9 px-lg-2 col-xl-8 px-xl-0">
                     
                     <form
                       method="POST"
-                      className="w-100 rounded p-4 border backgroundcolor"
+                      className="w-100 rounded p-4 border MeetingSection"
                       action="/setUpMeeting"
                       enctype="multipart/form-data"
+                      
                     >
-                    <p id="formTitle">Set-Up Meeting</p>
+                    <p id="MeetingTitle">Set-Up Meeting</p>
                     <hr style={{width:"94%", marginLeft : "3%", height:"3px", color:"black", backgroundColor:"black" }}></hr>
                       <label class="d-block mb-4">
                         <span class="d-block mb-2 labels" style={{marginTop: "40px"}}>Meeting Title</span>
                         <input
                           name="meetingTitle"
                           type="text"
-                          id = "title"
-                          class="form-control textInput"
+                          id = "meetingTitle"
+                          class="form-control textInput MeetingInput"
                           placeholder="Meeting Title"
+        
                         />
+                      </label>
+
+                      <label class="d-block mb-4">
+                        <span class="d-block mb-2 labels">Meeting Link</span>
+                        <textarea
+                          name="meetingLink"
+                          id = "meetingLink"
+                          rows = "1"
+                          class="form-control MeetingInput"
+                          placeholder="Enter the Meeting Link "
+                        ></textarea>
                       </label>
 
                       <label class="d-block mb-4">
                         <span class="d-block mb-2 labels">Meeting Description</span>
                         <textarea
                           name="meetingDesc"
-                          id = "desc"
+                          id = "meetingDesc"
                           rows = "3"
-                          class="form-control"
-                          placeholder="Enter the Meeting Description"
+                          class="form-control MeetingInput"
+                          placeholder="Enter the Meeting Description "
                         ></textarea>
                       </label>
 
@@ -44,7 +57,7 @@ function Meeting() {
                         <input
                           name="host"
                           type = "text"
-                          class="form-control textInput"
+                          class="form-control textInput MeetingInput"
                           id = "meetingHost"
                           placeholder="Enter the Host Name"
                         ></input>
@@ -55,7 +68,7 @@ function Meeting() {
                         <input
                           name="date"
                           type = "date"
-                          class="form-control"
+                          class="form-control MeetingInput"
                           id = "meetingDate"
                           placeholder="Select Date"
                           
@@ -67,12 +80,14 @@ function Meeting() {
                         <input
                           name="time"
                           type = "time"
-                          class="form-control "
-                          id = "meetingDate"
+                          class="form-control MeetingInput"
+                          id = "meetingTime"
                           placeholder="Select Time"
                           defaultValue = "00:00"
                         ></input>
                       </label>
+
+                     
                        
                       <div class="mb-3">
                         <button type="submit" class="btn btn-dark px-3 w-100 submitButton">Submit</button>

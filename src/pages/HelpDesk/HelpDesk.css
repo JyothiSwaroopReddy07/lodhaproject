@@ -1,0 +1,40 @@
+#complaint{
+    margin: 0px;
+    height: 44px;
+   
+  }
+
+.temp{
+    border: 1px solid black !important;
+}
+.head{
+    font-size: 18px;
+}
+
+.Help-desk-submit{
+    border: none !important;
+}
+.Help-desk-submit:hover{
+    background-color: #d19c29 !important;
+    color : rgb(251, 251, 251) !important ;
+ 
+}
+
+.HelpDeskSection{
+    margin-top: 50px;
+    background-color:ghostwhite;
+  }
+  
+  #title2{
+    margin-top: 100px !important;
+    font-size: 25px;
+    font-weight: bolder;
+    margin: 0px;
+    letter-spacing: 2px;
+    margin-left: 50px !important;
+}
+
+#title2:first-letter{
+    font-weight: normal;
+    font-size: 33px;
+}
