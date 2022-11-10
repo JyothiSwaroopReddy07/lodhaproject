@@ -54,11 +54,17 @@ function GoogleForms() {
             Description: "Hello this is sai Krishna",
             Link: "https://www.google.com",
 
+        },
+        {
+            Heading: "Welcome Message",
+            Description: "Hello this is sai Krishna",
+            Link: "https://www.google.com",
+
         }
     ];
     return (
         <>
-            <div className="FormItems" style={{ marginTop: "100px" }}>
+            <div className="FormItems" style={{ marginTop: "50px" }}>
                 <p className='FormHeader' >GOOGLE FORMS</p>
                 <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>
                 {

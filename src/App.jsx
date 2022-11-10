@@ -20,6 +20,7 @@ import CulturalSection from './pages/CulturalSection/CulturalSection'
 import LegalUpdate from './pages/LegalUpdate/LegalUpdate'
 import LoginNavBar from './components/LoginNavBar/LoginNavBar';
 import Profile from './pages/Profile/Profile';
+import Dashboard from './pages/Dashboard/Dashboard';
 
 export default function App() {
 
@@ -46,7 +47,8 @@ export default function App() {
           <Route path='/FM' element={<FacilityManagement />} />
           <Route path = '/HelpDesk' element = {<HelpDesk />} />
           <Route path = '/Cultural' element = {<CulturalSection />} />
-          <Route path='LegalUpdate' element = {<LegalUpdate />} />
+          <Route path='/LegalUpdate' element = {<LegalUpdate />} />
+          <Route path = '/UserDashboard' element={<Dashboard />} />
         </Routes>
       </Router>
     </>
