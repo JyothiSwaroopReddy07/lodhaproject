@@ -18,17 +18,21 @@ import FinanceAndAccount from './pages/FinanceAndAccount/FinanceAndAccount'
 import HelpDesk from './pages/HelpDesk/HelpDesk'
 import CulturalSection from './pages/CulturalSection/CulturalSection'
 import LegalUpdate from './pages/LegalUpdate/LegalUpdate'
+import LoginNavBar from './components/LoginNavBar/LoginNavBar';
+import Profile from './pages/Profile/Profile';
 
 export default function App() {
 
   const { isAuthenticated, user } = useSelector((state) => state.user);
-
+  const [Authenticated, setAuthenticated] = useState(false);
   return (
     <>
-      <NavBar />
+      {Authenticated && <LoginNavBar />}
+      {!Authenticated && <NavBar />}
       <Router>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path = '/UserProfile' element = {<Profile />} />
           <Route path='/login'element={<LoginSignUp location={location}/>}/>
           <Route path='/User' element={<Login />} />
           <Route path='/Register' element={<Register />} />
