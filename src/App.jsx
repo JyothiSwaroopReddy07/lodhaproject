@@ -1,18 +1,15 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useEffect, useState } from "react";
-import Login from './pages/Login/Login'
 import Complaints from './pages/Complaints/Complaints'
 import Notifications from './pages/Notifications/Notifications'
 import Home from './pages/Home/Home'
-import Register from './pages/Register/Register'
 import Meeting from './pages/Meeting/Meeting'
 import GoogleForms from './pages/GoogleForms/GoogleForms'
 import Emergency from './pages/Emergency/Emergency'
 import NavBar from '/src/components/NavBar/NavBar'
 import KeyContactsAndMails from './pages/KeyContactsAndMails/KeyContactsAndMails'
 import LoginSignUp from './pages/User/LoginSignUp'
-import { useSelector } from "react-redux"
 import FacilityManagement from './pages/FacilityManagement/FacilityManagement'
 import FinanceAndAccount from './pages/FinanceAndAccount/FinanceAndAccount'
 import HelpDesk from './pages/HelpDesk/HelpDesk'
@@ -21,22 +18,21 @@ import LegalUpdate from './pages/LegalUpdate/LegalUpdate'
 import LoginNavBar from './components/LoginNavBar/LoginNavBar';
 import Profile from './pages/Profile/Profile';
 import Dashboard from './pages/Dashboard/Dashboard';
+import {useGlobalContext} from "./context/StateContext";
 
 export default function App() {
 
-  const { isAuthenticated, user } = useSelector((state) => state.user);
-  const [Authenticated, setAuthenticated] = useState(false);
+  const { isAuthenticated, setIsAuthenticated } = useGlobalContext();
+  
   return (
     <>
-      {Authenticated && <LoginNavBar />}
-      {!Authenticated && <NavBar />}
+      {isAuthenticated && <LoginNavBar />}
+      {!isAuthenticated && <NavBar />}
       <Router>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path = '/UserProfile' element = {<Profile />} />
-          <Route path='/login'element={<LoginSignUp location={location}/>}/>
-          <Route path='/User' element={<Login />} />
-          <Route path='/Register' element={<Register />} />
+          <Route path='/login'element={<LoginSignUp history={history} location={location} />}/>
           <Route path='/Complaints' element={<Complaints />} />
           <Route path='/Meeting' element={<Meeting />} />
           <Route path='/Emergency' element={<Emergency />} />

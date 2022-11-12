@@ -1,8 +1,22 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
+import {useNavigate} from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
-import './KeyContactsAndMails.css'
+import './KeyContactsAndMails.css';
+import {useGlobalContext} from "/src/context/StateContext";
 
 function KeyContactsAndMails() {
+
+  const navigated = useNavigate();
+  const {isAuthenticated, user} = useGlobalContext();
+
+  useEffect(()=>{
+    if(isAuthenticated===false){
+      navigated("/login");
+    }
+  },[isAuthenticated]);
+
+
   const UserData = [
     ["501", "Jyothi Swaroop Reddy", "bjsreddy742002@gmail.com", "9849863395", "431/A", "Swaroop"],
     ["502", "dsgnjsng", "bjsreddy@gmail.com", "2496856069", "433/A", "Swar"],

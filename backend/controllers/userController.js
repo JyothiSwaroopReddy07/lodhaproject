@@ -18,15 +18,32 @@ exports.createUser = catchAsyncErrors(async(req,res,next)=> {
     })
 });
 
-// Get Single User
-exports.getUser = catchAsyncErrors(async(req,res,next) => {
-    const UserData = await User.find({FlatNo: req.params.FlatNo})
-    if(!UserData) {
-        return next(new ErrorHandler("User not found",404));
+// login User
+exports.loginUser = catchAsyncErrors(async(req,res,next) => {
+    console.log(req.body);
+    const {FlatNo, Password} = req.body;
+    const user1 = await User.find({FlatNo: FlatNo, Password: Password})
+    console.log(user1);
+    if(!user1 && Object.keys(user1).length){
+        return next(new ErrorHandler("User does not exists",404));
     }
     res.status(200).json({
         success: true,
-        UserData
+        user1
+    });
+})
+
+
+// Get Single User
+exports.getUser = catchAsyncErrors(async(req,res,next) => {
+    const {FlatNo} = req.body;
+    const user1 = await User.find({FlatNo: FlatNo})
+    if(user1 && Object.keys(user1).length){
+        return next(new ErrorHandler("User does not exists",404));
+    }
+    res.status(200).json({
+        success: true,
+        user1
     });
 });
 
