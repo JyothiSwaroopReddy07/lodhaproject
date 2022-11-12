@@ -43,6 +43,8 @@ const LoginSignUp = () => {
     else{
       setUser(user);
       setIsAuthenticated(true);
+      window.localStorage.setItem("user",user);
+      window.localStorage.setItem("isAuthenticated",isAuthenticated);
       navigate('/UserDashboard');
     }
   }

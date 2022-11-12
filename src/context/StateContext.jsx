@@ -16,8 +16,6 @@ const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider value={{
       User, setUser,
-      Admin, setAdmin,
-      ItSupport, setItSupport,
       Menu, setMenu,
       isAuthenticated,setIsAuthenticated,
       loading,setLoading
