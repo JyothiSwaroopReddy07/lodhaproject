@@ -25,14 +25,15 @@ import Dashboard from './pages/Dashboard/Dashboard';
 export default function App() {
 
   const { isAuthenticated, user } = useSelector((state) => state.user);
-  const [Authenticated, setAuthenticated] = useState(false);
+  const [Authenticated, setAuthenticated] = useState(true);
+  
   return (
     <>
       {Authenticated && <LoginNavBar />}
       {!Authenticated && <NavBar />}
       <Router>
         <Routes>
-          <Route path='/' element={<Home />} />
+         <Route path='/' element={ !Authenticated ? <Home /> : <Dashboard />} />
           <Route path = '/UserProfile' element = {<Profile />} />
           <Route path='/login'element={<LoginSignUp location={location}/>}/>
           <Route path='/User' element={<Login />} />

@@ -8,8 +8,8 @@ function Dropdown() {
       <div className="sidenav">
         <Accordion>
           <Accordion.Item eventKey="0">
-            <Accordion.Header>Management</Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Header><p className='DropDownHeader'>Management</p></Accordion.Header>
+            <Accordion.Body className='ExpandDropDown'>
               <a href='/Finance'>Finance & Account</a>
               <a href='/FM'>FM</a>
               <a href='/Cultural'>Cultural Section</a>
@@ -21,8 +21,8 @@ function Dropdown() {
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="1">
-            <Accordion.Header>Repository</Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Header><p className='DropDownHeader'>Repository</p></Accordion.Header>
+            <Accordion.Body className='ExpandDropDown'>
               <a href='/SocietyByLaws'>Society By-Laws</a>
               <a href='/ProcessDocs'>Process & Policy Documents </a>
               <a href='/Communication'>Key Communication</a>
@@ -31,8 +31,8 @@ function Dropdown() {
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="2">
-            <Accordion.Header>Key Reports</Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Header><p className='DropDownHeader'>Key Reports</p></Accordion.Header>
+            <Accordion.Body className='ExpandDropDown'>
               <a href='/Accounting'>Accounting</a>
               <a href='/Annexures'>Annexures to OIS Details</a>
               <a href='/BankStatements'>Bank Statements</a>
@@ -41,8 +41,8 @@ function Dropdown() {
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="3">
-            <Accordion.Header>Owners Section</Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Header><p className='DropDownHeader'>Owners Section</p></Accordion.Header>
+            <Accordion.Body className='ExpandDropDown'>
               <a href='/SocietyDues'>Society Dues</a>
               <a href='/Ois'>Owners Information System</a>
               <a href='/Parking'>Parking Allotment Chart</a>
@@ -50,8 +50,8 @@ function Dropdown() {
           </Accordion.Item>
 
           <Accordion.Item eventKey="4">
-            <Accordion.Header>Key Links</Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Header ><p className='DropDownHeader'>Key Links</p></Accordion.Header>
+            <Accordion.Body className='ExpandDropDown'>
               <a href="/Meeting">Set-Up Zoom Meeting</a>
               <a href='/Notifications'>Upcoming Zoom Meetings</a>
               <a href='/MyGate'>My Gate</a>

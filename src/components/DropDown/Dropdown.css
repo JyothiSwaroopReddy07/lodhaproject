@@ -11,19 +11,19 @@
   position: fixed;
   z-index: 10000 !important;
   left: 0;
-  background-color: #F0F8FF;
-  overflow-x: hidden;
+  background-color: #FFFFFF;
+  overflow: hidden;
   padding-top: 20px;
-  box-shadow: 2px 2px 12px #47759E;
+  box-shadow: 2px 2px 12px #adadab;
 }
 
 /* Style the sidenav links and the dropdown button */
 .sidenav a, .dropdown-btn {
-  padding: 6px 8px 6px 16px;
+  padding: 6px 8px 6px 0px;
   text-decoration: none;
-  font-size: 15px;
-  color: #47759E;
-  font-weight: bolder;
+  font-size: 13px;
+  color: black;
+  font-weight: normal;
   display: block;
   border: none;
   background: none;
@@ -33,24 +33,59 @@
   outline: none;
   margin-left: 10px; 
   margin-top: 15px;
-  
+  border-bottom: 1px solid rgb(236, 228, 186) ;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1.2px;
 }
 
 /* On mouse-over */
 .sidenav a:hover{
-  color: #f1f1f1;
-  background-color:#47759E;
-  transform : scale(1.1);
-  transition: transform 0.5s;
-  border-radius: 1px;
-  
+  font-weight: bold;
+  border-bottom: 1px solid black;
+}
+
+.sidenav a:first-letter{
+  font-size: 16px;
+}
+.ExpandDropDown{
+  background-color: rgb(236, 228, 186) !important;
 }
 
 .accordion-button{
-  background-color : #F0F8FF;
+  background-color : #FFFFFF;
   font-size : 15px;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding-bottom: 0px;
+  padding-top: 15px;
 }
 
+.DropDownHeader:first-letter{
+  font-size: 17px;
+}
+
+.accordion-button:not(.collapsed){
+  background-color: rgb(100, 93, 52) !important;
+  color: white;
+}
+
+.accordion-button.collapsed::after{
+
+  background: url("/src/assests/dropdownarrow.png");
+  background-size:     cover;                     
+  background-repeat:   no-repeat;
+  background-position: center center;  
+}
+
+.accordion-button:not(.collapsed)::after{
+
+  background: url("/src/assests/dropdownarrow.png");
+  background-size:     cover;                     
+  background-repeat:   no-repeat;
+  background-position: center center;  
+}
 
 @media (max-width: 780px) {
   .sidenav {
