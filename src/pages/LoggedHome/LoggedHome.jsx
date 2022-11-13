@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from "react";
 import './LoggedHome.css';
 import {
   MDBCard,
@@ -14,12 +14,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
 function LoggedHome() {
-
-  useEffect(()=>{
-    if(JSON.parse(localStorage.getItem("isAuthenticated")===false)){
-      navigate('/login')
-    }
-  },[JSON.parse(localStorage.getItem("isAuthenticated"))])
 
   return (
     <>

@@ -1,15 +1,9 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import './HelpDesk.css';
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar';
 
 
 function HelpDesk() {
-
-    useEffect(()=>{
-        if(JSON.parse(localStorage.getItem("isAuthenticated")===false)){
-          navigate('/login')
-        }
-      },[JSON.parse(localStorage.getItem("isAuthenticated"))])
       
     return (
         <>

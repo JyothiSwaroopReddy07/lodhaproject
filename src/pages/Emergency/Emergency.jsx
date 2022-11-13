@@ -1,14 +1,8 @@
-import * as React from "https://cdn.skypack.dev/react@17.0.1";
+import React, {useState, useEffect} from "react";
 import "./Emergency.css";
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
 function Emergency() {
-
-  useEffect(()=>{
-    if(JSON.parse(localStorage.getItem("isAuthenticated")===false)){
-      navigate('/login')
-    }
-  },[JSON.parse(localStorage.getItem("isAuthenticated"))])
   
   return (
     <>

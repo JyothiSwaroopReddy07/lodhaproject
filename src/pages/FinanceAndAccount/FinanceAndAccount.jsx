@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState, useEffect} from "react";
 import Table from 'react-bootstrap/Table';
 import './FinanceAndAccount.css'
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
@@ -34,11 +34,6 @@ function FinanceAndAccount() {
       setDataSource([...dataSource]);
     }
   }
-  useEffect(()=>{
-    if(JSON.parse(localStorage.getItem("isAuthenticated")===false)){
-      navigate('/login')
-    }
-  },[JSON.parse(localStorage.getItem("isAuthenticated"))])
 
   return (
     <>

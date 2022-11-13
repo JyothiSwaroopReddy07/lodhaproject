@@ -29,7 +29,7 @@ export default function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login'element={<LoginSignUp/>}/>
-          <Route path='/Home' component={<LoggedHome/>} /> 
+          <Route path='/Home' element={<LoggedHome/>} /> 
           <Route path = '/UserProfile' element = {<Profile />} />
           <Route path='/Complaints' element={<Complaints />} /> 
           <Route path='/Meeting' element={<Meeting />} /> 

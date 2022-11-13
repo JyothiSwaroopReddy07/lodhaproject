@@ -1,14 +1,8 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import './LegalUpdate.css';
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
 function LegalUpdate() {
-
-    useEffect(()=>{
-        if(JSON.parse(localStorage.getItem("isAuthenticated")===false)){
-          navigate('/login')
-        }
-      },[JSON.parse(localStorage.getItem("isAuthenticated"))])
       
 
     return (

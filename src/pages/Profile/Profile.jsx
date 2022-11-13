@@ -1,17 +1,12 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import './Profile.css';
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
 function Profile() {
-    const [user,setUser ] = useState(null);
-
+    const [user, setUser]  = useState(JSON.parse(localStorage.getItem("isAuthenticated"))|| null);
     useEffect(()=>{
-        if(JSON.parse(localStorage.getItem("isAuthenticated")===false)){
-          navigate('/login')
-        }else{
-            setUser(JSON.parse(localStorage.getItem("User")));
-        }
-      },[JSON.parse(localStorage.getItem("isAuthenticated"))])
+        setUser(JSON.parse(localStorage.getItem("User")));
+    }, [JSON.parse(localStorage.getItem("User"))])
 
     return (
         <>

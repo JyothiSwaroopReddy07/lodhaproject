@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './Complaints.css';
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 import Posts from '/src/components/Posts/Posts';
@@ -17,11 +17,6 @@ function Complaints() {
       Title: "Plumber Issue"
     }
   ];
-  useEffect(()=>{
-    if(JSON.parse(localStorage.getItem("isAuthenticated")===false)){
-      navigate('/login')
-    }
-  },[JSON.parse(localStorage.getItem("isAuthenticated"))])
 
   return (
     <>

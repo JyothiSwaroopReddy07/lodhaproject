@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import './GoogleForms.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -64,11 +64,6 @@ function GoogleForms() {
         }
     ];
 
-    useEffect(()=>{
-        if(JSON.parse(localStorage.getItem("isAuthenticated")===false)){
-          navigate('/login')
-        }
-      },[JSON.parse(localStorage.getItem("isAuthenticated"))])
       
     return (
         <>

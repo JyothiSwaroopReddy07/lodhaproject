@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from "react";
 import './Notifications.css';
 import Modals from '/src/components/Modals/Modals.jsx';
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
@@ -24,11 +24,6 @@ function Notifications() {
       DateOfPosting: "26 Oct 2022"
     }
   ];
-  useEffect(()=>{
-    if(JSON.parse(localStorage.getItem("isAuthenticated")===false)){
-      navigate('/login')
-    }
-  },[JSON.parse(localStorage.getItem("isAuthenticated"))])
   
   return (
     <>

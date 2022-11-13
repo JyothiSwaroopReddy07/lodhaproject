@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Nav from 'react-bootstrap/Nav';
 import GoogleForms from "../GoogleForms/GoogleForms";
 import "./Dashboard.css"
@@ -31,11 +31,6 @@ function Dashboard() {
         }
     };
 
-    useEffect(()=>{
-        if(JSON.parse(localStorage.getItem("isAuthenticated")===false)){
-          navigate('/login')
-        }
-      },[JSON.parse(localStorage.getItem("isAuthenticated"))])
       
     return (
         <>
