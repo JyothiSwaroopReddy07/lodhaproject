@@ -1,5 +1,5 @@
 import React from "react";
-import './GoogleForms.css';
+import './GeneralNotifications.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
@@ -22,10 +22,6 @@ function MyVerticallyCenteredModal(props) {
                 <p>
                     Description : {props.Description}
                 </p>
-                <p>
-                    Link : <a href={props.Link} target="_blank">Link</a>
-                </p>
-               
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={props.onHide}>Close</Button>
@@ -34,50 +30,44 @@ function MyVerticallyCenteredModal(props) {
     );
 }
 
-function GoogleForms() {
+function GeneralNotifications() {
     const [modalShow, setModalShow] = React.useState(false);
 
-    let googleForms = [
+    let generalNotifications = [
         {
             Heading: "Welcome Message",
             Description: "Hello this is sai Krishna",
-            Link: "https://www.google.com",
-            
-        },
-        {
-            Heading: "Welcome Message",
-            Description: "Hello this is sai Krishna",
-            Link: "https://www.google.com",
-        },
-        {
-            Heading: "Welcome Message",
-            Description: "Hello this is sai Krishna",
-            Link: "https://www.google.com",
 
         },
         {
             Heading: "Welcome Message",
             Description: "Hello this is sai Krishna",
-            Link: "https://www.google.com",
-
+        },
+        {
+            Heading: "Welcome Message",
+            Description: "Hello this is sai Krishna",
+        },
+        {
+            Heading: "Welcome Message",
+            Description: "Hello this is sai Krishna",
         }
     ];
     return (
         <>
-            <div className="FormItems" style={{ marginTop: "50px" }}>
-                <p className='FormHeader' >GOOGLE FORMS</p>
+            <div className="NotifyItems" style={{ marginTop: "50px" }}>
+                <p className='NotifyHeader' >GENERAL NOTIFICATIONS</p>
                 <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>
                 {
 
-                    googleForms.map(item => (
+                    generalNotifications.map(item => (
                         <>
                             <Button variant="primary" onClick={() => setModalShow(true)} className="modalButton">
-                                <div style={{display:"flex", flexDirection:"row"}}>
-                                    <span className="FormHeading">
-                                          <u><strong>SURVEY TITLE</strong></u> : {item.Heading}
+                                <div style={{ display: "flex", flexDirection: "row" }}>
+                                    <span className="NotifyHeading">
+                                        <u><strong>TITLE </strong></u> : {item.Heading}
                                     </span>
-                                    <span className="FormView">
-                                       <button className="Viewbutton" style={{padding:"3px", borderRadius:"5px"}}>More &rarr;</button>
+                                    <span className="NotifyView">
+                                        <button className="Viewbutton" style={{ padding: "3px", borderRadius: "5px" }}>More &rarr;</button>
                                     </span>
                                 </div>
                             </Button>
@@ -98,4 +88,4 @@ function GoogleForms() {
     );
 }
 
-export default GoogleForms;
+export default GeneralNotifications;

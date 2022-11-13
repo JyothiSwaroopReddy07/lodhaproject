@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 
-.FormHeader {
+.NotifyHeader {
     text-align: center;
     font-weight: bold;
     margin: 8px;
@@ -9,12 +9,12 @@
     letter-spacing: 2px;
 }
 
-.FormHeader:first-letter {
+.NotifyHeader:first-letter {
     font-size: 40px;
     font-weight: normal;
 }
 
-.FormItems {
+.NotifyItems {
     position: absolute;
     margin: auto;
    left:0;
@@ -52,14 +52,14 @@
     border-color: gold !important;
 }
 
-.FormHeading {
-    width: 75%;
+.NotifyHeading {
     text-align: left;
-    letter-spacing: 1px;
+    width: 75%;
     padding: 3px;
+    letter-spacing: 1px;
 }
 
-.FormView {
+.NotifyView {
     justify-content: center;
     text-align: center;
     width: 25%;

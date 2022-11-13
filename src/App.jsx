@@ -21,6 +21,7 @@ import LegalUpdate from './pages/LegalUpdate/LegalUpdate'
 import LoginNavBar from './components/LoginNavBar/LoginNavBar';
 import Profile from './pages/Profile/Profile';
 import Dashboard from './pages/Dashboard/Dashboard';
+import GeneralNotifications from './pages/GeneralNotifications/GeneralNotifications';
 
 export default function App() {
 
@@ -50,6 +51,7 @@ export default function App() {
           <Route path = '/Cultural' element = {<CulturalSection />} />
           <Route path='/LegalUpdate' element = {<LegalUpdate />} />
           <Route path = '/UserDashboard' element={<Dashboard />} />
+          <Route path = '/GeneralNotifications' element = {<GeneralNotifications />} />
         </Routes>
       </Router>
     </>

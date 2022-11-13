@@ -6,6 +6,7 @@
   margin: 8px;
   font-size: 25px;
   color: #675a0e;
+  letter-spacing: 2px;
 }
 
 .MeetingHeader:first-letter{

@@ -3,8 +3,8 @@ import { useState } from "react";
 import Nav from 'react-bootstrap/Nav';
 import GoogleForms from "../GoogleForms/GoogleForms";
 import "./Dashboard.css"
-import Meeting from "../Meeting/Meeting";
 import Notifications from "../Notifications/Notifications";
+import GeneralNotifications from "../GeneralNotifications/GeneralNotifications";
 
 function Dashboard() {
     const [IsForms, setIsForms] = useState(true);
@@ -36,7 +36,7 @@ function Dashboard() {
                 <img src="/src/assests/dashboard.png" style={{height:"35px", width:"35px", marginTop:"105px", marginLeft:"50px", marginBottom:"0px"}}></img>
                 <p id="userDashboardTitle">USER DASHBOARD</p>
                 </div>
-                <div style={{ marginLeft: "55px", height: "3px", width: "250px", backgroundColor: "gold" }}></div>
+                <div style={{ marginLeft: "55px", height: "3px", width: "275px", backgroundColor: "gold" }}></div>
                 <div className="FacilityNavBar" style={{ backgroundColor: "rgb(36, 35, 35)" }}>
 
                     <Nav variant="pills" defaultActiveKey="/home">
@@ -54,7 +54,7 @@ function Dashboard() {
                 </div>
                 {IsForms && <GoogleForms />}
                 {IsMeeting && <Notifications />}
-                {IsNotification && <Notifications />}
+                {IsNotification && <GeneralNotifications />}
             </div>
         </>
     );
