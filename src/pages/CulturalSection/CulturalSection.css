@@ -17,8 +17,8 @@
 
 .CulturalSubmit:hover{
   background-color: #d19c29 !important;
-  color : rgb(251, 251, 251) !important ;
-
+  color : black !important ;
+  font-weight: bold;
 }
 
 

@@ -1,13 +1,11 @@
-
-
-.MeetingDiv{
-    margin-top : 100px;
+.MeetingDiv {
+    margin-top: 100px;
     margin-bottom: 30px;
-    width:100% !important;
-    
+    width: 100% !important;
+
 }
 
-.MeetingSection{
+.MeetingSection {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     background-color: #f2e2a4;
     border-radius: 10px;
@@ -16,11 +14,21 @@
 }
 
 
-.MeetingSection:hover{
+.MeetingSection:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.9), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#MeetingTitle{
+#MeetingFormTitle {
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+#MeetingFormTitle:first-letter {
+    font-size: 30px;
+}
+
+#MeetingTitle {
     justify-content: center;
     text-align: center;
     font-weight: bold;
@@ -28,21 +36,21 @@
     font-size: 30px;
 }
 
-.labels{
+.labels {
     font-weight: bold;
-
+    letter-spacing: 0.5px;
 }
 
 
-.MeetingInput{
+.MeetingInput {
     margin: 0 !important;
     font-size: 14px !important;
 }
 
-.textInput{
+.textInput {
     height: 35px !important;
 }
 
-.submitButton:hover{
-   color: gold !important;
+.submitButton:hover {
+    color: gold !important;
 }

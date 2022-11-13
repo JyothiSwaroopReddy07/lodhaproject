@@ -42,7 +42,10 @@
 /* On mouse-over */
 .sidenav a:hover{
   font-weight: bold;
-  border-bottom: 1px solid black;
+  text-decoration-line: underline;
+  text-underline-offset: 10px;
+  text-decoration-thickness: 2px;
+
 }
 
 .sidenav a:first-letter{

@@ -32,6 +32,7 @@ export default function App() {
     <>
       {Authenticated && <LoginNavBar />}
       {!Authenticated && <NavBar />}
+      
       <Router>
         <Routes>
          <Route path='/' element={ !Authenticated ? <Home /> : <Dashboard />} />

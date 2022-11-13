@@ -31,8 +31,9 @@ function HelpDesk() {
 
                                 <div class="mb-4">
                                     <label class="d-block mb-2 head">Related Files</label>
+                                    <p style={{fontSize:"14px"}}>(.xlsx, .xls, images, .doc, .docx, .pdf are only accepted)</p>
                                     <div class="form-control h-auto temp">
-                                        <input name="receipt" type="file" class="form-control-file" />
+                                        <input name="receipt" type="file" class="form-control-file" multiple accept=".xlsx,.xls,image/*,.doc, .docx,.pdf"/>
                                     </div>
                                 </div>
 

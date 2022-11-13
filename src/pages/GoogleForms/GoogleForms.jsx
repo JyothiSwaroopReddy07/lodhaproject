@@ -74,7 +74,7 @@ function GoogleForms() {
                             <Button variant="primary" onClick={() => setModalShow(true)} className="modalButton">
                                 <div style={{display:"flex", flexDirection:"row"}}>
                                     <span className="FormHeading">
-                                          <u><strong>SURVEY TITLE</strong></u> : {item.Heading}
+                                          <strong>SURVEY TITLE</strong> : {item.Heading}
                                     </span>
                                     <span className="FormView">
                                        <button className="Viewbutton" style={{padding:"3px", borderRadius:"5px"}}>More &rarr;</button>
