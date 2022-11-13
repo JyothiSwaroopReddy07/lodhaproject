@@ -5,6 +5,7 @@ import GoogleForms from "../GoogleForms/GoogleForms";
 import "./Dashboard.css"
 import Meeting from "../Meeting/Meeting";
 import Notifications from "../Notifications/Notifications";
+import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
 function Dashboard() {
     const [IsForms, setIsForms] = useState(true);
@@ -31,6 +32,7 @@ function Dashboard() {
     };
     return (
         <>
+        <LoginNavBar/>
             <div>
                 <div style={{display:"flex"}}>
                 <img src="/src/assests/dashboard.png" style={{height:"35px", width:"35px", marginTop:"105px", marginLeft:"50px", marginBottom:"0px"}}></img>

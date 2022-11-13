@@ -3,18 +3,9 @@ import { useEffect } from "react";
 import {useNavigate} from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
 import './KeyContactsAndMails.css';
-import {useGlobalContext} from "/src/context/StateContext";
+import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
 function KeyContactsAndMails() {
-
-  const navigated = useNavigate();
-  const {isAuthenticated, user} = useGlobalContext();
-
-  useEffect(()=>{
-    if(isAuthenticated===false){
-      navigated("/login");
-    }
-  },[isAuthenticated]);
 
 
   const UserData = [
@@ -50,6 +41,7 @@ function KeyContactsAndMails() {
 
   return (
     <>
+    <LoginNavBar/>
       <div style={{ marginTop: "60px" }}>
 
         <div className="container mt-5" style={{ padding: "0px", width: "100%" }}>

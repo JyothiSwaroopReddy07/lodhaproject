@@ -18,6 +18,7 @@ import{
 }
   from 'mdb-react-ui-kit';
 import axios from "axios";
+import NavBar from "/src/components/NavBar/NavBar";
 
 
 const LoginSignUp = () => {
@@ -32,7 +33,6 @@ const LoginSignUp = () => {
 
   const login = async(loginFlatNo, loginPassword) => {
     setLoading(true);
-    console.log(loginFlatNo, loginPassword);
     const {data} = await axios.post("http://localhost:4000/api/v1/login",{
       FlatNo: loginFlatNo, Password: loginPassword });
     const user = data.user1;
@@ -43,8 +43,33 @@ const LoginSignUp = () => {
     else{
       setUser(user);
       setIsAuthenticated(true);
-      window.localStorage.setItem("user",user);
-      window.localStorage.setItem("isAuthenticated",isAuthenticated);
+      localStorage.setItem("User",user);
+      localStorage.setItem("isAuthenticated",true);
+      navigate('/UserDashboard');
+    }
+  }
+
+  const register = async(OwnerName,RegisteredName,FlatNo,Password,Email,Mobile,ParkingSlot) => {
+    setLoading(true);
+    const {data} = await axios.post("http://localhost:4000/api/v1/register",{
+      OwnerName: OwnerName,
+      RegisteredName: RegisteredName,
+      Email: Email,
+      Mobile: Mobile,
+      ParkingSlot: ParkingSlot,
+      FlatNo: FlatNo, 
+      Password: Password 
+    });
+    const user = data.user1;
+    setLoading(false);
+    if(user!==[] && !user){
+      navigate('/register');
+    }
+    else{
+      setUser(user);
+      setIsAuthenticated(true);
+      localStorage.setItem("User",user);
+      localStorage.setItem("isAuthenticated",isAuthenticated);
       navigate('/UserDashboard');
     }
   }
@@ -57,30 +82,17 @@ const LoginSignUp = () => {
   };
 
   const registerSubmit = (e) => {
+    const OwnerName = e.target.OwnerName.value;
+    const RegisteredName = e.target.RegisteredName.value;
+    const FlatNo = e.target.FlatNo.value;
+    const Password = e.target.Password.value;
+    const Email = e.target.Email.value;
+    const Mobile = e.target.Mobile.value;
+    const ParkingSlot = e.target.ParkingSlot.value;
     e.preventDefault();
-
-    const myForm = new FormData();
-
-    myForm.set("OwnerName", e.target.OwnerName.value);
-    myForm.set("Email", e.target.Email.value);
-    myForm.set("Password", e.target.Password.value);
-    myForm.set("ParkingSlot", e.target.ParkingSlot.value);
-    myForm.set("RegisteredName", e.target.RegisteredName.value);
-    myForm.set("Block", e.target.Block.value);
-    myForm.set("Mobile", e.target.Mobile.value);
-    myForm.set("FlatNo", e.target.FlatNo.value);
+    register(OwnerName,RegisteredName,FlatNo,Password,Email,Mobile,ParkingSlot);
   };
 
-  const registerDataChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
-
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/UserDashboard");
-    }
-  }, [ isAuthenticated]);
 
   const switchTabs = (e, tab) => {
     if (tab === "login") {
@@ -107,6 +119,7 @@ const LoginSignUp = () => {
         <Loader />
       ) : (
         <Fragment>
+          <NavBar/>
           <div style={{ marginTop: "100px" }}>
             <div className="container">
               <div style={{marginBottom:"60px"}}>

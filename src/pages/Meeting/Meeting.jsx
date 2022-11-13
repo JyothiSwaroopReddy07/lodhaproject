@@ -1,10 +1,11 @@
 import React from "react";
 import './Meeting.css';
+import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
 function Meeting() {
     return (
         <>
-       
+        <LoginNavBar/>
         <div class="container MeetingDiv">
                 <div class="row mx-0 justify-content-center">
                   <div class="col-md-10 col-lg-9 px-lg-2 col-xl-8 px-xl-0">

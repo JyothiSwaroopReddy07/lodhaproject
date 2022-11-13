@@ -1,9 +1,12 @@
 import React from "react";
 import './HelpDesk.css';
+import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar';
+
 
 function HelpDesk() {
     return (
         <>
+        <LoginNavBar/>
             <div>
 
                 <p id="title2">POST A COMPLAINT</p>

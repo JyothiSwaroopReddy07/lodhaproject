@@ -1,8 +1,11 @@
 import * as React from "https://cdn.skypack.dev/react@17.0.1";
 import "./Emergency.css";
+import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
 function Emergency() {
   return (
+    <>
+    <LoginNavBar/>
     <div className="emergency">
     <p className="title"> 
         Emergency Services
@@ -40,6 +43,7 @@ function Emergency() {
         desc="hello" />
     </div>
     </div>
+    </>
   )
 }
 

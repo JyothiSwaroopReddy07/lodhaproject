@@ -1,9 +1,11 @@
 import React from "react";
 import './LegalUpdate.css';
+import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
 function LegalUpdate() {
     return (
         <>
+        <LoginNavBar/>
             <div>
 
                 <p id="title5">LEGAL UPDATE</p>

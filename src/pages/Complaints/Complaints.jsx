@@ -1,6 +1,6 @@
 import React from 'react';
 import './Complaints.css';
-
+import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 import Posts from '/src/components/Posts/Posts';
 
 
@@ -18,6 +18,7 @@ function Complaints() {
 
   return (
     <>
+    <LoginNavBar/>
       <div className="middle" style = {{marginTop : "100px"}}>
       <p id="title3">COMPLAINTS</p>
       <div style={{ marginLeft: "5px", height: "3px", width: "130px", backgroundColor: "gold" }}></div>

@@ -1,9 +1,11 @@
 import React from "react";
 import './CulturalSection.css';
+import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
 function CulturalSection() {
     return (
         <>
+        <LoginNavBar/>
             <div>
 
                 <p id="title4">CULTURAL SECTION</p>

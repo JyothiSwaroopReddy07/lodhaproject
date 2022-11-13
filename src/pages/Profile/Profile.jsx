@@ -1,5 +1,6 @@
 import React from "react";
 import './Profile.css';
+import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
 function Profile() {
     const user = {
@@ -12,6 +13,7 @@ function Profile() {
     }
     return (
         <>
+        <LoginNavBar/>
             <div>
                 <div className="UserProfileDiv">
                     <p id="userProfileTitle">USER PROFILE</p>

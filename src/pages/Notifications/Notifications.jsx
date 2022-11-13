@@ -1,6 +1,7 @@
 import React from 'react';
 import './Notifications.css';
 import Modals from '/src/components/Modals/Modals.jsx';
+import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
 function Notifications() {
   let Notification = [
@@ -25,6 +26,7 @@ function Notifications() {
   ];
   return (
     <>
+    <LoginNavBar/>
       <div className="MeetingItems" style={{ marginTop: "50px" }}>
       
           

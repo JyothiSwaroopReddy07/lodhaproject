@@ -18,21 +18,19 @@ import LegalUpdate from './pages/LegalUpdate/LegalUpdate'
 import LoginNavBar from './components/LoginNavBar/LoginNavBar';
 import Profile from './pages/Profile/Profile';
 import Dashboard from './pages/Dashboard/Dashboard';
+import LoggedHome from './pages/LoggedHome/LoggedHome'
 import {useGlobalContext} from "./context/StateContext";
 
 export default function App() {
 
-  const { isAuthenticated, setIsAuthenticated } = useGlobalContext();
-  
   return (
     <>
-      {isAuthenticated && <LoginNavBar />}
-      {!isAuthenticated && <NavBar />}
       <Router>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/Home' element={<LoggedHome />} />
           <Route path = '/UserProfile' element = {<Profile />} />
-          <Route path='/login'element={<LoginSignUp history={history} location={location} />}/>
+          <Route path='/login'element={<LoginSignUp/>}/>
           <Route path='/Complaints' element={<Complaints />} />
           <Route path='/Meeting' element={<Meeting />} />
           <Route path='/Emergency' element={<Emergency />} />
