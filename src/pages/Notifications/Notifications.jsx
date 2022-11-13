@@ -24,6 +24,12 @@ function Notifications() {
       DateOfPosting: "26 Oct 2022"
     }
   ];
+  useEffect(()=>{
+    if(JSON.parse(localStorage.getItem("isAuthenticated")===false)){
+      navigate('/login')
+    }
+  },[JSON.parse(localStorage.getItem("isAuthenticated"))])
+  
   return (
     <>
     <LoginNavBar/>

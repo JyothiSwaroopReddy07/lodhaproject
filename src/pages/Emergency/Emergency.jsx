@@ -3,6 +3,13 @@ import "./Emergency.css";
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
 function Emergency() {
+
+  useEffect(()=>{
+    if(JSON.parse(localStorage.getItem("isAuthenticated")===false)){
+      navigate('/login')
+    }
+  },[JSON.parse(localStorage.getItem("isAuthenticated"))])
+  
   return (
     <>
     <LoginNavBar/>

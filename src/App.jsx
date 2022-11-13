@@ -28,18 +28,18 @@ export default function App() {
       <Router>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/Home' element={<LoggedHome />} />
-          <Route path = '/UserProfile' element = {<Profile />} />
           <Route path='/login'element={<LoginSignUp/>}/>
-          <Route path='/Complaints' element={<Complaints />} />
-          <Route path='/Meeting' element={<Meeting />} />
-          <Route path='/Emergency' element={<Emergency />} />
-          <Route path='/Forms' element={<GoogleForms />} />
-          <Route path='/Notifications' element={<Notifications />} />
-          <Route path='/KeyContacts' element={<KeyContactsAndMails />} />
-          <Route path='/Finance' element={<FinanceAndAccount />} />
-          <Route path='/FM' element={<FacilityManagement />} />
-          <Route path = '/HelpDesk' element = {<HelpDesk />} />
+          <Route path='/Home' component={<LoggedHome/>} /> 
+          <Route path = '/UserProfile' element = {<Profile />} />
+          <Route path='/Complaints' element={<Complaints />} /> 
+          <Route path='/Meeting' element={<Meeting />} /> 
+          <Route path='/Emergency' element={<Emergency />} /> 
+          <Route path='/Forms' element={<GoogleForms />} /> 
+          <Route path='/Notifications' element={<Notifications />} /> 
+          <Route path='/KeyContacts' element={<KeyContactsAndMails />} /> 
+          <Route path='/Finance' element={<FinanceAndAccount />} /> 
+          <Route path='/FM' element={<FacilityManagement />} /> 
+          <Route path = '/HelpDesk' element = {<HelpDesk />} /> 
           <Route path = '/Cultural' element = {<CulturalSection />} />
           <Route path='/LegalUpdate' element = {<LegalUpdate />} />
           <Route path = '/UserDashboard' element={<Dashboard />} />

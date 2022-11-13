@@ -13,7 +13,14 @@ import Facilities from '/src/components/Facilities/facilities';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
-function Home() {
+function LoggedHome() {
+
+  useEffect(()=>{
+    if(JSON.parse(localStorage.getItem("isAuthenticated")===false)){
+      navigate('/login')
+    }
+  },[JSON.parse(localStorage.getItem("isAuthenticated"))])
+
   return (
     <>
     <LoginNavBar/>
@@ -76,4 +83,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default LoggedHome;

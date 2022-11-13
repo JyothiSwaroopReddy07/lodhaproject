@@ -34,6 +34,11 @@ function FinanceAndAccount() {
       setDataSource([...dataSource]);
     }
   }
+  useEffect(()=>{
+    if(JSON.parse(localStorage.getItem("isAuthenticated")===false)){
+      navigate('/login')
+    }
+  },[JSON.parse(localStorage.getItem("isAuthenticated"))])
 
   return (
     <>
