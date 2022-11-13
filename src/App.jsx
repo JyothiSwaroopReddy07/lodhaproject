@@ -20,29 +20,66 @@ import Profile from './pages/Profile/Profile';
 import Dashboard from './pages/Dashboard/Dashboard';
 import LoggedHome from './pages/LoggedHome/LoggedHome'
 import {useGlobalContext} from "./context/StateContext";
+import PrivateRoute from '/src/pages/PrivateRoute/PrivateRoute'
 
 export default function App() {
 
+  const {isAuthenticated, setIsAuthenticated} = useGlobalContext();
+  useEffect(()=>{
+    setIsAuthenticated(JSON.parse(localStorage.getItem("isAuthenticated")));
+
+  },[isAuthenticated,JSON.parse(localStorage.getItem("isAuthenticated"))])
   return (
     <>
       <Router>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login'element={<LoginSignUp/>}/>
-          <Route path='/Home' element={<LoggedHome/>} /> 
-          <Route path = '/UserProfile' element = {<Profile />} />
-          <Route path='/Complaints' element={<Complaints />} /> 
-          <Route path='/Meeting' element={<Meeting />} /> 
-          <Route path='/Emergency' element={<Emergency />} /> 
-          <Route path='/Forms' element={<GoogleForms />} /> 
-          <Route path='/Notifications' element={<Notifications />} /> 
-          <Route path='/KeyContacts' element={<KeyContactsAndMails />} /> 
-          <Route path='/Finance' element={<FinanceAndAccount />} /> 
-          <Route path='/FM' element={<FacilityManagement />} /> 
-          <Route path = '/HelpDesk' element = {<HelpDesk />} /> 
-          <Route path = '/Cultural' element = {<CulturalSection />} />
-          <Route path='/LegalUpdate' element = {<LegalUpdate />} />
-          <Route path = '/UserDashboard' element={<Dashboard />} />
+          <Route path="/Home"
+              element = {<PrivateRoute redirectTo="/login" component={<LoggedHome/>} 
+              isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))}/>  } />
+          
+          <Route path="/UserProfile"
+              element = {<PrivateRoute redirectTo="/login" component={<Profile/>} 
+              isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))}/>  } />
+
+          <Route path="/Complaints"
+              element = {<PrivateRoute redirectTo="/login" component={<Complaints/>} 
+              isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))}/>  } />
+
+          <Route path="/Meeting"
+              element = {<PrivateRoute redirectTo="/login" component={<Meeting/>} 
+              isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))}/>  } />
+          <Route path="/Emergency"
+              element = {<PrivateRoute redirectTo="/login" component={<Emergency/>} 
+              isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))}/>  } />
+          <Route path="/Forms"
+              element = {<PrivateRoute redirectTo="/login" component={<GoogleForms/>} 
+              isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))}/>  } />
+          <Route path="/Notifications"
+              element = {<PrivateRoute redirectTo="/login" component={<Notifications/>} 
+              isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))}/>  } />
+          <Route path="/KeyContacts"
+              element = {<PrivateRoute redirectTo="/login" component={<KeyContactsAndMails/>} 
+              isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))}/>  } />
+          <Route path="/Finance"
+              element = {<PrivateRoute redirectTo="/login" component={<FinanceAndAccount/>} 
+              isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))}/>  } />
+          <Route path="/FM"
+              element = {<PrivateRoute redirectTo="/login" component={<FacilityManagement/>} 
+              isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))}/>  } />
+          <Route path="/HelpDesk"
+              element = {<PrivateRoute redirectTo="/login" component={<HelpDesk/>} 
+              isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))}/>  } />
+          <Route path="/Cultural"
+              element = {<PrivateRoute redirectTo="/login" component={<CulturalSection/>} 
+              isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))}/>  } />
+          <Route path="/LegalUpdate"
+              element = {<PrivateRoute redirectTo="/login" component={<LegalUpdate/>} 
+              isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))}/>  } />
+          <Route path="/UserDashboard"
+              element = {<PrivateRoute redirectTo="/login" component={<Dashboard/>} 
+              isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))}/>  } />
         </Routes>
       </Router>
     </>
