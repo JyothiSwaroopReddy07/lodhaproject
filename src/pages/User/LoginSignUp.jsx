@@ -35,7 +35,7 @@ const LoginSignUp = () => {
     setLoading(true);
     const {data} = await axios.post("http://localhost:4000/api/v1/login",{
       FlatNo: loginFlatNo, Password: loginPassword });
-    const user = data.user1;
+    const user = data.user;
     setLoading(false);
     if(user!==[] && !user){
       navigate('/login');
@@ -49,7 +49,7 @@ const LoginSignUp = () => {
     }
   }
 
-  const register = async(OwnerName,RegisteredName,FlatNo,Password,Email,Mobile,ParkingSlot) => {
+  const register = async(OwnerName,RegisteredName,FlatNo,Password,Email,Mobile,ParkingSlot, Block) => {
     setLoading(true);
     const {data} = await axios.post("http://localhost:4000/api/v1/register",{
       OwnerName: OwnerName,
@@ -58,12 +58,13 @@ const LoginSignUp = () => {
       Mobile: Mobile,
       ParkingSlot: ParkingSlot,
       FlatNo: FlatNo, 
-      Password: Password 
+      Password: Password,
+      Block: Block
     });
-    const user = data.user1;
+    const user = data.user;
     setLoading(false);
     if(user!==[] && !user){
-      navigate('/register');
+      navigate('/login');
     }
     else{
       setUser(user);
@@ -89,8 +90,9 @@ const LoginSignUp = () => {
     const Email = e.target.Email.value;
     const Mobile = e.target.Mobile.value;
     const ParkingSlot = e.target.ParkingSlot.value;
+    const Block = e.target.Block.value;
     e.preventDefault();
-    register(OwnerName,RegisteredName,FlatNo,Password,Email,Mobile,ParkingSlot);
+    register(OwnerName,RegisteredName,FlatNo,Password,Email,Mobile,ParkingSlot,Block);
   };
 
 
