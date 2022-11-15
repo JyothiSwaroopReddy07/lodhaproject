@@ -193,6 +193,12 @@
      border-radius: 10px;
    }
    
+   #ReEnterRegPass{
+     
+    border: 1px solid #000!important;
+   height: 40px;
+   border-radius: 10px;
+ }
    #RegisterButton{
      margin: 0px !important;
      align-items: center !important;
@@ -211,7 +217,7 @@
    
    .registerContainer{
      background-color:rgb(255, 254, 246);
-     margin-top: 375px ;
+     margin-top: 850px !important;
      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
      border-radius: 10px;
    }
@@ -233,10 +239,26 @@
      .RegisterHeading{
          margin: 5% 5% 5% 0%;
      }
-     .registerContainer{
-      margin-top: 350px !important;
-     }
+     
    }
    
    
-   
+   .Label {
+    text-align: left;
+    margin-left: 10% ;
+    font-size: 15px;
+    color: black;
+    letter-spacing: 1.5px;
+    text-decoration-line: underline;
+    text-underline-offset: 10px;
+    text-decoration-color: gold;
+    text-decoration-thickness: 2px;
+    margin-bottom: 20px;
+}
+
+
+.Label:first-letter {
+    font-size: 20px;
+    font-weight: normal;
+
+}
