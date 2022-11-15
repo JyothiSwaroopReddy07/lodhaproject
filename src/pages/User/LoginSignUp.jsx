@@ -2,9 +2,10 @@ import React, { Fragment, useRef, useState, useEffect } from "react";
 import "./LoginSignUp.css";
 import Loader from "../layout/Loader/Loader";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, login, register } from "../../actions/userAction";
-import {
+import {useGlobalContext} from '/src/context/StateContext'
+
+import {useNavigate} from 'react-router-dom';
+import{
   MDBBtn,
   MDBContainer,
   MDBCard,
@@ -16,18 +17,18 @@ import {
   MDBCheckbox
 }
   from 'mdb-react-ui-kit';
+import axios from "axios";
+import NavBar from "/src/components/NavBar/NavBar";
   import validator from 'validator'
 
 
 
 
-const LoginSignUp = ({ history, location }) => {
-  const dispatch = useDispatch();
+const LoginSignUp = () => {
 
+  const navigate = useNavigate();
 
-  const { error, loading, isAuthenticated } = useSelector(
-    (state) => state.user
-  );
+  const { isAuthenticated,setUser, setIsAuthenticated, loading,setLoading } = useGlobalContext();
   const [Curr, setCurr] = useState(false);
   const loginTab = useRef(null);
   const registerTab = useRef(null);
@@ -37,64 +38,85 @@ const LoginSignUp = ({ history, location }) => {
   const [isEmpty, setIsEmpty] = useState(true);
   const [isValidMobile, setIsValidMobile] = useState(false);
 
-  const [loginFlatNo, setLoginFlatNo] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
+  const login = async(loginFlatNo, loginPassword) => {
+    setLoading(true);
+    const {data} = await axios.post("http://localhost:4000/api/v1/login",{
+      FlatNo: loginFlatNo, Password: loginPassword });
+    const user = data.user;
+    setLoading(false);
+    if(user!==[] && !user){
+      navigate('/login');
+    }
+    else{
+      setUser(user);
+      setIsAuthenticated(true);
+      localStorage.setItem("User",user);
+      localStorage.setItem("isAuthenticated",true);
+      navigate('/UserDashboard');
+    }
+  }
 
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-
-  const { name, email, password} = user;
-
+  const register = async(OwnerName,RegisteredName,FlatNo,Password,Email,Mobile,ParkingSlot, Block) => {
+    setLoading(true);
+    const {data} = await axios.post("http://localhost:4000/api/v1/register",{
+      OwnerName: OwnerName,
+      RegisteredName: RegisteredName,
+      Email: Email,
+      Mobile: Mobile,
+      ParkingSlot: ParkingSlot,
+      FlatNo: FlatNo, 
+      Password: Password,
+      Block: Block
+    });
+    const user = data.user;
+    setLoading(false);
+    if(user!==[] && !user){
+      navigate('/login');
+    }
+    else{
+      setUser(user);
+      setIsAuthenticated(true);
+      localStorage.setItem("User",user);
+      localStorage.setItem("isAuthenticated",isAuthenticated);
+      navigate('/UserDashboard');
+    }
+  }
 
   const loginSubmit = (e) => {
+    const loginFlatNo = e.target.FlatNo.value;
+    const loginPassword = e.target.Password.value;
     e.preventDefault();
-    dispatch(login(loginEmail, loginPassword));
+    login(loginFlatNo,loginPassword);
   };
 
   const registerSubmit = (e) => {
+    const OwnerName = e.target.OwnerName.value;
+    const RegisteredName = e.target.RegisteredName.value;
+    const FlatNo = e.target.FlatNo.value;
+    const Password = e.target.Password.value;
+    const Email = e.target.Email.value;
+    const Mobile = e.target.Mobile.value;
+    const ParkingSlot = e.target.ParkingSlot.value;
+    const Block = e.target.Block.value;
     e.preventDefault();
-
-    const myForm = new FormData();
-
-    myForm.set("name", name);
-    myForm.set("email", email);
-    myForm.set("password", password);
-
-    dispatch(register(myForm));
+    register(OwnerName,RegisteredName,FlatNo,Password,Email,Mobile,ParkingSlot,Block);
   };
 
-  const registerDataChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
-
-  const redirect = location.search ? location.search.split("=")[1] : "/account";
-
-  useEffect(() => {
-    if (error) {
-
-      dispatch(clearErrors());
-    }
-
-    if (isAuthenticated) {
-      history.push(redirect);
-    }
-  }, [dispatch, error, history, isAuthenticated, redirect]);
 
   const switchTabs = (e, tab) => {
     if (tab === "login") {
       switcherTab.current.classList.add("shiftToNeutral");
       switcherTab.current.classList.remove("shiftToRight");
-
+      registerTab.current.classList.add("visible");
+      loginTab.current.classList.remove("visible");
       registerTab.current.classList.remove("shiftToNeutralForm");
       loginTab.current.classList.remove("shiftToLeft");
     }
     if (tab === "register") {
       switcherTab.current.classList.add("shiftToRight");
       switcherTab.current.classList.remove("shiftToNeutral");
-      
+      registerTab.current.classList.remove("visible");
+      loginTab.current.classList.add("visible");
       registerTab.current.classList.add("shiftToNeutralForm");
       loginTab.current.classList.add("shiftToLeft");
     }
@@ -137,9 +159,10 @@ const LoginSignUp = ({ history, location }) => {
         <Loader />
       ) : (
         <Fragment>
-          <div style={{ marginTop: "100px", }}>
+          <NavBar/>
+          <div style={{ marginTop: "100px" }}>
             <div className="container">
-              <div >
+              <div style={{marginBottom:"60px"}}>
                 <div className="login_signUp_toggle">
                   <p onClick={(e) => switchTabs(e, "login")} className="LoginRegisterTitle">LOGIN</p>
                   <div style={{width:"2px", height:"inherit", backgroundColor:"gold"}}></div>
@@ -148,7 +171,7 @@ const LoginSignUp = ({ history, location }) => {
                 <button className="switchButton" ref={switcherTab}></button>
               </div>
               <form className="loginForm" ref={loginTab} onSubmit={loginSubmit}>
-                <MDBContainer className='my-3'>
+                <MDBContainer>
                   <MDBCard className='p-5 login-container LoginContainer'>
 
                     <MDBRow className='g-0 d-flex align-items-center'>
@@ -166,20 +189,20 @@ const LoginSignUp = ({ history, location }) => {
                           </div>
                           <div>
                           <p className="Label">EMAIL ADDRESS</p>
-                            <MDBInput wrapperClass='mb-4' placeholder='Email address' className='form1' id='uname' type='email' />
+                            <MDBInput wrapperClass='mb-4' placeholder='Flat Number' className='form1' id='uname' name="FlatNo" type='text' />
                           </div>
                           <div style={{display:"flex", justifyContent:"space-between"}}>
                           <p className="Label">PASSWORD</p>
                           <img src="/src/assests/password.png" onClick={(e) => ShowPassword(e)} style={{height:"20px", width:"20px",marginRight:"10%", marginTop:"10px"}}></img>
                           </div>
-                          <MDBInput wrapperClass='mb-4' placeholder='Password' className='form1' id='pass' type={Curr ? 'text':'password'} />
+                          <MDBInput wrapperClass='mb-4' placeholder='Password' className='form1' id='pass' name="Password" type={Curr ? 'text':'password'} />
 
                           <div className="d-flex justify-content-around mx-4 mb-4 form1">
                             <MDBCheckbox name='flexCheck' value='' label='Remember me' />
                             <Link to="/password/forgot">Forget Password ?</Link>
                           </div>
 
-                          <MDBBtn className="mb-4 form1" id="loginButton">Login</MDBBtn>
+                          <MDBBtn className="mb-4 form1" id="loginButton" type="submit">Login</MDBBtn>
 
                         </MDBCardBody>
 
@@ -196,8 +219,8 @@ const LoginSignUp = ({ history, location }) => {
                 encType="multipart/form-data"
                 onSubmit={registerSubmit}
               >
-                <div>
-                <MDBContainer className='my-3' style={{}}>
+              <div>
+                <MDBContainer>
                   <MDBCard className='p-5 login-container registerContainer' >
 
                     <MDBRow className='g-0 d-flex align-items-center'>
@@ -213,32 +236,32 @@ const LoginSignUp = ({ history, location }) => {
                             <img src="/src/assests/user.svg" style={{ width: "70px", height: "70px" }}></img>
                             <h1 className='RegisterHeading'>Register</h1>
                           </div>
-                          <p className="Label">NAME</p>
-                          <MDBInput wrapperClass='mb-4' placeholder='Name' className='form1' id='name' type='text' />
+                          <MDBInput wrapperClass='mb-4' placeholder='Owner Name' className='form1' name="OwnerName" id='name' type='text' />
+                          <MDBInput wrapperClass='mb-4' placeholder='Property Registered Name' className='form1' name="RegisteredName" id='name' type='text' />
                           <div>
                           <p className="Label">EMAIL ADRESS</p>
-                            <MDBInput wrapperClass='mb-4' placeholder='Email address' className='form1' id='RegUname' type='email' />
+                            <MDBInput wrapperClass='mb-4' placeholder='Email address' className='form1' id='RegUname' name="Email" type='email' />
                           </div>
 
                           <div style={{display:"flex", justifyContent:"space-between"}}>
                           <p className="Label">PASSWORD</p>
                           <img src="/src/assests/password.png" onClick={(e) => ShowPassword(e)} style={{height:"20px", width:"20px",marginRight:"10%", marginTop:"10px"}}></img>
                           </div>
-                          <MDBInput wrapperClass='mb-4' placeholder='Password' className='form1' id='RegPass' type={Curr ? 'text': 'password'} ref={UserPass} onChange={(e) => validate(e.target.value, e.target.value.length)}/>
+                          <MDBInput wrapperClass='mb-4' placeholder='Password' name="Password" className='form1' id='RegPass' type={Curr ? 'text': 'password'} ref={UserPass} onChange={(e) => validate(e.target.value, e.target.value.length)}/>
                           {
                             (isEmpty)? <></> : (isStrong ) ? <p style={{color:"green", letterSpacing:"1.5px", }}>Strong Password</p> : <p style={{color:"red", letterSpacing:"1.5px"}}>Weak Password</p>
                           }
                           <p className="Label">MOBILE NUMBER</p>
-                          <MDBInput wrapperClass='mb-4' placeholder='Mobile Number' className='form1' id='mob' type='text' onChange={(e) => MobileValidate(e.target.value)}/>
+                          <MDBInput wrapperClass='mb-4' placeholder='Mobile Number' name="Mobile" className='form1' id='mob' type='text' onChange={(e) => MobileValidate(e.target.value)}/>
                           {
                             (isValidMobile) ? <p style={{color:"green", letterSpacing:"1.5px", }}>Valid Mobile Number</p> : <p style={{color:"red", letterSpacing:"1.5px"}}>Invalid Mobile Number</p> 
                           }
                           <p className="Label">BLOCK</p>
-                          <MDBInput wrapperClass='mb-4' placeholder='Block' className='form1' id='block' type='text' />
+                          <MDBInput wrapperClass='mb-4' placeholder='Block' name="Block" className='form1' id='block' type='text' />
                           <p className="Label">FLAT NUMBER</p>
-                         <MDBInput wrapperClass='mb-4' placeholder='Flat Number' className='form1' id='flat' type='number' />
+                         <MDBInput wrapperClass='mb-4' placeholder='Flat Number' name="FlatNo" className='form1' id='flat' type='number' />
                           <p className="Label">PARKING SLOT</p>
-                          <MDBInput wrapperClass='mb-4' placeholder='Parking Slot' className='form1' id='parking' type='text' />
+                          <MDBInput wrapperClass='mb-4' placeholder='Parking Slot' name="ParkingSlot" className='form1' id='parking' type='text' />
                           <p className="Label">NOTE</p>
                           <ul style={{textAlign:"left", marginLeft:"10%", fontSize:"14px",backgroundColor:"white", border:"1px solid black", borderRadius:"10px"}}>
                             Password must contain alteast 8 characters including 
@@ -251,7 +274,7 @@ const LoginSignUp = ({ history, location }) => {
                             <a href="!#">Forgot password?</a>
                           </div>
 
-                          <MDBBtn className="mb-4 form1" id="RegisterButton">Register</MDBBtn>
+                          <MDBBtn className="mb-4 form1" id="RegisterButton" type="submit">Register</MDBBtn>
 
                         </MDBCardBody>
 

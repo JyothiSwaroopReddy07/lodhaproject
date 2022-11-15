@@ -12,7 +12,6 @@ const complaints = require("./routes/complaintsRoute");
 app.use("/api/v1", users)
 app.use("/api/v1",complaints);
 // MiddleWare for Errors
-app.use(errorMiddleWare);
 
 
 module.exports = app;

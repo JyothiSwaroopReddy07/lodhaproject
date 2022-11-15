@@ -10,7 +10,17 @@ exports.createUser = catchAsyncErrors(async(req,res,next)=> {
     if(user1 && Object.keys(user1).length){
         return next(new ErrorHandler("User Already Exists",404));
     }
-    const user = await User.create(req.body);
+    const {Password, OwnerName,RegisteredName,Block, Mobile,ParkingSlot,Email } = req.body;
+    const user = await User.create({
+        FlatNo: FlatNo,
+        Email: Email,
+        Password: Password,
+        OwnerName: OwnerName,
+        RegisteredName: RegisteredName,
+        Block: Block,
+        Mobile: Mobile,
+        ParkingSlot: ParkingSlot
+    });
 
     res.status(201).json({
         success: true,
@@ -18,15 +28,31 @@ exports.createUser = catchAsyncErrors(async(req,res,next)=> {
     })
 });
 
-// Get Single User
-exports.getUser = catchAsyncErrors(async(req,res,next) => {
-    const UserData = await User.find({FlatNo: req.params.FlatNo})
-    if(!UserData) {
-        return next(new ErrorHandler("User not found",404));
+// login User
+exports.loginUser = catchAsyncErrors(async(req,res,next) => {
+    console.log(req.body);
+    const {FlatNo, Password} = req.body;
+    const user = await User.find({FlatNo: FlatNo, Password: Password})
+    if(!user && Object.keys(user).length){
+        return next(new ErrorHandler("User does not exists",404));
     }
     res.status(200).json({
         success: true,
-        UserData
+        user
+    });
+})
+
+
+// Get Single User
+exports.getUser = catchAsyncErrors(async(req,res,next) => {
+    const {FlatNo} = req.body;
+    const user1 = await User.find({FlatNo: FlatNo})
+    if(user1 && Object.keys(user1).length){
+        return next(new ErrorHandler("User does not exists",404));
+    }
+    res.status(200).json({
+        success: true,
+        user1
     });
 });
 

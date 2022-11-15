@@ -1,8 +1,13 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
+import {useNavigate} from 'react-router-dom'; 
 import Table from 'react-bootstrap/Table';
-import './KeyContactsAndMails.css'
+import './KeyContactsAndMails.css';
+import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
 function KeyContactsAndMails() {
+
+
   const UserData = [
     ["501", "Jyothi Swaroop Reddy", "bjsreddy742002@gmail.com", "9849863395", "431/A", "Swaroop"],
     ["502", "dsgnjsng", "bjsreddy@gmail.com", "2496856069", "433/A", "Swar"],
@@ -33,9 +38,11 @@ function KeyContactsAndMails() {
       setDataSource([...dataSource]);
     }
   }
+  
 
   return (
     <>
+    <LoginNavBar/>
       <div style={{ marginTop: "60px" }}>
 
         <div className="container mt-5" style={{ padding: "0px", width: "100%" }}>

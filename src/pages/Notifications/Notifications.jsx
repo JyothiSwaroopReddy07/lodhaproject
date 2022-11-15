@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState, useEffect} from "react";
 import './Notifications.css';
 import Modals from '/src/components/Modals/Modals.jsx';
+import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
 function Notifications() {
   let Notification = [
@@ -23,8 +24,10 @@ function Notifications() {
       DateOfPosting: "26 Oct 2022"
     }
   ];
+  
   return (
     <>
+    <LoginNavBar/>
       <div className="MeetingItems" style={{ marginTop: "50px" }}>
       
           

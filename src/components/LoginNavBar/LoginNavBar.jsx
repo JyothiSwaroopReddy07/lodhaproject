@@ -6,16 +6,24 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 import './LoginNavBar.css';
 import Dropdown from '../DropDown/Dropdown';
+import {useGlobalContext} from '/src/context/StateContext'
 
 function LoginNavBar() {
-
     const [Menu, setMenu] = useState(false);
+    const { setIsAuthenticated , setUser, setLoading, isAuthenticated }= useGlobalContext();
+
+     const changes = () => {
+        localStorage.setItem("isAuthenticated",false);
+        localStorage.setItem("User",null);
+        setIsAuthenticated(false);
+        setUser(null);
+    }
 
     return (
         <div id="nav-container">
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Container>
-                    <Navbar.Brand href="/">
+                    <Navbar.Brand href="/Home">
                         <a>
                             <img id="MeridianLogo" src="/src/assests/lodhalogo.svg" alt="logo" />
                         </a>
@@ -38,7 +46,7 @@ function LoginNavBar() {
                                 <NavDropdown.Divider />
                                 <div className='ProfileDiv' style={{display:"flex"}}>
                                 <img src="/src/assests/logout.png" style={{paddingLeft: "5px",height:"30px", width: "30px"}}></img>
-                                <NavDropdown.Item href="/UserLogout" className='loginDropDownMenu'>
+                                <NavDropdown.Item href="/" onClick={()=>{changes();}} className='loginDropDownMenu'>
                                     LOGOUT
                                 </NavDropdown.Item>
                                 </div>

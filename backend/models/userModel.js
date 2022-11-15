@@ -27,6 +27,10 @@ const userSchema = mongoose.Schema({
         type: String,
         required: [true, "Please Enter Parking Slot"]
     },
+    Block: {
+        type: String,
+        required: [true, "Please enter Block Number"]
+    },
     Password:{
         type: String,
         required: [true, "Please Enter Password"]

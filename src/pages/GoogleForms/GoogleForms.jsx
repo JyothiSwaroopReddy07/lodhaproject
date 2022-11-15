@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import './GoogleForms.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
 
 function MyVerticallyCenteredModal(props) {
@@ -62,8 +63,11 @@ function GoogleForms() {
 
         }
     ];
+
+      
     return (
         <>
+        <LoginNavBar/>
             <div className="FormItems" style={{ marginTop: "50px" }}>
                 <p className='FormHeader' >GOOGLE FORMS</p>
                 <hr style={{ height: "1", backgroundColor: "black", width: "94%", marginLeft: "3%" }}></hr>

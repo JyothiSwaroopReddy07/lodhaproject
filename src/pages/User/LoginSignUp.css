@@ -19,6 +19,9 @@
     letter-spacing: 2px;
     border-radius: 10px;
   }
+  .visible{
+    visibility: hidden;
+  }
 
   .LoginRegisterTitle:first-letter{
     font-size: 40px;

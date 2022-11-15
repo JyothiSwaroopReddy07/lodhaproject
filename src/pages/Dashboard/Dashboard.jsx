@@ -1,9 +1,10 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Nav from 'react-bootstrap/Nav';
 import GoogleForms from "../GoogleForms/GoogleForms";
 import "./Dashboard.css"
 import Notifications from "../Notifications/Notifications";
+import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 import GeneralNotifications from "../GeneralNotifications/GeneralNotifications";
 
 function Dashboard() {
@@ -29,8 +30,11 @@ function Dashboard() {
             setIsMeeting(false);
         }
     };
+
+      
     return (
         <>
+        <LoginNavBar/>
             <div>
                 <div style={{display:"flex"}}>
                 <img src="/src/assests/dashboard.png" style={{height:"35px", width:"35px", marginTop:"105px", marginLeft:"50px", marginBottom:"0px"}}></img>

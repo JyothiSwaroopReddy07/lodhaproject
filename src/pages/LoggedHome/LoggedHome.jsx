@@ -1,5 +1,5 @@
-import React from 'react';
-import './Home.css';
+import React, {useState, useEffect} from "react";
+import './LoggedHome.css';
 import {
   MDBCard,
   MDBCardBody,
@@ -11,12 +11,13 @@ import Contact from '/src/components/ContactUs/Contact';
 import Carousels from '/src/components/Carousel/Carousel';
 import Facilities from '/src/components/Facilities/facilities';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NavBar from '/src/components/NavBar/NavBar'
+import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
-function Home() {
+function LoggedHome() {
+
   return (
     <>
-    <NavBar/>
+    <LoginNavBar/>
       <div style={{ marginTop: "60px", width: "100%" }}>
         <video width="100%" autoplay="" muted loop playsinline>
           <source src="src/assests/home.mp4" type="video/mp4"></source>
@@ -76,4 +77,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default LoggedHome;

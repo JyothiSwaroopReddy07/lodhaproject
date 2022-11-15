@@ -1,9 +1,14 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Nav from 'react-bootstrap/Nav';
 import "./FacilityManagement.css"
+import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
+
 function FacilityManagement() {
+
+
     return (
         <>
+        <LoginNavBar/>
         <div>
         <p id="title1">FACILITY MANAGEMENT</p>
         <div style={{ marginLeft: "55px", height: "3px", width: "250px", backgroundColor: "gold" }}></div>

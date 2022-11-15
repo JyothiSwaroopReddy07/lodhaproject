@@ -1,10 +1,14 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import './Meeting.css';
+import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
 function Meeting() {
+
+
   return (
     <>
-      <div style={{ display: "flex" }}>
+      <LoginNavBar/>
+       <div style={{ display: "flex" }}>
         <img src="/src/assests/meeting.png" style={{ height: "35px", width: "35px", marginTop: "105px", marginLeft: "50px", marginBottom: "0px" }}></img>
         <p id="userDashboardTitle">SET UP MEETING</p>
       </div>

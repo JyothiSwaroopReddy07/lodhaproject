@@ -26,8 +26,7 @@ function Header() {
             </Nav>
             <Nav>
               <Nav.Link id="Menu" onClick={() => { setMenu(!Menu) }}>Menu</Nav.Link>
-              <Nav.Link id="User" href="/User"> Login</Nav.Link>
-              <Nav.Link id="register" href="/Register"> Sign Up</Nav.Link>
+              <Nav.Link id="User" href="/login"> Login /Register</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

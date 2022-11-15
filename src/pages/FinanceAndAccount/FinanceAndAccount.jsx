@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, {useState, useEffect} from "react";
 import Table from 'react-bootstrap/Table';
 import './FinanceAndAccount.css'
+import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 
 function FinanceAndAccount() {
   const UserData = [
@@ -36,6 +37,7 @@ function FinanceAndAccount() {
 
   return (
     <>
+    <LoginNavBar/>
       <div style={{ marginTop: "60px" }}>
 
         <div className="container mt-5" style={{ padding: "0px", width: "100%" }}>
