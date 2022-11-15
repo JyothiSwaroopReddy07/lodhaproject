@@ -1,27 +1,8 @@
-const {Complaint, complaint_types} = require("../models/complaintModel");
+const {Complaint} = require("../models/complaintModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const UserApiFeatures = require("../utils/apifeatures");
 
-
-// Add new enum type to complaint
-exports.addNewEnum = catchAsyncErrors(async(req,res,next)=> {
-    const userRole = req.body.role;
-    if(userRole === 'admin')
-    {
-        const newType = (req.body.complaintType).toString();
-        if(complaint_types.indexOf(newType) < 0){
-            console.log("here")
-            complaint_types.push(newType); 
-            res.status(201).json({
-                success: true,
-                complaint_types
-            })
-        }
-    }
-    return next(new ErrorHandler("You can't make such requests",404));
-    
-});
 
 
 // Create Complaint
@@ -41,10 +22,10 @@ exports.createComplaint = catchAsyncErrors(async(req,res,next)=> {
 
 // Get All Complaints
 exports.getAllComplaints = catchAsyncErrors(async(req,res) => {
-    const AllComplaints = await Complaint.find()
+    const complaints = await Complaint.find()
     res.status(200).json({
         success: true,
-        AllComplaints
+        complaints
     });
 });
 
@@ -65,7 +46,8 @@ exports.updateComplaint = catchAsyncErrors(async(req,res,next)=> {
 
 // get User Complaints
 exports.getUserComplaints = catchAsyncErrors(async(req,res,next) => {
-    const complaints = await Complaint.find({user: req.params.id});
+    const {FlatNo} = req.body;
+    const complaints = await Complaint.find({FlatNo: FlatNo});
     res.status(200).json({
         success:true,
         complaints

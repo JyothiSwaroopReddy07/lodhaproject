@@ -59,21 +59,12 @@ exports.getUser = catchAsyncErrors(async(req,res,next) => {
 // Get All users
 exports.getAllusers = catchAsyncErrors(async(req,res) => {
     console.log(req);
-    if(req.query !== null || req.query!== undefined || req.query!== "")
-    {
-        const userapiFeature = new UserApiFeatures(User.find(),req.query).search();
-        const user_query = await userapiFeature.query;
+    
+        const users = await User.find()
         res.status(200).json({
             success: true,
-            user_query
+            users
         });
-    }else{
-        const UserData = await User.find()
-        res.status(200).json({
-            success: true,
-            UserData
-        });
-    }
     
 })
 

@@ -1,9 +1,22 @@
+import axios from "axios";
 import React, {useState, useEffect} from "react";
 import './HelpDesk.css';
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar';
 
 
 function HelpDesk() {
+
+    const [Issues, setIssues] = useState([]);
+
+    const fetchIssues = async()=>{
+        const { data }  = await axios.get("http://localhost:4000/api/v1/issue_types");
+        console.log(data.issues);
+        setIssues(data.issues);
+    }
+    useEffect(()=>{
+        fetchIssues();
+        console.log(Issues);
+    },[Issues.length])
       
     return (
         <>
@@ -31,6 +44,16 @@ function HelpDesk() {
                                         class="form-control temp"
                                         placeholder="Complaint Title"
                                     />
+                                </label>
+                                <label class="d-block mb-4">
+                                    <span class="d-block mb-2 head">Issue Type</span>
+                                    <select>
+                                        {
+                                            Issues.map(({Name}) => (
+                                                <option value={Name}>{Name}</option>
+                                            ))
+                                        }
+                                    </select>
                                 </label>
 
                                 <div class="mb-4">

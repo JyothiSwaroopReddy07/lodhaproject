@@ -1,11 +1,15 @@
 const express = require("express");
 const { getAllComplaints, createComplaint, updateComplaint, deleteComplaint, getUserComplaints, addNewEnum} = require("../controllers/complaintController");
 const router = express.Router();
+router.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
-router.route('/AddComplaintType').post(addNewEnum);
 router.route('/AllComplaints').get(getAllComplaints)
 router.route('/complaint/new').post(createComplaint);
-router.route('/complaint/:id').put(updateComplaint).get(getUserComplaints).delete(deleteComplaint);
+router.route('/complaint').put(updateComplaint).post(getUserComplaints).delete(deleteComplaint);
 
  
 module.exports = router

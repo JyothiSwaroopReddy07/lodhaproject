@@ -8,7 +8,13 @@
 
 }
 
+.KeyContactDiv{
+  margin-top: 60px;
+  margin-left: 50px;
+}
+
 #title{
+   
     font-size: 25px;
     font-weight: bolder;
     margin: 0px;

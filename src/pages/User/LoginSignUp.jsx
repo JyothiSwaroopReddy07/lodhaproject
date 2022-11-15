@@ -43,14 +43,15 @@ const LoginSignUp = () => {
     const {data} = await axios.post("http://localhost:4000/api/v1/login",{
       FlatNo: loginFlatNo, Password: loginPassword });
     const user = data.user;
+    console.log(user);
     setLoading(false);
     if(user!==[] && !user){
       navigate('/login');
     }
     else{
-      setUser(user);
+      setUser(user[0]);
       setIsAuthenticated(true);
-      localStorage.setItem("User",user);
+      localStorage.setItem("User",user[0]);
       localStorage.setItem("isAuthenticated",true);
       navigate('/UserDashboard');
     }
@@ -69,14 +70,15 @@ const LoginSignUp = () => {
       Block: Block
     });
     const user = data.user;
+    console.log(user);
     setLoading(false);
     if(user!==[] && !user){
       navigate('/login');
     }
     else{
-      setUser(user);
+      setUser(user[0]);
       setIsAuthenticated(true);
-      localStorage.setItem("User",user);
+      localStorage.setItem("User",user[0]);
       localStorage.setItem("isAuthenticated",isAuthenticated);
       navigate('/UserDashboard');
     }
