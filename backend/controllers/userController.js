@@ -70,16 +70,19 @@ exports.getAllusers = catchAsyncErrors(async(req,res) => {
 
 // Update User
 exports.updateUser = catchAsyncErrors(async(req,res,next)=> {
-    let user1 = await User.findById(req.params.id);
+    const data = req.body;
+    console.log("data",data);
+    console.log("req.body ", req.body);
+    let user1 = await User.findById(data.FlatNo);
     if(!user1){
         return next(new ErrorHandler("User not found",404));
     }
-    user1 = await User.findByIdAndUpdate(req.params.id, req.body, {new: true, 
+    user = await User.findByIdAndUpdate(data.FlatNo,data, {new: true, 
         runValidator: true, useFindAndModify: false})
  
     res.status(200).json({
         success: true,
-        user1
+        user
     })
 });
 
