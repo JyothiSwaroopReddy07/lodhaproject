@@ -46,9 +46,12 @@ export default function KeyContactsAndMails() {
         dataSource={filteredData}
         columns={userColumns}
         loading={loading}
-        pagination={false}
+        pagination={true}
         style={{marginTop:"20px", width: "90%", boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px",backgroundColor:"black !important"}}
       />
+      </div>
+      <div style={{height:"100px", color: "white"}}>
+
       </div>
     </>
   );

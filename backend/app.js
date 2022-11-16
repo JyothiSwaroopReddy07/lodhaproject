@@ -8,13 +8,16 @@ app.use(express.json());
 const users = require("./routes/userRoute");
 const complaints = require("./routes/complaintsRoute");
 const issues = require("./routes/issueRoute");
-const notification = require("./routes/notificationRoute")
-const form = require('./routes/formRoute')
+const notification = require("./routes/notificationRoute");
+const form = require('./routes/formRoute');
+const meeting = require('./routes/meetingRoute');
+
 app.use("/api/v1", users);
 app.use("/api/v1",complaints);
 app.use("/api/v1",issues);
 app.use("/api/v1",notification);
 app.use("/api/v1", form);
+app.use("/api/v1", meeting);
 // MiddleWare for Errors
 
 

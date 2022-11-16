@@ -45,7 +45,7 @@ function GoogleForms() {
                             <Button variant="primary" onClick={() => handleShow(item.Title, item.Description, item.Link)} className="modalButton">
                                 <div style={{ display: "flex", flexDirection: "row" }}>
                                     <span className="FormHeading">
-                                        <p style={{ textDecorationLine: "underline", textUnderlineOffset: "10px" }}>TITLE</p>
+                                        <p style={{ textDecorationLine: "underline", textUnderlineOffset: "10px" }}>SURVEY TITLE</p>
                                         <p>{item.Title}</p>
                                     </span>
                                     <span className="FormView">

@@ -2,20 +2,20 @@ const mongoose = require('mongoose');
 
 
 const meetingSchema = mongoose.Schema({
-    MeetingTitle: {
+    Title: {
        type: String,
        required: [true, "Enter the meeting title "]
 
     }, 
-    MeetingDesc : {
+    Description : {
         type: String, 
         required: [true, "Enter the meeting description"]
     },
-    MeetingLink: {
+    Link: {
       type: String, 
       required: [true, "Enter the meeting Link"]
     },
-    MeetingDate: {
+    Date: {
         type: Date, 
         required: [true, "Enter the Meeting Date"],
     }, 

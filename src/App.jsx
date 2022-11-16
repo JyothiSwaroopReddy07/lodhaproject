@@ -23,6 +23,7 @@ import { useGlobalContext } from "./context/StateContext";
 import PrivateRoute from '/src/pages/PrivateRoute/PrivateRoute'
 import GeneralNotifications from './pages/GeneralNotifications/GeneralNotifications';
 import AllComplaints from './pages/AllComplaints/AllComplaints';
+import CreateForm from './pages/CreateForms/CreateForm';
 
 export default function App() {
 
@@ -88,6 +89,9 @@ export default function App() {
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
                     <Route path="/GeneralNotifications"
                         element={<PrivateRoute redirectTo="/login" component={<Dashboard />}
+                            isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
+                    <Route path="/CreateForm"
+                        element={<PrivateRoute redirectTo="/login" component={<CreateForm />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
                 </Routes>
             </Router>
