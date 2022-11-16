@@ -66,5 +66,6 @@
 }
 
 .Viewbutton:hover{
+    color: black;
 background-color: rgb(233, 222, 156);
 }

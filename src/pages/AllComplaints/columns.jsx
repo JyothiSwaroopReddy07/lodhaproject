@@ -10,7 +10,7 @@ export const complaintColumns = [
       key: "Issue"
     },
     {
-      title: "Time",
+      title: "Days Since Posted",
       dataIndex: "Time",
       key: "Time"
     },
@@ -18,11 +18,6 @@ export const complaintColumns = [
       title: "Description",
       dataIndex: "Description",
       key: "Description"
-    },
-    {
-      title: "Status",
-      dataIndex: "Status",
-      key: "Status"
     }
   ];
   

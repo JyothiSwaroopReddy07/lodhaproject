@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllForms, getForm, createForm, updateForm, deleteForm} = require("../controllers/formController");
+const { getAllForms, createForm} = require("../controllers/formController");
 const router = express.Router();
 router.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -7,11 +7,8 @@ router.use(function(req, res, next) {
     next();
   });
 
-
-
-router.route('/forms').get(getAllForms)
-router.route('/forms/new').post(createForm);
-router.route('/forms/:id').get(getForm).put(updateForm).delete(deleteForm);
+router.route('/AllForms').get(getAllForms)
+router.route('/form/new').post(createForm);
 
  
 module.exports = router

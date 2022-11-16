@@ -6,8 +6,8 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 exports.createIssue = catchAsyncErrors(async(req,res,next)=> {
     console.log(req.body);
     const { issue } = req.body;
-    const issue1 = await Issue.find();
-    if(issue1.indexOf(Issue) >= 0){
+    const issue1 = await Issue.find({Name: issue});
+    if(issue1.length > 0){
         return next(new ErrorHandler("Issue Already Exists",404));
     }
 
@@ -25,6 +25,20 @@ exports.getAllIssues = catchAsyncErrors(async(req,res,next)=> {
     res.status(201).json({
         success: true,
         issues
+    })
+});
+
+exports.deleteIssue = catchAsyncErrors(async(req,res,next) => {
+    const {issue} = req.body;
+
+    const user1 = await Issue.find({Name: issue});
+    if(!user1) {
+        return next(new ErrorHandler("Issue not found",404));
+    }
+    await user1[0].remove();
+    res.status(200).json({
+        success: true,
+        message: "Issue Deletion successful"
     })
 });
 

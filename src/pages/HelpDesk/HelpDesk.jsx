@@ -2,12 +2,30 @@ import axios from "axios";
 import React, {useState, useEffect} from "react";
 import './HelpDesk.css';
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar';
-
+import {useGlobalContext} from '/src/context/StateContext';
 
 function HelpDesk() {
-
+    const {User, setLoading, loading} = useGlobalContext();
     const [Issues, setIssues] = useState([]);
-
+    const PostComplaint = async(FlatNo, Issue, Description) => {
+        setLoading(true);
+        const {data} = await axios.post("http://localhost:4000/api/v1/complaint/new",{
+            FlatNo: FlatNo,
+            Issue: Issue,
+            Description : Description
+        });
+        console.log("success");
+      }
+      const complaintSubmit = (e) => {
+        const user = JSON.parse(User);
+        const FlatNo = user.FlatNo;
+        const Issue = e.target.Issue.value;
+        const Description = e.target.Description.value;
+        e.preventDefault();
+        console.log("user", FlatNo,Issue,Description);
+        PostComplaint(FlatNo, Issue, Description);
+      };
+    
     const fetchIssues = async()=>{
         const { data }  = await axios.get("http://localhost:4000/api/v1/issue_types");  
         setIssues(data.issues);
@@ -28,24 +46,13 @@ function HelpDesk() {
                     <div class="row mx-0 justify-content-center">
                         <div class="col-md-10 col-lg-9 px-lg-2 col-xl-8 px-xl-0">
                             <form
-                                method="POST"
                                 className="w-100 rounded p-4 border backgroundcolor HelpDeskSection"
-                                action="/postComplaint"
-                                enctype="multipart/form-data"
+                                onSubmit={complaintSubmit}
                             >
-                                <label class="d-block mb-4">
-                                    <span class="d-block mb-2 head">Complaint Title</span>
-                                    <input
-                                        name="email"
-                                        type="text"
-                                        id="complaint"
-                                        class="form-control temp"
-                                        placeholder="Complaint Title"
-                                    />
-                                </label>
+                                
                                 <label class="d-block mb-4">
                                     <span class="d-block mb-2 head">Issue Type</span>
-                                    <select className="dropDownSelect">
+                                    <select className="dropDownSelect" name="Issue">
                                         {
                                             Issues.map(({Name}) => (
                                                 <option value={Name}>{Name}</option>
@@ -65,7 +72,7 @@ function HelpDesk() {
                                 <label class="d-block mb-4">
                                     <span class="d-block mb-2 head">What's wrong?</span>
                                     <textarea
-                                        name="message"
+                                        name="Description"
                                         class="form-control temp"
                                         rows="3"
                                         placeholder="Please describe your problem"

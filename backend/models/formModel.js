@@ -1,15 +1,15 @@
 const mongoose = require("mongoose"); 
 
 const formSchema = mongoose.Schema({
-    FormTitle: {
+    Title: {
      type: String, 
      required: [true, "Enter the form title"]
     },
-    FormDesc : {
+    Description : {
       type: String, 
       required: [true, "Enter the form Desc"]
     },
-    FormLink: {
+    Link: {
         type: String,
         required: [true, "Enter the Form Link"]
     }

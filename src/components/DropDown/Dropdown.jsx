@@ -6,15 +6,24 @@ function Dropdown() {
   return (
     <>
       <div className="sidenav">
-        
+
         <Accordion>
+          <Accordion.Item eventKey="3">
+            <Accordion.Header><p className='DropDownHeader'>Owners Section</p></Accordion.Header>
+            <Accordion.Body className='ExpandDropDown'>
+              <a href='/SocietyDues'>Society Dues</a>
+              <a href='/Ois'>Owners Information System</a>
+              <a href='/Parking'>Parking Allotment Chart</a>
+              <a href='/HelpDesk'>Help Desk</a>
+            </Accordion.Body>
+          </Accordion.Item>
           <Accordion.Item eventKey="0">
             <Accordion.Header><p className='DropDownHeader'>Management</p></Accordion.Header>
             <Accordion.Body className='ExpandDropDown'>
               <a href='/Finance'>Finance & Account</a>
               <a href='/FM'>FM</a>
               <a href='/Cultural'>Cultural Section</a>
-              <a href='/HelpDesk'>Help Desk</a>
+
               <a href='/AllComplaints'>All Complaints</a>
               <a href='/LegalUpdate'>Legal Update</a>
               <a href='/Purchase'>Purchase & Audit Section</a>
@@ -39,14 +48,6 @@ function Dropdown() {
               <a href='/BankStatements'>Bank Statements</a>
               <a href='/AuditReports'>Audit Reports</a>
               <a href='/NewProposals'>New Proposals for Society</a>
-            </Accordion.Body>
-          </Accordion.Item>
-          <Accordion.Item eventKey="3">
-            <Accordion.Header><p className='DropDownHeader'>Owners Section</p></Accordion.Header>
-            <Accordion.Body className='ExpandDropDown'>
-              <a href='/SocietyDues'>Society Dues</a>
-              <a href='/Ois'>Owners Information System</a>
-              <a href='/Parking'>Parking Allotment Chart</a>
             </Accordion.Body>
           </Accordion.Item>
 

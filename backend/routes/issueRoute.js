@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllIssues, createIssue} = require("../controllers/issueController");
+const { getAllIssues, createIssue,deleteIssue} = require("../controllers/issueController");
 const router = express.Router();
 router.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -10,6 +10,7 @@ router.use(function(req, res, next) {
 
 router.route('/issue_types').get(getAllIssues)
 router.route('/new_issue').post(createIssue);
+router.route('/delete_issue').post(deleteIssue);
 
 
  

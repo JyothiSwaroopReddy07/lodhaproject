@@ -36,6 +36,7 @@ const LoginSignUp = () => {
   const UserPass= useRef(null);
   const [isStrong, setIsStrong] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
+  const [isMobileEmpty, setIsMobileEmpty] = useState(true);
   const [isValidMobile, setIsValidMobile] = useState(false);
 
   const login = async(loginFlatNo, loginPassword) => {
@@ -168,7 +169,13 @@ const LoginSignUp = () => {
     }
   }
   
-  const MobileValidate = (value) => {
+  const MobileValidate = (value, len) => {
+    if(len > 0){
+      setIsMobileEmpty(false);
+    } 
+    else{
+      setIsMobileEmpty(true);
+    }
     if(validator.isMobilePhone(value, "en-IN")){
       setIsValidMobile(true);
     } 
@@ -186,7 +193,7 @@ const LoginSignUp = () => {
           <NavBar/>
           <div style={{ marginTop: "100px" }}>
             <div className="container">
-              <div style={{marginBottom:"60px"}}>
+              <div style={{marginBottom:"60px"}} className="container">
                 <div className="login_signUp_toggle">
                   <p onClick={(e) => switchTabs(e, "login")} className="LoginRegisterTitle">LOGIN</p>
                   <div style={{width:"2px", height:"inherit", backgroundColor:"gold"}}></div>
@@ -222,8 +229,7 @@ const LoginSignUp = () => {
                           <MDBInput wrapperClass='mb-4' placeholder='Password' className='form1' id='pass' name="Password" type={Curr ? 'text':'password'} />
 
                           <div className="d-flex justify-content-around mx-4 mb-4 form1">
-                            <MDBCheckbox name='flexCheck' value='' label='Remember me' />
-                            <Link to="/password/forgot">Forget Password ?</Link>
+                            <Link to="/password/forgot">Forgot Password ?</Link>
                           </div>
 
                           <MDBBtn className="mb-4 form1" id="loginButton" type="submit">Login</MDBBtn>
@@ -249,18 +255,18 @@ const LoginSignUp = () => {
 
                     <MDBRow className='g-0 d-flex align-items-center'>
 
-                      <MDBCol md='4'>
-                        <MDBCardImage src='/src/assests/lodha11.webp' alt='logo' className='rounded-t-5 rounded-tr-lg-0' fluid />
-                      </MDBCol>
+                     
 
-                      <MDBCol md='8'>
+                      <MDBCol md='12'>
 
                         <MDBCardBody className="mx-auto">
                           <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "5%" }}>
                             <img src="/src/assests/user.svg" style={{ width: "70px", height: "70px" }}></img>
                             <h1 className='RegisterHeading'>Register</h1>
                           </div>
+                          <p className="Label">OWNER NAME </p>
                           <MDBInput wrapperClass='mb-4' placeholder='Owner Name' className='form1' name="OwnerName" id='name' type='text' />
+                          <p className="Label">PROPERTY REGISTERED NAME</p>
                           <MDBInput wrapperClass='mb-4' placeholder='Property Registered Name' className='form1' name="RegisteredName" id='name' type='text' />
                           <div>
                           <p className="Label">EMAIL ADRESS</p>
@@ -276,9 +282,9 @@ const LoginSignUp = () => {
                             (isEmpty)? <></> : (isStrong ) ? <p style={{color:"green", letterSpacing:"1.5px", }}>Strong Password</p> : <p style={{color:"red", letterSpacing:"1.5px"}}>Weak Password</p>
                           }
                           <p className="Label">MOBILE NUMBER</p>
-                          <MDBInput wrapperClass='mb-4' placeholder='Mobile Number' name="Mobile" className='form1' id='mob' type='text' onChange={(e) => MobileValidate(e.target.value)}/>
+                          <MDBInput wrapperClass='mb-4' placeholder='Mobile Number' name="Mobile" className='form1' id='mob' type='text' onChange={(e) => MobileValidate(e.target.value, e.target.value.length)}/>
                           {
-                            (isValidMobile) ? <p style={{color:"green", letterSpacing:"1.5px", }}>Valid Mobile Number</p> : <p style={{color:"red", letterSpacing:"1.5px"}}>Invalid Mobile Number</p> 
+                            (isMobileEmpty) ? <></> : (isValidMobile) ? <p style={{color:"green", letterSpacing:"1.5px", }}>Valid Mobile Number</p> : <p style={{color:"red", letterSpacing:"1.5px"}}>Invalid Mobile Number</p> 
                           }
                           <p className="Label">BLOCK</p>
                           <MDBInput wrapperClass='mb-4' placeholder='Block' name="Block" className='form1' id='block' type='text' />
@@ -287,14 +293,14 @@ const LoginSignUp = () => {
                           <p className="Label">PARKING SLOT</p>
                           <MDBInput wrapperClass='mb-4' placeholder='Parking Slot' name="ParkingSlot" className='form1' id='parking' type='text' />
                           <p className="Label">NOTE</p>
-                          <ul style={{textAlign:"left", marginLeft:"10%", fontSize:"14px",backgroundColor:"white", border:"1px solid black", borderRadius:"10px"}}>
+                          <ul style={{width:"80%",textAlign:"left", marginLeft:"10%", fontSize:"14px",backgroundColor:"white", border:"1px solid black", borderRadius:"10px"}}>
                             Password must contain alteast 8 characters including 
                             <li>atleast One digit</li> 
                             <li>atleast One Special Character</li>
                             <li>atleast One Lowercase letter</li>
                           </ul>
                           <div className="d-flex justify-content-around mx-4 mb-4 form1">
-                            <MDBCheckbox name='flexCheck' value='' label='Remember me' />
+                            
                             <a href="!#">Forgot password?</a>
                           </div>
 

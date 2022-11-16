@@ -12,8 +12,21 @@ export const useTableSearch = ({ searchVal, retrieve }) => {
       if (!allValues) allValues = [];
       for (var key in user) {
         if (typeof user[key] === "object") crawl(user[key], allValues);
-        else if(key !== "Description"){
-          allValues.push(user[key] + " ");
+        else if (key !== "Description") {
+          if (key === "Time") {
+            let timeStamp = Date.parse(user[key]);
+            var date1 = new Date(timeStamp);
+            var date2 = new Date();
+            
+            var Difference_In_Time = date2.getTime() - date1.getTime();
+            var days = Difference_In_Time / (1000 * 3600 * 24);
+            days = (Math.ceil(days)).toString();
+            user[key] = days + ((days > 1)?" days " : " day ");
+            allValues.push(days + " ");
+          }
+          else {
+            allValues.push(user[key] + " ");
+          }
         }
       }
       return allValues;

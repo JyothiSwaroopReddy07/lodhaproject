@@ -13,16 +13,13 @@ function Complaints() {
   const { User } = useGlobalContext();
   const [complaints, setComplaints] = useState([]);
   const fetchComplaints = async()=>{
-    console.log("User", User);
+
     const user = JSON.parse(User);
-    console.log("user", user);
       const {data} = await axios.get("http://localhost:4000/api/v1/complaint",{params : {FlatNo: user.FlatNo}});
-      console.log(data);
       setComplaints(data.complaints);
   }
   useEffect(()=>{
     fetchComplaints();
-    console.log(complaints);
   },[]);
 
   return (

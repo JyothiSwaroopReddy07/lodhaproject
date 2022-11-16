@@ -37,6 +37,7 @@
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 1.2px;
+  
 }
 
 /* On mouse-over */
@@ -78,7 +79,7 @@
 
 .accordion-button.collapsed::after{
 
-  background: url("/src/assests/dropdownarrow.png");
+  background: url("/src/assests/goldDropDown.png");
   background-size:     cover;                     
   background-repeat:   no-repeat;
   background-position: center center;  
@@ -87,7 +88,7 @@
 
 .accordion-button:not(.collapsed)::after{
 
-  background: url("/src/assests/dropdownarrow.png");
+  background: url("/src/assests/goldDropDown.png");
   background-size:     cover;                     
   background-repeat:   no-repeat;
   background-position: center center;  

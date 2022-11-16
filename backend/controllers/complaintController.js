@@ -48,8 +48,6 @@ exports.updateComplaint = catchAsyncErrors(async(req,res,next)=> {
 exports.getUserComplaints = catchAsyncErrors(async(req,res,next) => {
    
     const complaints = await Complaint.find({FlatNo: req.query.FlatNo});
-    console.log("request", req.query.FlatNo);
-    console.log("complaints: ",complaints);
     res.status(200).json({
         success:true,
         complaints
