@@ -58,47 +58,47 @@ function Profile() {
                             <p className="EditTitle">NAME</p>
                             <div style={{ marginTop: "2px", height: "3px", width: "75px", backgroundColor: "gold" }}></div>
                             <input placeholder={user.OwnerName} name="OwnerName" className="EditInput"></input>
-                            <button className="EditButton">Edit</button>
+                             
                         </div>
                         <div className="ProfileInput">
                             <p className="EditTitle">EMAIL ADDRESS</p>
                             <div style={{ marginTop: "2px", height: "3px", width: "150px", backgroundColor: "gold" }}></div>
                             <input placeholder={user.Email} name="Email" className="EditInput"></input>
-                            <button className="EditButton">Edit</button>
+                             
                         </div>
                         <div className="ProfileInput">
                             <p className="EditTitle">MOBILE NUMBER</p>
                             <div style={{ marginTop: "2px", height: "3px", width: "175px", backgroundColor: "gold" }}></div>
                             
                             <input placeholder={user.Mobile} name="Mobile" className="EditInput"></input>
-                            <button className="EditButton">Edit</button>
+                             
                         </div>
                         <div className="ProfileInput">
                             <p className="EditTitle">BLOCK</p>
                             <div style={{ marginTop: "2px", height: "3px", width: "75px", backgroundColor: "gold" }}></div>
                             
                             <input placeholder={user.Block} name="Block" className="EditInput"></input>
-                            <button className="EditButton">Edit</button>
+                             
                         </div>
                         <div className="ProfileInput">
                             <p className="EditTitle">FLAT NUMBER</p>
                             <div style={{ marginTop: "2px", height: "3px", width: "150px", backgroundColor: "gold" }}></div>
                             <input placeholder={user.FlatNo} name="FlatNo" className="EditInput"></input>
-                            <button className="EditButton">Edit</button>
+                             
                         </div>
                         
                         <div className="ProfileInput" >
-                            <p className="EditTitle">PARKING SLOT</p>
-                            <div style={{ marginTop: "2px", height: "3px", width: "150px", backgroundColor: "gold" }}></div>
+                            <p className="EditTitle">PROPERTY REGISTERED NAME</p>
+                            <div style={{ marginTop: "2px", height: "3px", width: "300px", backgroundColor: "gold" }}></div>
                             <input placeholder={user.RegisteredName} name="RegisteredName" className="EditInput"></input>
-                            <button className="EditButton">Edit</button>
+                             
                         </div>
 
                         <div className="ProfileInput" >
                             <p className="EditTitle">PARKING SLOT</p>
                             <div style={{ marginTop: "2px", height: "3px", width: "150px", backgroundColor: "gold" }}></div>
                             <input placeholder={user.ParkingSlot} name="ParkingSlot" className="EditInput"></input>
-                            <button className="EditButton">Edit</button>
+                             
                         </div>
                         <div style={{display:"flex", justifyContent:"center"}}>
                         <button className="UserProfileSubmit" type="submit">UPDATE</button>

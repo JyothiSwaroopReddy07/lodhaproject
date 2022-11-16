@@ -13,18 +13,15 @@ function Complaints() {
   const { User } = useGlobalContext();
   const [complaints, setComplaints] = useState([]);
   const fetchComplaints = async()=>{
-    if(User.Role==='admin')
-    {
-      const { data } = await axios.get("http://localhost:4000/api/v1/AllComplaints");
-      return data.complaints;
-    }
-    const {data} = await axios.post("http://localhost:4000/api/v1/complaint",{FlatNo: User.FlatNo});
-    return data.complaints;
+    console.log("User", User);
+    const user = JSON.parse(User);
+    console.log("user", user);
+      const {data} = await axios.get("http://localhost:4000/api/v1/complaint",{params : {FlatNo: user.FlatNo}});
+      console.log(data);
+      setComplaints(data.complaints);
   }
   useEffect(()=>{
-    const data = fetchComplaints();
-    console.log("con", data);
-    setComplaints(data)
+    fetchComplaints();
     console.log(complaints);
   },[]);
 

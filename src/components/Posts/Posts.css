@@ -14,7 +14,7 @@
  }
 
 .PostDesc{
-  text-align: center;
+  text-align: left;
 }
 
 .track-line {
@@ -51,4 +51,17 @@
 
 .card-stepper {
   z-index: 0
+}
+
+.PostHeader{
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.PostsIssue{
+  font-size: 25px;
+  color: black;
+  letter-spacing: 1px;
+  font-weight: normal;
 }

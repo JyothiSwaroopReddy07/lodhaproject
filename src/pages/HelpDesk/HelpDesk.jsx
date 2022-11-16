@@ -9,13 +9,11 @@ function HelpDesk() {
     const [Issues, setIssues] = useState([]);
 
     const fetchIssues = async()=>{
-        const { data }  = await axios.get("http://localhost:4000/api/v1/issue_types");
-        console.log(data.issues);
+        const { data }  = await axios.get("http://localhost:4000/api/v1/issue_types");  
         setIssues(data.issues);
     }
     useEffect(()=>{
         fetchIssues();
-        console.log(Issues);
     },[Issues.length])
       
     return (
@@ -47,7 +45,7 @@ function HelpDesk() {
                                 </label>
                                 <label class="d-block mb-4">
                                     <span class="d-block mb-2 head">Issue Type</span>
-                                    <select>
+                                    <select className="dropDownSelect">
                                         {
                                             Issues.map(({Name}) => (
                                                 <option value={Name}>{Name}</option>

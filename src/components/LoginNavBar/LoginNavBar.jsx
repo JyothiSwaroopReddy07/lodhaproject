@@ -34,6 +34,7 @@ function LoginNavBar() {
                         </Nav>
                         <Nav>
                             <Nav.Link id="Menu" onClick={() => { setMenu(!Menu) }}>Menu</Nav.Link>
+                            <Nav.Link id="Menu" href='/UserDashboard'>Dashboard</Nav.Link>
                             <NavDropdown
                                 id="LoginDropdown"
                                 title="Account"

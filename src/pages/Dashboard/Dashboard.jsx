@@ -6,28 +6,38 @@ import "./Dashboard.css"
 import Notifications from "../Notifications/Notifications";
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 import GeneralNotifications from "../GeneralNotifications/GeneralNotifications";
+import Complaints from "../Complaints/Complaints";
 
 function Dashboard() {
     const [IsForms, setIsForms] = useState(true);
     const [IsMeeting, setIsMeeting] = useState(false);
     const [IsNotification, setIsNotification] = useState(false);
+    const [IsComplaints, setIsComplaints] = useState(false); 
 
     const changeMenu = (e, tab) => {
         if (tab == "Forms") {
             setIsForms(true);
             setIsMeeting(false);
             setIsNotification(false);
-
+            setIsComplaints(false);
         }
         if (tab == "Meetings") {
             setIsMeeting(true);
             setIsForms(false);
             setIsNotification(false);
+            setIsComplaints(false);
         }
         if (tab == "Notifications") {
             setIsNotification(true);
             setIsForms(false);
             setIsMeeting(false);
+            setIsComplaints(false);
+        } 
+        if(tab == "Complaints"){
+            setIsComplaints(true); 
+            setIsForms(false); 
+            setIsMeeting(false); 
+            setIsNotification(false);
         }
     };
 
@@ -53,12 +63,17 @@ function Dashboard() {
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link className="FacilityLink" eventKey="/notify" onClick={(e) => changeMenu(e, "Notifications")}>Notifications</Nav.Link>
+                            
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link className="FacilityLink" eventKey="/complaints" onClick={(e) => changeMenu(e, "Complaints")}>Complaints</Nav.Link>
                         </Nav.Item>
                     </Nav>
                 </div>
                 {IsForms && <GoogleForms />}
                 {IsMeeting && <Notifications />}
                 {IsNotification && <GeneralNotifications />}
+                {IsComplaints && <Complaints />}
             </div>
         </>
     );

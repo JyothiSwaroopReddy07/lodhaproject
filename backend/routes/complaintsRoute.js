@@ -9,7 +9,7 @@ router.use(function(req, res, next) {
 
 router.route('/AllComplaints').get(getAllComplaints)
 router.route('/complaint/new').post(createComplaint);
-router.route('/complaint').put(updateComplaint).post(getUserComplaints).delete(deleteComplaint);
+router.route('/complaint').put(updateComplaint).get(getUserComplaints).delete(deleteComplaint);
 
  
 module.exports = router

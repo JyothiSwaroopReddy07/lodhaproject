@@ -6,6 +6,7 @@ function Dropdown() {
   return (
     <>
       <div className="sidenav">
+        
         <Accordion>
           <Accordion.Item eventKey="0">
             <Accordion.Header><p className='DropDownHeader'>Management</p></Accordion.Header>
@@ -14,7 +15,7 @@ function Dropdown() {
               <a href='/FM'>FM</a>
               <a href='/Cultural'>Cultural Section</a>
               <a href='/HelpDesk'>Help Desk</a>
-              <a href='/Complaints'>Complaints</a>
+              <a href='/AllComplaints'>All Complaints</a>
               <a href='/LegalUpdate'>Legal Update</a>
               <a href='/Purchase'>Purchase & Audit Section</a>
               <a href='/KeyContacts'>Key Contacts & Email ids</a>

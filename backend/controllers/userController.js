@@ -10,7 +10,7 @@ exports.createUser = catchAsyncErrors(async(req,res,next)=> {
     if(user1 && Object.keys(user1).length){
         return next(new ErrorHandler("User Already Exists",404));
     }
-    const {Password, OwnerName,RegisteredName,Block, Mobile,ParkingSlot,Email } = req.body;
+    const {Password, OwnerName,RegisteredName,Block, Mobile,ParkingSlot,Email,Role } = req.body;
     const user = await User.create({
         FlatNo: FlatNo,
         Email: Email,
@@ -19,7 +19,8 @@ exports.createUser = catchAsyncErrors(async(req,res,next)=> {
         RegisteredName: RegisteredName,
         Block: Block,
         Mobile: Mobile,
-        ParkingSlot: ParkingSlot
+        ParkingSlot: ParkingSlot,
+        Role: Role
     });
 
     res.status(201).json({
