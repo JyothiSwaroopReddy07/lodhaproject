@@ -44,8 +44,6 @@ export default function App() {
                     <Route path="/Home"
                         element={<PrivateRoute redirectTo="/login" component={<LoggedHome />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
-                    
-
                     <Route path="/UserProfile"
                         element={<PrivateRoute redirectTo="/login" component={<Profile />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />

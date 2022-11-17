@@ -44,16 +44,22 @@ exports.getAllComplaints = catchAsyncErrors(async(req,res) => {
 
 // Update Complaint
 exports.updateComplaint = catchAsyncErrors(async(req,res,next)=> {
-    let complaint1 = await Complaint.findById(req.params.id);
+
+    let complaint1 = await Complaint.find({FlatNo: req.query.complaint.FlatNo, Issue: req.query.complaint.Issue, Description: req.query.complaint.Description});
     if(!complaint1){
-        return next(new ErrorHandler("Complaint not found",404));
+        return next(new ErrorHandler("complaint not found",404));
     }
-    complaint1 = await Complaint.findByIdAndUpdate(req.params.id, req.body, {new: true, 
-        runValidator: true, useFindAndModify: false})
- 
+    console.log("query", req.query);
+    console.log("done");
+    complaint1[0].Status = req.query.complaint.Status;
+
+    complaint1[0].save();
+    complaint1 = await Complaint.find({FlatNo: req.query.complaint.FlatNo, Issue: req.query.complaint.Issue, Description: req.query.complaint.Description});
+    
+    console.log(complaint1[0]);
     res.status(200).json({
         success: true,
-        complaint1
+        message: "SuccessFully updated"
     })
 });
 
@@ -69,11 +75,11 @@ exports.getUserComplaints = catchAsyncErrors(async(req,res,next) => {
 
 // Delete User Complaint
 exports.deleteComplaint = catchAsyncErrors(async(req,res,next) => {
-    const complaint1 = await Complaint.findById(req.params.id);
+    const complaint1 = await Complaint.find({FlatNo: req.query.FlatNo, Issue: req.query.Issue, Description: req.query.Description});
     if(!complaint1) {
-        return next(new ErrorHandler("Complaint not found",404));
+        return next(new ErrorHandler("complaint not found",404));
     }
-    await complaint1.remove();
+    await complaint1[0].remove();
     res.status(200).json({
         success: true,
         message: "Complaint Deletion successful"
