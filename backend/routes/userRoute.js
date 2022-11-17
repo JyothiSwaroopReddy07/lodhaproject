@@ -22,7 +22,8 @@ router.route("/login").post(loginUser);
 // router.route("/me/update").put(isAuthenticatedUser, updateProfile);
 router.route('/users').get(getAllusers)
 router.route('/register').post(createUser);
-router.route('/userupdate').get(getUser).put(updateUser).delete(deleteUser);
+router.route('/userupdate').get(updateUser)
+router.route('/userdelete').get(deleteUser);
 
  
 module.exports = router

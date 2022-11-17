@@ -3,7 +3,6 @@ import "antd/dist/antd.css"
 import "./seperate.css"
 import { Form, Input, Popconfirm, Table } from "antd"
 import axios from "axios"
-import { useTableSearch } from "./useTableSearch"
 import LoginNavBar from "/src/components/LoginNavBar/LoginNavBar"
 import "antd/dist/antd.css"
 const { Search } = Input
@@ -104,29 +103,70 @@ const Seperate = () => {
 
   const [dataSource, setDataSource] = useState([])
   const [searchVal, setSearchVal] = useState("")
-  const { filteredData, loading } = useTableSearch({
-    searchVal,
-    dataSource
-  })
+  const [filteredData, setFilteredData] = useState([]);
+  const [origData, setOrigData] = useState([]);
+  const [searchIndex, setSearchIndex] = useState([]);
+  const [loading, setLoading] = useState(true);
+  
+  const refreshPage = () =>
+  {
+    window.location.reload();
+  }
+  useEffect(() => {
+    setLoading(true);
+    const crawl = (user, allValues) => {
+      if (!allValues) allValues = [];
+      for (var key in user) {
+        if (typeof user[key] === "object") crawl(user[key], allValues);
+        else allValues.push(user[key] + " ");
+      }
+      return allValues;
+    };
+    const fetchData = async() => {
+      const users = await fetchUsers();
+      setOrigData(users);
+      setFilteredData(users);
+      const searchInd = users.map(user => {
+        const allValues = crawl(user);
+        return { allValues: allValues.toString() };
+      });
+      setSearchIndex(searchInd);
+      if (users) setLoading(false);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (searchVal) {
+      const reqData = searchIndex.map((user, index) => {
+        if (user.allValues.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0)
+          return origData[index];
+        return null;
+      });
+      setFilteredData(
+        reqData.filter(user => {
+          if (user) return true;
+          return false;
+        })
+      );
+    } else setFilteredData(origData);
+  }, [searchVal, origData, searchIndex]);
 
   const fetchUsers = async () => {
-    const { data } = await axios.get("http://localhost:4000/api/v1/users/")
+    const { data } = await axios.get("http://localhost:4000/api/v1/users")
     const users = data.users
-    console.log(users);
-    setDataSource(users);
     return users
   }
-  useEffect(async ()=>{
-    const data = await fetchUsers();
-    console.log("Data", data);
-    setDataSource(data);
-  },[dataSource.length])
-
   
-  const [count, setCount] = useState(2)
+  const deleteUser = async(key)=> {
+    const {data} = await axios.get("http://localhost:4000/api/v1/userdelete", {params: {FlatNo: key}});
+    console.log(data.message);
+    refreshPage();
+  }
 
   const handleDelete = key => {
     console.log("key", key)
+    deleteUser(key);
     const newData = dataSource.filter(item => item.FlatNo !== key)
     setDataSource(newData)
   }
@@ -175,6 +215,12 @@ const Seperate = () => {
       editable: true
     },
     {
+      title: "Society Dues",
+      dataIndex: "Dues",
+      key: "Dues",
+      editable: true
+    },
+    {
       title: "operation",
       dataIndex: "operation",
       render: (_, record) =>
@@ -189,15 +235,25 @@ const Seperate = () => {
     }
   ]
 
+  const updateUser = async(row)=> {
+    const {data} = await axios.get("http://localhost:4000/api/v1/userupdate", {params: {user: row}});
+    console.log(data.user);
+    refreshPage();
+  }
+
   const handleSave = row => {
-    const newData = [...dataSource]
-    const index = newData.findIndex(item => row.FlatNo === item.FlatNo)
-    const item = newData[index]
-    newData.splice(index, 1, {
-      ...item,
-      ...row
-    })
-    setDataSource(newData)
+    console.log("row",JSON.stringify(row));
+    updateUser(row);
+    // const newData = [...dataSource]
+    // const index = newData.findIndex(item => row.FlatNo === item.FlatNo)
+    // console.log("data", dataSource);
+    // console.log("index", index);
+    // const item = newData[index];
+    // newData.splice(index, 1, {
+    //   ...item,
+    //   ...row
+    // })
+    // setDataSource(newData)
   }
 
   const components = {
@@ -264,7 +320,7 @@ const Seperate = () => {
           rowClassName={() => 'editable-row'}
           bordered
           rowKey="name"
-          dataSource={dataSource}
+          dataSource={filteredData}
           columns={columns}
           loading={loading}
           pagination={false}

@@ -31,7 +31,6 @@ exports.createUser = catchAsyncErrors(async(req,res,next)=> {
 
 // login User
 exports.loginUser = catchAsyncErrors(async(req,res,next) => {
-    console.log(req.body);
     const {FlatNo, Password} = req.body;
     const user = await User.find({FlatNo: FlatNo, Password: Password})
     if(!user && Object.keys(user).length){
@@ -59,9 +58,23 @@ exports.getUser = catchAsyncErrors(async(req,res,next) => {
 
 // Get All users
 exports.getAllusers = catchAsyncErrors(async(req,res) => {
-    console.log(req);
     
-        const users = await User.find()
+        const data = await User.find()
+        const users = data.map((ele)=>{
+            
+            return (
+                {
+                    FlatNo: ele.FlatNo,
+                    OwnerName: ele.OwnerName,
+                    RegisteredName: ele.RegisteredName,
+                    ParkingSlot: ele.ParkingSlot,
+                    Block: ele.Block,
+                    Mobile: ele.Mobile,
+                    Email: ele.Email,
+                    Dues: ele.Dues
+                }
+            );
+        })
         res.status(200).json({
             success: true,
             users
@@ -71,30 +84,39 @@ exports.getAllusers = catchAsyncErrors(async(req,res) => {
 
 // Update User
 exports.updateUser = catchAsyncErrors(async(req,res,next)=> {
-    const data = req.body;
-    console.log("data",data);
-    console.log("req.body ", req.body);
-    let user1 = await User.findById(data.FlatNo);
+    let user1 = await User.find({FlatNo: req.query.user.FlatNo});
     if(!user1){
         return next(new ErrorHandler("User not found",404));
     }
-    user = await User.findByIdAndUpdate(data.FlatNo,data, {new: true, 
-        runValidator: true, useFindAndModify: false})
- 
+    console.log("query", req.query);
+    console.log("done");
+    user1[0].FlatNo = req.query.user.FlatNo;
+    user1[0].Email = req.query.user.Email; 
+    user1[0].Mobile = req.query.user.Mobile; 
+    user1[0].Block = req.query.user.Block; 
+    user1[0].Dues = req.query.user.Dues;
+    user1[0].ParkingSlot = req.query.user.ParkingSlot; 
+    user1[0].OwnerName = req.query.user.OwnerName; 
+    user1[0].RegisteredName = req.query.user.RegisteredName;
+    
+    user1[0].save();
+    user1 = await User.find({FlatNo: req.query.user.FlatNo});
+    
+    console.log(user1[0]);
     res.status(200).json({
         success: true,
-        user
+        message: "SuccessFully updated"
     })
 });
 
 // Delete User
 
 exports.deleteUser = catchAsyncErrors(async(req,res,next) => {
-    const user1 = await User.findById(req.params.id);
+    const user1 = await User.find({FlatNo: req.query.FlatNo});
     if(!user1) {
         return next(new ErrorHandler("User not found",404));
     }
-    await user1.remove();
+    await user1[0].remove();
     res.status(200).json({
         success: true,
         message: "User Deletion successful"
