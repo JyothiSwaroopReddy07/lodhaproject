@@ -14,6 +14,7 @@ exports.createComplaint = catchAsyncErrors(async(req,res,next)=> {
         return next(new ErrorHandler("Complaint Already Exists",404));
     }
     const complaint = await Complaint.create(req.body);
+
     res.status(201).json({
         success: true,
         complaint
@@ -22,7 +23,19 @@ exports.createComplaint = catchAsyncErrors(async(req,res,next)=> {
 
 // Get All Complaints
 exports.getAllComplaints = catchAsyncErrors(async(req,res) => {
-    const complaints = await Complaint.find()
+    const data = await Complaint.find()
+    const complaints = data.map((ele) =>{
+        return (
+            {
+                FlatNo: ele.FlatNo,
+                Issue: ele.Issue,
+                Description: ele.Description,
+                Time: ele.Time,
+                Status: ele.Status
+            }
+        );
+    })
+    
     res.status(200).json({
         success: true,
         complaints

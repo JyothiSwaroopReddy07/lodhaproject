@@ -1,93 +1,310 @@
-import React, {useState, useEffect} from "react";
-import Table from 'react-bootstrap/Table';
-import './FinanceAndAccount.css'
-import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
+import React, { useContext, useEffect, useRef, useState } from "react"
+import "antd/dist/antd.css"
+import "./FinanceAndAccount.css"
+import { Form, Input, Popconfirm, Table } from "antd"
+import axios from "axios"
+import LoginNavBar from "/src/components/LoginNavBar/LoginNavBar"
+import "antd/dist/antd.css"
+const { Search } = Input
 
-function FinanceAndAccount() {
-  const UserData = [
-    ["501", "Jyothi Swaroop Reddy", "bjsreddy742002@gmail.com", "9849863395"],
-    ["502", "dsgnjsng", "bjsreddy@gmail.com", "2496856069"],
-    ["503", "eortrotyhmkgj", "bjsredd2002@gmail.com", "2483940403"],
-    ["504", "mnmvncvcbn", "bjsreddy742@gmail.com", "1309324892"],
-  ];
-  const userColumns = ["Flat No", "Owners Name", "Email", "Phone"];
+const EditableContext = React.createContext(null)
 
-  const [value, setValue] = useState('');
-  const [dataSource, setDataSource] = useState(UserData);
-  const [tableFilter, setTableFilter] = useState([]);
+const EditableRow = ({ index, ...props }) => {
+  const [form] = Form.useForm()
+  return (
+    <Form form={form} component={false}>
+      <EditableContext.Provider value={form}>
+        <tr {...props} />
+      </EditableContext.Provider>
+    </Form>
+  )
+}
 
-  const filterData = (e) => {
-    if (e.target.value !== '') {
+const EditableCell = ({
+  title,
+  editable,
+  children,
+  dataIndex,
+  record,
+  handleSave,
+  ...restProps
+}) => {
+  const [editing, setEditing] = useState(false)
+  const inputRef = useRef(null)
+  const form = useContext(EditableContext)
 
-      setValue(e.target.value);
-      const filterTable = dataSource.filter((ele) => {
-        if (ele[0].length >= value.length && ele[0].indexOf(value) >= 0) {
-          return true;
-        }
-        return false;
-      })
-      console.log(filterData);
-      setTableFilter([...filterTable]);
+  useEffect(() => {
+    if (editing) {
+      inputRef.current.focus()
     }
-    else {
-      setValue(e.target.value);
-      setDataSource([...dataSource]);
+  }, [editing])
+
+  const toggleEdit = () => {
+    setEditing(!editing)
+    form.setFieldsValue({ [dataIndex]: record[dataIndex] })
+  }
+
+  const save = async () => {
+    try {
+      const values = await form.validateFields()
+
+      toggleEdit()
+      handleSave({ ...record, ...values })
+    } catch (errInfo) {
+      console.log("Save failed:", errInfo)
     }
   }
 
-  return (
-    <>
-    <LoginNavBar/>
-      <div style={{ marginTop: "60px" }}>
+  let childNode = children
 
-        <div className="container mt-5" style={{ padding: "0px", width: "100%" }}>
-
-          <br /><br />
-         
-          <p id="title6">FINANCE AND ACCOUNT</p>
-          <div style={{ marginLeft: "5px", height: "3px", width: "250px", backgroundColor: "gold" }}></div>
-          <div className="input-group mt-5 mb-3" style={{ border: "1px solid black", width: "90%", borderRadius: "6px", }}>
-            <i className="fa fa-search" style={{ color: "gold", height: "30px", width: "30px", padding: "6px", paddingLeft: "10px" }}></i>
-            <input style={{ height: "30px", border: "none", padding: "5px" }} type="text" className="form-control" placeholder="Search Flat Number" aria-describedby="basic-addon1" aria-label="Username" value={value} onChange={filterData} ></input>
-          </div>
-          <Table responsive style={{ margin: "5px 0px 20px 10px", width: "90%", backgroundColor: "snow", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px", borderRadius: "10px" }}>
-            <thead>
-              <tr>
-                <th>#</th>
-                {userColumns.map((ele, index) => (
-                  <th key={index}>{ele}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {
-                value.length > 0 ? tableFilter.map((ele, i) => {
-                  return (<tr>
-                    <td>{i + 1}</td>
-                    {ele.map((ele1, index) => (
-                      <td key={index}>{ele1}</td>
-                    ))}
-                    <td><button className="btn btn-primary fin-dues" >Add Dues</button></td>
-                    <td><button className="btn btn-danger fin-dues">Delete</button></td>
-                  </tr>)
-                }) : dataSource.map((ele, i) => {
-                  return (<tr>
-                    <td>{i + 1}</td>
-                    {ele.map((ele1, index) => (
-                      <td key={index}>{ele1}</td>
-                    ))}
-                    <td><button className="btn btn-primary fin-dues">Add Dues</button></td>
-                    <td><button className="btn btn-danger findues">Delete</button></td>
-                  </tr>)
-                })
-              }
-            </tbody>
-          </Table>
-        </div>
+  if (editable) {
+    childNode = editing ? (
+      <Form.Item
+        style={{ margin: 0 }}
+        name={dataIndex}
+        rules={[
+          {
+            required: true,
+            message: `${title} is required.`
+          }
+        ]}
+      >
+        <Input ref={inputRef} onPressEnter={save} onBlur={save} />
+      </Form.Item>
+    ) : (
+      <div
+        className="editable-cell-value-wrap"
+        style={{ paddingRight: 24 }}
+        onClick={toggleEdit}
+      >
+        {children}
       </div>
-    </>
+    )
+  }
 
-  );
+  return <td {...restProps}>{childNode}</td>
+}
+
+
+
+
+
+
+
+/*******************************************Component************************************************ */
+
+
+
+
+
+
+
+const FinanceAndAccount = () => {
+
+  const [dataSource, setDataSource] = useState([])
+  const [searchVal, setSearchVal] = useState("")
+  const [filteredData, setFilteredData] = useState([]);
+  const [origData, setOrigData] = useState([]);
+  const [searchIndex, setSearchIndex] = useState([]);
+  const [loading, setLoading] = useState(true);
+  
+  const refreshPage = () =>
+  {
+    window.location.reload();
+  }
+  useEffect(() => {
+    setLoading(true);
+    const crawl = (user, allValues) => {
+      if (!allValues) allValues = [];
+      for (var key in user) {
+        if (typeof user[key] === "object") crawl(user[key], allValues);
+        else allValues.push(user[key] + " ");
+      }
+      return allValues;
+    };
+    const fetchData = async() => {
+      const users = await fetchUsers();
+      setOrigData(users);
+      setFilteredData(users);
+      const searchInd = users.map(user => {
+        const allValues = crawl(user);
+        return { allValues: allValues.toString() };
+      });
+      setSearchIndex(searchInd);
+      if (users) setLoading(false);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (searchVal) {
+      const reqData = searchIndex.map((user, index) => {
+        if (user.allValues.toLowerCase().indexOf(searchVal.toLowerCase()) >= 0)
+          return origData[index];
+        return null;
+      });
+      setFilteredData(
+        reqData.filter(user => {
+          if (user) return true;
+          return false;
+        })
+      );
+    } else setFilteredData(origData);
+  }, [searchVal, origData, searchIndex]);
+
+  const fetchUsers = async () => {
+    const { data } = await axios.get("http://localhost:4000/api/v1/users")
+    const users = data.users
+    return users
+  }
+  
+
+
+  const defaultColumns = [
+    {
+      title: "Flat Number",
+      dataIndex: "FlatNo",
+      key: "FlatNo",
+      editable: false
+    },
+    {
+      title: "Owner Name",
+      dataIndex: "OwnerName",
+      key: "OwnerName",
+      editable: false
+    },
+    {
+      title: "Property Registered Name",
+      dataIndex: "RegisteredName",
+      key: "RegisteredName",
+      editable: false
+    },
+    {
+      title: "Email",
+      dataIndex: "Email",
+      key: "Email",
+      editable: false
+    },
+    {
+      title: "Society Dues",
+      dataIndex: "Dues",
+      key: "Dues",
+      editable: true
+    },
+
+  ]
+
+  const updateUser = async(row)=> {
+    const {data} = await axios.get("http://localhost:4000/api/v1/userupdate", {params: {user: row}});
+    console.log(data.user);
+    refreshPage();
+  }
+
+  const handleSave = row => {
+    console.log("row",JSON.stringify(row));
+    updateUser(row);
+    // const newData = [...dataSource]
+    // const index = newData.findIndex(item => row.FlatNo === item.FlatNo)
+    // console.log("data", dataSource);
+    // console.log("index", index);
+    // const item = newData[index];
+    // newData.splice(index, 1, {
+    //   ...item,
+    //   ...row
+    // })
+    // setDataSource(newData)
+  }
+
+  const components = {
+    body: {
+      row: EditableRow,
+      cell: EditableCell
+    }
+  }
+
+  const columns = defaultColumns.map(col => {
+    if (!col.editable) {
+      return col
+    }
+    return {
+      ...col,
+      onCell: record => ({
+        record,
+        editable: col.editable,
+        dataIndex: col.dataIndex,
+        title: col.title,
+        handleSave
+      })
+    }
+  })
+
+  return (
+    // <div>
+    //   <Table
+    //     components={components}
+    //     rowClassName={() => 'editable-row'}
+    //     bordered
+    //     dataSource={dataSource}
+    //     columns={columns as ColumnTypes}
+    //   />
+    // </div>
+    <>
+      <LoginNavBar />
+      <div className="KeyContactDiv">
+        <p id="title">FINANCE AND ACCOUNT</p>
+        <div
+          style={{
+            marginLeft: "5px",
+            height: "3px",
+            width: "300px",
+            backgroundColor: "gold"
+          }}
+        ></div>
+        <div className="Note">
+          <p className="NoteTitle">NOTE</p>
+          <ul> 
+            <li className="NoteList">
+               Only Society Dues field can be edited.
+            </li>
+            <li className="NoteList">
+               Please Enter the value to be Edited in the Input and press enter button to be edited.
+            </li>
+          </ul>
+        </div>
+
+        <Search
+          onChange={e => setSearchVal(e.target.value)}
+          placeholder="Enter Flat No"
+          enterButton
+          size="large"
+          style={{
+            width: "90%",
+            marginTop: "20px",
+            border: "1px solid black",
+            borderRadius: "5px"
+          }}
+        />
+
+        <Table
+          components={components}
+          rowClassName={() => 'editable-row'}
+          bordered
+          rowKey="name"
+          dataSource={filteredData}
+          columns={columns}
+          loading={loading}
+          pagination={false}
+          style={{
+            marginTop: "20px",
+            marginRight: "50px",
+            boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+           
+          }}
+        />
+      </div>
+      <div style={{ height: "100px", color: "white" }}></div>
+    </>
+  )
 }
 
 export default FinanceAndAccount;
