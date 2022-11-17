@@ -20,7 +20,7 @@
     border-radius: 10px;
   }
   .visible{
-    visibility: hidden;
+    display: none;
   }
 
   .LoginRegisterTitle:first-letter{
@@ -37,7 +37,7 @@
   .switchButton {
     margin: 0px;
     padding: 0px;
-
+    display: none;
     background-color: white;
     height: 3px;
     width: 50%;
@@ -220,7 +220,8 @@
    
    .registerContainer{
      background-color:rgb(255, 254, 246);
-     margin-top: 900px !important;
+     position: absolute;
+     top: 10px;
      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
      border-radius: 10px;
    }

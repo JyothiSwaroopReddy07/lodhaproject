@@ -24,6 +24,8 @@ import PrivateRoute from '/src/pages/PrivateRoute/PrivateRoute'
 import GeneralNotifications from './pages/GeneralNotifications/GeneralNotifications';
 import AllComplaints from './pages/AllComplaints/AllComplaints';
 import CreateForm from './pages/CreateForms/CreateForm';
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
+import Seperate from "./pages/seperate/seperate";
 
 export default function App() {
 
@@ -38,9 +40,12 @@ export default function App() {
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/login' element={<LoginSignUp />} />
+                    <Route path='/forgotpassword' element={<ForgotPassword />} />
+                    <Route path='/seperate' element={<Seperate />} />
                     <Route path="/Home"
                         element={<PrivateRoute redirectTo="/login" component={<LoggedHome />}
                             isAuth={JSON.parse(localStorage.getItem("isAuthenticated"))} role={true} />} />
+                    
 
                     <Route path="/UserProfile"
                         element={<PrivateRoute redirectTo="/login" component={<Profile />}

@@ -109,7 +109,7 @@ function Notifications() {
               Link : <a href={LinkVar} target="_blank">Link</a>
             </p>
             <p>
-              Date : {DateVar}
+              Date : {getFormattedTime(DateVar)}
             </p>
             <p>
               Time : {TimeVar}
