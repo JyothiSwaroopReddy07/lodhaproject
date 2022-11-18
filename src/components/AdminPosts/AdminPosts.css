@@ -2,7 +2,7 @@
 
 .PostBackground{
   margin-top: 40px !important;
-  background-color: whitesmoke;
+  background-color: #f6f1d0;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .PostBackground:hover{
@@ -68,6 +68,9 @@
   color: black;
   letter-spacing: 1px;
   font-weight: normal;
+  margin-left: 20px;
+  margin-right: 20px;
+  text-transform: capitalize;
 }
 
 .ComplaintsButton{
@@ -92,4 +95,21 @@
   text-decoration-line: underline;
   text-underline-offset: 10px;
   font-weight: bold;
+}
+
+.PostHeading{
+   font-weight: bold;
+   font-size: 20px;
+   color: rgb(63, 61, 51);
+   letter-spacing: 1.5px;
+   text-decoration: underline;
+   text-underline-offset: 10px;
+}
+
+.statusOptions{
+   font-size: 20px;
+   border: none;
+   background-color: #f6f1d0;
+   padding: 10px;
+   
 }

@@ -23,19 +23,7 @@ exports.createComplaint = catchAsyncErrors(async(req,res,next)=> {
 
 // Get All Complaints
 exports.getAllComplaints = catchAsyncErrors(async(req,res) => {
-    const data = await Complaint.find()
-    const complaints = data.map((ele) =>{
-        return (
-            {
-                FlatNo: ele.FlatNo,
-                Issue: ele.Issue,
-                Description: ele.Description,
-                Time: ele.Time,
-                Status: ele.Status
-            }
-        );
-    })
-    
+    const complaints = await Complaint.find()
     res.status(200).json({
         success: true,
         complaints
@@ -44,24 +32,21 @@ exports.getAllComplaints = catchAsyncErrors(async(req,res) => {
 
 // Update Complaint
 exports.updateComplaint = catchAsyncErrors(async(req,res,next)=> {
-
-    let complaint1 = await Complaint.find({FlatNo: req.query.complaint.FlatNo, Issue: req.query.complaint.Issue, Description: req.query.complaint.Description});
+    
+    let complaint1 = await Complaint.findById(req.query.complaint._id);
     if(!complaint1){
         return next(new ErrorHandler("complaint not found",404));
     }
-    console.log("query", req.query);
-    console.log("done");
-    complaint1[0].Status = req.query.complaint.Status;
-
-    complaint1[0].save();
+    complaint1.Status = req.query.complaint.Status;
+    complaint1.Description = req.query.complaint.Description;
+    complaint1.save();
     complaint1 = await Complaint.find({FlatNo: req.query.complaint.FlatNo, Issue: req.query.complaint.Issue, Description: req.query.complaint.Description});
-    
-    console.log(complaint1[0]);
     res.status(200).json({
         success: true,
         message: "SuccessFully updated"
     })
 });
+
 
 // get User Complaints
 exports.getUserComplaints = catchAsyncErrors(async(req,res,next) => {

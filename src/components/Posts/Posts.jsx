@@ -15,6 +15,8 @@ import {
   MDBRow,
   MDBTypography,
 } from "mdb-react-ui-kit";
+import {useGlobalContext} from '/src/context/StateContext';
+import axios from 'axios';
 
 function Posts({ props }) {
   let timeStamp = Date.parse(props.Time);
@@ -24,22 +26,52 @@ function Posts({ props }) {
   var month = months[date.getMonth()];
   var dateVal = date.getDate();
   var formattedDate = dateVal + '-' + (date.getMonth() + 1) + '-' + year;
+  const {User} = useGlobalContext();
   
+  const refreshPage = ()=>{
+    window.location.reload();
+  }
+  
+  const updateComplaint = async () => {
+    const { data } = await axios.get("http://localhost:4000/api/v1/updatecomplaint", { params: { complaint: props } });
+    refreshPage();
+  }
+
+  const UpdateDescription = (e) => {
+    e.preventDefault();
+    const desc = document.getElementById((props._id).toString()).innerText;
+    console.log("Update description", desc);
+    props.Description = desc;
+    updateComplaint();
+    
+  }
+
   return (
     <>
       <Card className="m-3 backgroundcoloring PostBackground">
         <Card.Header className="PostTitle">
           <div className='PostHeader'>
-          <p className='PostsIssue'>{props.Issue}</p>
-          <div>
-          {props.Status ? <p style={{color: "green", fontWeight:"bold", fontSize:"16px", letterSpacing:"1px"}}>Done</p> : <p style={{color: "red",fontWeight:"bold", fontSize:"16px", letterSpacing:"1px"}}>Pending</p>}
-          <p style={{color: "black", fontWeight:"bold", fontSize:"16px", letterSpacing:"1px"}}>{formattedDate}</p>
+           
+            <p className='PostsIssue'> {props.Issue}</p>
+            <div>
+              {props.Status ? <p style={{ color: "green", fontWeight: "bold", fontSize: "16px", letterSpacing: "1px" }}>Done</p> : <p style={{ color: "red", fontWeight: "bold", fontSize: "16px", letterSpacing: "1px" }}>Pending</p>}
+              <p style={{ color: "black", fontWeight: "bold", fontSize: "16px", letterSpacing: "1px" }}>{formattedDate}</p>
+            </div>
           </div>
-          </div>
-          </Card.Header>
+        </Card.Header>
         <Card.Body>
           <Card.Text className="PostDesc">
-            {props.Description}
+            <form
+            onSubmit={UpdateDescription}
+            >
+              <p className='DescriptionTitle'>DESCRIPTION</p>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <div contentEditable style={{ width: "100%" }} id={props._id}>{props.Description}</div>
+              </div>
+              <div style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}>
+                <button className="btn btn-success ComplaintsButton" type="submit" onClick={(e) => UpdateDescription(e)}>Edit Complaint</button>
+              </div>
+            </form>
           </Card.Text>
         </Card.Body>
       </Card>

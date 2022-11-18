@@ -23,7 +23,6 @@ exports.createForm = catchAsyncErrors(async(req,res,next)=> {
 // Get All forms
 exports.getAllForms = catchAsyncErrors(async(req,res) => {
     const forms = await Form.find();
-    console.log(forms);
     res.status(200).json({
         success: true,
         forms

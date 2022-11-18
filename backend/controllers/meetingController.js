@@ -23,7 +23,6 @@ exports.createMeeting = catchAsyncErrors(async(req,res,next)=> {
 // Get All Meetings
 exports.getAllMeetings = catchAsyncErrors(async(req,res) => {
     const meetings = await Meeting.find();
-    console.log(meetings);
     res.status(200).json({
         success: true,
         meetings

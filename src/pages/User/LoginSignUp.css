@@ -17,7 +17,7 @@
     margin: 0;
     padding: 15px 0px 15px 15px;
     letter-spacing: 2px;
-    border-radius: 10px;
+    
   }
   .visible{
     display: none;
@@ -26,7 +26,7 @@
   .LoginRegisterTitle:first-letter{
     font-size: 40px;
   }
-
+  
   
   .login_signUp_toggle > p:hover {
     color: #BFA008;
@@ -113,6 +113,8 @@
      background-color: black !important;
      border-radius: 10px;
      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+     text-transform: uppercase;
+     letter-spacing: 1px;
    }
    #loginButton:hover{
      color: black;
@@ -208,6 +210,8 @@
      justify-content: center !important;
      text-align : center !important;
      background-color: black !important;
+     letter-spacing: 1px;
+     text-transform: uppercase;
      border-radius: 10px;
      border: none;
      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -265,4 +269,23 @@
     font-size: 20px;
     font-weight: normal;
 
+}
+
+.ToastLogin{
+
+  width: 90%;
+  height: 50px;
+
+  z-index: 10;
+  border: none;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.Red{
+  color: red;
+}
+
+.Green{
+  color: green;
 }

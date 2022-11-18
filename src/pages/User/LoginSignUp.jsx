@@ -20,7 +20,8 @@ import {
 import axios from "axios";
 import NavBar from "/src/components/NavBar/NavBar";
 import validator from 'validator'
-
+import 'antd/dist/antd.css';
+import { Alert } from 'antd';
 
 
 
@@ -37,7 +38,17 @@ const LoginSignUp = () => {
   const [isStrong, setIsStrong] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
   const [isMobileEmpty, setIsMobileEmpty] = useState(true);
+  const [isEmptyEmail, setIsEmptyEmail] = useState(true);
   const [isValidMobile, setIsValidMobile] = useState(false);
+  const [isValidEmail, setIsValidEmail] = useState(false);
+  const [falseCredentials, setFalseCredentials] = useState(false);
+  const [ValidCredentials, setValidCredentials] = useState(false);
+  const [InvalidCredentials, setInvalidCredentials] = useState(false);
+  const [AtleastEight, setAtleastEight] = useState(false);
+  const [Atleastdigit, setAtleastdigit] = useState(false);
+  const [AtleastLower, setAtleastLower] = useState(false);
+  const [AtleastUpper, setAtleastUpper] = useState(false);
+  const [Atleastspecial, setAtleastspecial] = useState(false);
 
   const login = async (loginFlatNo, loginPassword) => {
     setLoading(true);
@@ -47,8 +58,9 @@ const LoginSignUp = () => {
     const user = data.user;
     console.log("user", user);
     setLoading(false);
-    if (user !== [] && !user) {
-      navigate('/login');
+    if (!user || user.length == 0) {
+     setFalseCredentials(true);
+
     }
     else {
       const user1 = {
@@ -82,29 +94,23 @@ const LoginSignUp = () => {
       Password: Password,
       Block: Block
     });
-    const user = data.user;
-    console.log(user);
+    
     setLoading(false);
-    if (user !== [] && !user) {
-      navigate('/login');
+    if (data.success === false) {
+      setValidCredentials(false);
+      setInvalidCredentials(true);
+      setIsEmpty(true); 
+      setIsEmptyEmail(true); 
+      setIsMobileEmpty(true);
     }
     else {
-      const user1 = {
-        OwnerName: user[0].OwnerName,
-        RegisteredName: user[0].RegisteredName,
-        FlatNo: user[0].FlatNo,
-        Block: user[0].Block,
-        ParkingSlot: user[0].ParkingSlot,
-        Mobile: user[0].Mobile,
-        Dues: user[0].Dues,
-        Email: user[0].Email,
-        Role: user[0].Role
-      }
-      setUser(JSON.stringify(user1));
-      setIsAuthenticated(true);
-      localStorage.setItem("User", JSON.stringify(user1));
-      localStorage.setItem("isAuthenticated", true);
-      navigate('/UserDashboard');
+      setValidCredentials(true);
+      setIsEmpty(true); 
+      setIsEmptyEmail(true); 
+      setIsMobileEmpty(true);
+      setInvalidCredentials(false);
+      navigate('/login');
+
     }
   }
 
@@ -147,6 +153,7 @@ const LoginSignUp = () => {
       loginTab.current.classList.add("visible");
       registerTab.current.classList.add("shiftToNeutralForm");
       loginTab.current.classList.add("shiftToLeft");
+      
     }
   };
 
@@ -154,14 +161,62 @@ const LoginSignUp = () => {
     setCurr(!Curr);
 
   };
-
+  const isdigit = (value) => {
+    let str = "0123456789";
+      if(str.indexOf(value) >= 0){
+        return true;
+      }
+    return false;
+  }
   const validate = (value, len) => {
+    setAtleastEight(false);
+    setAtleastUpper(false);
+    setAtleastLower(false);
+    setAtleastspecial(false);
+    setAtleastdigit(false);
     if (len > 0) {
       setIsEmpty(false);
     }
     else {
       setIsEmpty(true);
     }
+    if(len >= 8 ){
+      setAtleastEight(true);
+    }
+    else {
+      setAtleastEight(false);
+    }
+
+    for(let x of value)
+    {
+      let spChars = "!@#$%^&*";
+        if(!isdigit(x) && (x.toUpperCase() !== x.toLowerCase()) && x === x.toLowerCase()){
+          setAtleastLower(true);
+        }
+        else {
+          setAtleastLower(AtleastLower || false);
+        }
+        if(!isdigit(x) && (x.toUpperCase() !== x.toLowerCase()) && x === x.toUpperCase()){
+          setAtleastUpper(true);
+        }
+        else {
+          setAtleastUpper(AtleastUpper||false);
+        }
+        if(isdigit(x)){
+          setAtleastdigit(true);
+        }
+        else{
+          setAtleastdigit(Atleastdigit||false);
+        }
+        if(spChars.indexOf(x)>=0){
+          setAtleastspecial(true);
+        }
+        else{
+          setAtleastspecial(Atleastspecial || false);
+        }
+    }
+
+
     if (validator.isStrongPassword(value, {
       minLength: 8, minLowercase: 1,
       minUppercase: 1, minNumbers: 1, minSymbols: 1
@@ -187,6 +242,22 @@ const LoginSignUp = () => {
     }
   }
 
+  const EmailValidate = (value, len) => {
+    if (len > 0) {
+      setIsEmptyEmail(false);
+    }
+    else {
+      setIsEmptyEmail(true);
+    }
+    if (validator.isEmail(value)) {
+      console.log("valid");
+      setIsValidEmail(true);
+    }
+    else {
+      setIsValidEmail(false);
+    }
+  }
+
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/UserProfile");
@@ -209,7 +280,17 @@ const LoginSignUp = () => {
                 </div>
                 <button className="switchButton" ref={switcherTab}></button>
               </div>
+              {
+                falseCredentials ?  <Alert message="Error" type="error" description="Invalid Credentials! Please try again" showIcon closable /> : <></>
+              }
+              {
+                ValidCredentials ?  <Alert message="Success" type="success" description="Registered Successfully" showIcon closable /> : <></>
+              }
+              {
+                InvalidCredentials ?  <Alert message="Error" type="error" description="User Already Exists or Invalid User Details" showIcon closable /> : <></>
+              }
               <form className="loginForm" ref={loginTab} onSubmit={loginSubmit}>
+
                 <MDBContainer>
                   <MDBCard className='p-5 login-container LoginContainer'>
 
@@ -227,14 +308,14 @@ const LoginSignUp = () => {
                             <h1 className='LoginHeading'>User Login</h1>
                           </div>
                           <div>
-                            <p className="Label">EMAIL ADDRESS</p>
-                            <MDBInput wrapperClass='mb-4' placeholder='Flat Number' className='form1' id='uname' name="FlatNo" type='text' />
+                            <p className="Label">FLAT NUMBER</p>
+                            <MDBInput wrapperClass='mb-4' placeholder='Flat Number' className='form1' id='uname' name="FlatNo" type='text' required/>
                           </div>
                           <div style={{ display: "flex", justifyContent: "space-between" }}>
                             <p className="Label">PASSWORD</p>
                             <img src="/src/assests/password.png" onClick={(e) => ShowPassword(e)} style={{ height: "20px", width: "20px", marginRight: "10%", marginTop: "10px" }}></img>
                           </div>
-                          <MDBInput wrapperClass='mb-4' placeholder='Password' className='form1' id='pass' name="Password" type={Curr ? 'text' : 'password'} />
+                          <MDBInput wrapperClass='mb-4' placeholder='Password' className='form1' id='pass' name="Password" type={Curr ? 'text' : 'password'} required/>
 
                           <div className="d-flex justify-content-around mx-4 mb-4 form1">
                             <Link to="/password/forgot">Forgot Password ?</Link>
@@ -251,6 +332,7 @@ const LoginSignUp = () => {
                   </MDBCard>
                 </MDBContainer>
               </form>
+             
               <form
                 className="signUpForm visible"
                 ref={registerTab}
@@ -274,40 +356,46 @@ const LoginSignUp = () => {
                               <h1 className='RegisterHeading'>Register</h1>
                             </div>
                             <p className="Label">OWNER NAME </p>
-                            <MDBInput wrapperClass='mb-4' placeholder='Owner Name' className='form1' name="OwnerName" id='name' type='text' />
+                            <MDBInput wrapperClass='mb-4' placeholder='Owner Name' className='form1' name="OwnerName" id='name' type='text' required/>
                             <p className="Label">PROPERTY REGISTERED NAME</p>
-                            <MDBInput wrapperClass='mb-4' placeholder='Property Registered Name' className='form1' name="RegisteredName" id='name' type='text' />
+                            <MDBInput wrapperClass='mb-4' placeholder='Property Registered Name' className='form1' name="RegisteredName" id='name' type='text' required/>
                             <div>
                               <p className="Label">EMAIL ADRESS</p>
-                              <MDBInput wrapperClass='mb-4' placeholder='Email address' className='form1' id='RegUname' name="Email" type='email' />
+                              <MDBInput wrapperClass='mb-4' placeholder='Email address' className='form1' id='RegUname' name="Email" type='email' onClick={(e) => EmailValidate(e.target.value, e.target.value.length)} required/>
                             </div>
+                            {
+                              (isEmptyEmail) ? <></> : (isValidEmail) ? <p style={{ color: "green", letterSpacing: "1.5px", }}>Valid Email Address</p> : <p style={{ color: "red", letterSpacing: "1.5px" }}>Invalid Email Address</p>
+                            }
 
                             <div style={{ display: "flex", justifyContent: "space-between" }}>
                               <p className="Label">PASSWORD</p>
                               <img src="/src/assests/password.png" onClick={(e) => ShowPassword(e)} style={{ height: "20px", width: "20px", marginRight: "10%", marginTop: "10px" }}></img>
                             </div>
-                            <MDBInput wrapperClass='mb-4' placeholder='Password' name="Password" className='form1' id='RegPass' type={Curr ? 'text' : 'password'} ref={UserPass} onChange={(e) => validate(e.target.value, e.target.value.length)} />
+                            <MDBInput wrapperClass='mb-4' placeholder='Password' name="Password" className='form1' id='RegPass' type={Curr ? 'text' : 'password'} ref={UserPass} onChange={(e) => validate(e.target.value, e.target.value.length)} required/>
                             {
                               (isEmpty) ? <></> : (isStrong) ? <p style={{ color: "green", letterSpacing: "1.5px", }}>Strong Password</p> : <p style={{ color: "red", letterSpacing: "1.5px" }}>Weak Password</p>
                             }
+                            
+                            <ul style={{ width: "80%", textAlign: "left", marginLeft: "10%", fontSize: "14px", backgroundColor: "white", border: "1px solid black", borderRadius: "10px" }}>
+                              Password must contain 
+                              <li className= {AtleastEight ? "Green": "Red"}>alteast 8 characters</li>
+                              <li className={Atleastdigit ? "Green": "Red"}>atleast One digit</li>
+                              <li className={Atleastspecial ? "Green": "Red"}>atleast One Special Character(!,@,#,$,%,^,&,*)</li>
+                              <li className={AtleastLower ? "Green": "Red"}>atleast One Lowercase letter</li>
+                              <li className={AtleastUpper? "Green": "Red"}>atleast One Uppercase letter</li>
+                            </ul>
                             <p className="Label">MOBILE NUMBER</p>
-                            <MDBInput wrapperClass='mb-4' placeholder='Mobile Number' name="Mobile" className='form1' id='mob' type='text' onChange={(e) => MobileValidate(e.target.value, e.target.value.length)} />
+                            <MDBInput wrapperClass='mb-4' placeholder='Mobile Number' name="Mobile" className='form1' id='mob' type='text' onClick={(e) => MobileValidate(e.target.value, e.target.value.length)} required/>
                             {
                               (isMobileEmpty) ? <></> : (isValidMobile) ? <p style={{ color: "green", letterSpacing: "1.5px", }}>Valid Mobile Number</p> : <p style={{ color: "red", letterSpacing: "1.5px" }}>Invalid Mobile Number</p>
                             }
                             <p className="Label">BLOCK</p>
-                            <MDBInput wrapperClass='mb-4' placeholder='Block' name="Block" className='form1' id='block' type='text' />
+                            <MDBInput wrapperClass='mb-4' placeholder='Block' name="Block" className='form1' id='block' type='text' required/>
                             <p className="Label">FLAT NUMBER</p>
-                            <MDBInput wrapperClass='mb-4' placeholder='Flat Number' name="FlatNo" className='form1' id='flat' type='text' />
+                            <MDBInput wrapperClass='mb-4' placeholder='Flat Number' name="FlatNo" className='form1' id='flat' type='text' required/>
                             <p className="Label">PARKING SLOT</p>
-                            <MDBInput wrapperClass='mb-4' placeholder='Parking Slot' name="ParkingSlot" className='form1' id='parking' type='text' />
-                            <p className="Label">NOTE</p>
-                            <ul style={{ width: "80%", textAlign: "left", marginLeft: "10%", fontSize: "14px", backgroundColor: "white", border: "1px solid black", borderRadius: "10px" }}>
-                              Password must contain alteast 8 characters including
-                              <li>atleast One digit</li>
-                              <li>atleast One Special Character</li>
-                              <li>atleast One Lowercase letter</li>
-                            </ul>
+                            <MDBInput wrapperClass='mb-4' placeholder='Parking Slot' name="ParkingSlot" className='form1' id='parking' type='text' required/>
+                            
                             <div className="d-flex justify-content-around mx-4 mb-4 form1">
 
                               <a href="!#">Forgot password?</a>

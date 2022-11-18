@@ -8,25 +8,30 @@ exports.createUser = catchAsyncErrors(async(req,res,next)=> {
     const { FlatNo } = req.body;
     const user1 = await User.find({FlatNo: FlatNo});
     if(user1 && Object.keys(user1).length){
-        return next(new ErrorHandler("User Already Exists",404));
+        res.status(201).json({
+            success:false,
+            message: "User Already Exists"
+        })
     }
-    const {Password, OwnerName,RegisteredName,Block, Mobile,ParkingSlot,Email,Role } = req.body;
-    const user = await User.create({
-        FlatNo: FlatNo,
-        Email: Email,
-        Password: Password,
-        OwnerName: OwnerName,
-        RegisteredName: RegisteredName,
-        Block: Block,
-        Mobile: Mobile,
-        ParkingSlot: ParkingSlot,
-        Role: Role
-    });
+    else{
+        const {Password, OwnerName,RegisteredName,Block, Mobile,ParkingSlot,Email,Role } = req.body;
+        const user = await User.create({
+            FlatNo: FlatNo,
+            Email: Email,
+            Password: Password,
+            OwnerName: OwnerName,
+            RegisteredName: RegisteredName,
+            Block: Block,
+            Mobile: Mobile,
+            ParkingSlot: ParkingSlot,
+            Role: Role
+        });
 
-    res.status(201).json({
-        success: true,
-       user 
-    })
+        res.status(201).json({
+            success: true,
+            user 
+        });
+    }
 });
 
 // login User
@@ -45,9 +50,10 @@ exports.loginUser = catchAsyncErrors(async(req,res,next) => {
 
 // Get Single User
 exports.getUser = catchAsyncErrors(async(req,res,next) => {
-    const {FlatNo} = req.body;
+    const FlatNo = req.query.FlatNo;
+    
     const user1 = await User.find({FlatNo: FlatNo})
-    if(user1 && Object.keys(user1).length){
+    if(user1.length === 0){
         return next(new ErrorHandler("User does not exists",404));
     }
     res.status(200).json({
@@ -88,8 +94,7 @@ exports.updateUser = catchAsyncErrors(async(req,res,next)=> {
     if(!user1){
         return next(new ErrorHandler("User not found",404));
     }
-    console.log("query", req.query);
-    console.log("done");
+   
     user1[0].FlatNo = req.query.user.FlatNo;
     user1[0].Email = req.query.user.Email; 
     user1[0].Mobile = req.query.user.Mobile; 
@@ -102,7 +107,6 @@ exports.updateUser = catchAsyncErrors(async(req,res,next)=> {
     user1[0].save();
     user1 = await User.find({FlatNo: req.query.user.FlatNo});
     
-    console.log(user1[0]);
     res.status(200).json({
         success: true,
         message: "SuccessFully updated"

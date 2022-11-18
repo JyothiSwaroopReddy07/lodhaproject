@@ -198,9 +198,10 @@ export default function AllComplaints() {
   }
 
   const handleDelete = (key) => {
-    console.log("key", key)
+  
     deleteComplaint(key);
     const newData = dataSource.filter(item => item.FlatNo !== key.FlatNo)
+  
     setDataSource(newData)
   }
 
@@ -221,12 +222,6 @@ export default function AllComplaints() {
       title: "Days Since Posted",
       dataIndex: "Time",
       key: "Time", 
-      editable: false
-    },
-    {
-      title: "Description",
-      dataIndex: "Description",
-      key: "Description",
       editable: false
     },
     {
@@ -344,7 +339,6 @@ export default function AllComplaints() {
           size="large"
           style={{ width: "90%", marginTop: "50px", border: "1px solid black", borderRadius: "5px" }}
         />
-
         <Table
           components={components}
           rowClassName={() => 'editable-row'}
@@ -354,13 +348,17 @@ export default function AllComplaints() {
           columns={columns}
           loading={loading}
           pagination={false}
+          expandable={{
+            expandedRowRender: record => <div style={{ margin: 0, width:"50%"}}>{record.Description}</div>,
+            rowExpandable: record => record.name !== 'Not Expandable',
+          }}
           style={{
             marginTop: "20px",
-            marginRight: "20px",
             boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+            width: "90%"
 
           }}
-        />
+          />
       </div>
       <div style={{ height: "100px", color: "white" }}>
 

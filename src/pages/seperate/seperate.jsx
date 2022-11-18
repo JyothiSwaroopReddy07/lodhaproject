@@ -1,11 +1,15 @@
-import React, { useContext, useEffect, useRef, useState } from "react"
-import "antd/dist/antd.css"
-import "./seperate.css"
-import { Form, Input, Popconfirm, Table } from "antd"
-import axios from "axios"
-import LoginNavBar from "/src/components/LoginNavBar/LoginNavBar"
-import "antd/dist/antd.css"
-const { Search } = Input
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Table, Input, Form, Popconfirm } from "antd";
+import axios from "axios";
+import './Seperate.css';
+import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
+import 'antd/dist/antd.css';
+import Accordion from 'react-bootstrap/Accordion';
+const { Search } = Input;
+import Posts from "/src/components/Posts/Posts"
+
+import Toast from 'react-bootstrap/Toast';
+import AdminPosts from "../../components/AdminPosts/AdminPosts";
 
 const EditableContext = React.createContext(null)
 
@@ -86,30 +90,24 @@ const EditableCell = ({
 }
 
 
+const fetchUsers = async () => {
+  const { data } = await axios.get(
+    "http://localhost:4000/api/v1/AllComplaints"
+  );
+  const users = data.complaints;
+  return users;
+};
 
-
-
-
-
-/*******************************************Component************************************************ */
-
-
-
-
-
-
-
-const Seperate = () => {
-
+export default function Seperate() {
+  const [Issues, setIssues] = useState([]);
   const [dataSource, setDataSource] = useState([])
   const [searchVal, setSearchVal] = useState("")
   const [filteredData, setFilteredData] = useState([]);
   const [origData, setOrigData] = useState([]);
   const [searchIndex, setSearchIndex] = useState([]);
   const [loading, setLoading] = useState(true);
-  
-  const refreshPage = () =>
-  {
+
+  const refreshPage = () => {
     window.location.reload();
   }
   useEffect(() => {
@@ -118,11 +116,26 @@ const Seperate = () => {
       if (!allValues) allValues = [];
       for (var key in user) {
         if (typeof user[key] === "object") crawl(user[key], allValues);
-        else allValues.push(user[key] + " ");
+        else if (key !== "Description") {
+          if (key === "Time") {
+            let timeStamp = Date.parse(user[key]);
+            var date1 = new Date(timeStamp);
+            var date2 = new Date();
+            
+            var Difference_In_Time = date2.getTime() - date1.getTime();
+            var days = Difference_In_Time / (1000 * 3600 * 24);
+            days = (Math.ceil(days)).toString();
+            user[key] = days + ((days > 1)?" days " : " day ");
+            allValues.push(days + " ");
+          }
+          else {
+            allValues.push(user[key] + " ");
+          }
+        }
       }
       return allValues;
     };
-    const fetchData = async() => {
+    const fetchData = async () => {
       const users = await fetchUsers();
       setOrigData(users);
       setFilteredData(users);
@@ -152,22 +165,45 @@ const Seperate = () => {
     } else setFilteredData(origData);
   }, [searchVal, origData, searchIndex]);
 
-  const fetchUsers = async () => {
-    const { data } = await axios.get("http://localhost:4000/api/v1/users")
-    const users = data.users
-    return users
+
+
+  const delete_Issue = async (ele) => {
+    const issue = await axios.post("http://localhost:4000/api/v1/delete_issue", {
+      issue: ele.Name
+    })
+    setIssues([]);
   }
-  
-  const deleteUser = async(key)=> {
-    const {data} = await axios.get("http://localhost:4000/api/v1/userdelete", {params: {FlatNo: key}});
+
+  const issue = async (issue) => {
+    const { data } = await axios.post("http://localhost:4000/api/v1/new_issue", {
+      issue: issue
+    })
+    console.log(data.success)
+    setIssues([]);
+  }
+  const issueSubmit = (e) => {
+    e.preventDefault();
+    issue(e.target.issue.value);
+  }
+  const fetchIssues = async () => {
+    const { data } = await axios.get("http://localhost:4000/api/v1/issue_types");
+    setIssues(data.issues);
+  }
+  useEffect(() => {
+    fetchIssues();
+  }, [Issues.length]);
+
+  const deleteComplaint = async (key) => {
+    const { data } = await axios.get("http://localhost:4000/api/v1/deletecomplaint", { params: { FlatNo: key.FlatNo, Issue: key.Issue, Description: key.Description } });
     console.log(data.message);
     refreshPage();
   }
 
-  const handleDelete = key => {
-    console.log("key", key)
-    deleteUser(key);
-    const newData = dataSource.filter(item => item.FlatNo !== key)
+  const handleDelete = (key) => {
+  
+    deleteComplaint(key);
+    const newData = dataSource.filter(item => item.FlatNo !== key.FlatNo)
+  
     setDataSource(newData)
   }
 
@@ -176,84 +212,39 @@ const Seperate = () => {
       title: "Flat Number",
       dataIndex: "FlatNo",
       key: "FlatNo",
-      editable: true
+      editable: false
     },
     {
-      title: "Owner Name",
-      dataIndex: "OwnerName",
-      key: "OwnerName",
-      editable: true
+      title: "Issue",
+      dataIndex: "Issue",
+      key: "Issue", 
+      editable: false
     },
     {
-      title: "Property Registered Name",
-      dataIndex: "RegisteredName",
-      key: "RegisteredName",
-      editable: true
+      title: "Days Since Posted",
+      dataIndex: "Time",
+      key: "Time", 
+      editable: false
     },
     {
-      title: "Email",
-      dataIndex: "Email",
-      key: "Email",
+      title: "Status",
+      dataIndex: "Status",
+      key: "Status",
       editable: true
     },
-    {
-      title: "Mobile Number",
-      dataIndex: "Mobile",
-      key: "Mobile",
-      editable: true
-    },
-    {
-      title: "Block",
-      dataIndex: "Block",
-      key: "Block",
-      editable: true
-    },
-    {
-      title: "Parking Slot",
-      dataIndex: "ParkingSlot",
-      key: "ParkingSlot",
-      editable: true
-    },
-    {
-      title: "Society Dues",
-      dataIndex: "Dues",
-      key: "Dues",
-      editable: true
-    },
-    {
-      title: "operation",
-      dataIndex: "operation",
-      render: (_, record) =>
-        dataSource.length >= 0 ? (
-          <Popconfirm
-            title="Sure to delete?"
-            onConfirm={() => handleDelete(record.FlatNo)}
-          >
-            <button className="btn btn-danger">Delete</button>
-          </Popconfirm>
-        ) : null
-    }
+    
   ]
 
-  const updateUser = async(row)=> {
-    const {data} = await axios.get("http://localhost:4000/api/v1/userupdate", {params: {user: row}});
-    console.log(data.user);
+  const updateComplaint = async (row) => {
+    const { data } = await axios.get("http://localhost:4000/api/v1/updatecomplaint", { params: { complaint: row } });
+    console.log(data.complaint);
     refreshPage();
   }
 
   const handleSave = row => {
-    console.log("row",JSON.stringify(row));
-    updateUser(row);
-    // const newData = [...dataSource]
-    // const index = newData.findIndex(item => row.FlatNo === item.FlatNo)
-    // console.log("data", dataSource);
-    // console.log("index", index);
-    // const item = newData[index];
-    // newData.splice(index, 1, {
-    //   ...item,
-    //   ...row
-    // })
-    // setDataSource(newData)
+    console.log("row", JSON.stringify(row));
+    updateComplaint(row);
+    
   }
 
   const components = {
@@ -278,63 +269,75 @@ const Seperate = () => {
       })
     }
   })
-
   return (
-    // <div>
-    //   <Table
-    //     components={components}
-    //     rowClassName={() => 'editable-row'}
-    //     bordered
-    //     dataSource={dataSource}
-    //     columns={columns as ColumnTypes}
-    //   />
-    // </div>
     <>
       <LoginNavBar />
       <div className="KeyContactDiv">
-        <p id="title">KEY CONTACTS AND MAILS</p>
-        <div
-          style={{
-            marginLeft: "5px",
-            height: "3px",
-            width: "300px",
-            backgroundColor: "gold"
-          }}
-        ></div>
+        <p id="title10"> ALL COMPLAINTS</p>
 
+        <div style={{ marginLeft: "5px", height: "3px", width: "200px", backgroundColor: "gold" }}></div>
+        <Accordion >
+          <Accordion.Item id="IssueAccord" style={{ marginTop: "50px", width: "90%", border: "2px solid #d3d3d3", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",  }}>
+            <Accordion.Header>
+              <p className="IssueTitle">Add New Complaint Type</p>
+            </Accordion.Header>
+            <Accordion.Body>
+              <div>
+                <form onSubmit={issueSubmit} className="ComplaintForm">
+                  <div style={{ display: "flex" }}>
+                    <input placeholder="Complaint Type" type="text" name="issue" className="IssueInput" />
+                    <button type="submit" className="IssueButton">Add</button>
+                  </div>
+                </form>
+              </div>
+              <div className="ToastDiv">
+
+                {
+
+                  Issues.map(({ Name }) => {
+                    return (
+                      <Toast onClose={(e) => { e.preventDefault(); delete_Issue({ Name }) }} animation={false} className="ToastIssue">
+                        <Toast.Header>
+                          {Name}
+                        </Toast.Header>
+                      </Toast>);
+                  })
+
+                }
+              </div>
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+        <div className="Note" style={{marginTop: "50px"}}>
+          <p className="NoteTitle">NOTE</p>
+          <ul> 
+            <li className="NoteList">
+              Status Field can only be edited.
+            </li>
+            <li className="NoteList">
+               Please Enter the value to be Edited in the Input and press enter button to be edited.
+            </li>
+            <li className="NoteList">
+              Please Press Delete button to delete the Complaint details
+            </li>
+          </ul>
+        </div>
         <Search
           onChange={e => setSearchVal(e.target.value)}
-          placeholder="Enter Flat No"
+          placeholder="Search Complaint"
           enterButton
           size="large"
-          style={{
-            width: "90%",
-            marginTop: "20px",
-            border: "1px solid black",
-            borderRadius: "5px"
-          }}
+          style={{ width: "90%", marginTop: "50px", border: "1px solid black", borderRadius: "5px" }}
         />
-
-        <Table
-          components={components}
-          rowClassName={() => 'editable-row'}
-          bordered
-          rowKey="name"
-          dataSource={filteredData}
-          columns={columns}
-          loading={loading}
-          pagination={false}
-          style={{
-            marginTop: "20px",
-            width: "90%",
-            boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-            backgroundColor: "black !important"
-          }}
-        />
+        <div className="container">
+        {
+           filteredData.map(item => <AdminPosts props={item} />)
+        }
+        </div>
       </div>
-      <div style={{ height: "100px", color: "white" }}></div>
-    </>
-  )
-}
+      <div style={{ height: "100px", color: "white" }}>
 
-export default Seperate
+      </div>
+    </>
+  );
+}
