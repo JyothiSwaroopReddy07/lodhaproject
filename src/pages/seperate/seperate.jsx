@@ -329,7 +329,7 @@ export default function Seperate() {
           size="large"
           style={{ width: "90%", marginTop: "50px", border: "1px solid black", borderRadius: "5px" }}
         />
-        <div className="container">
+        <div className="AdminPostsDiv">
         {
            filteredData.map(item => <AdminPosts props={item} />)
         }

@@ -25,10 +25,10 @@ function Complaints() {
   return (
     <>
       <LoginNavBar />
-      <div className="middle" style={{ marginTop: "100px" }}>
+      <div className="middle" style={{ marginTop: "0px" }}>
         <p id="title3">COMPLAINTS</p>
         <div style={{ marginLeft: "5px", height: "3px", width: "130px", backgroundColor: "gold" }}></div>
-        <div className="Note" style={{ marginTop: "50px" }}>
+        <div className="Note" style={{ marginTop: "50px", marginLeft:"20px" }}>
           <p className="NoteTitle">NOTE</p>
           <ul>
             <li className="NoteList">

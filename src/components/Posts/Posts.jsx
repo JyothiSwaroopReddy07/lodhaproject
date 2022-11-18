@@ -15,7 +15,7 @@ import {
   MDBRow,
   MDBTypography,
 } from "mdb-react-ui-kit";
-import {useGlobalContext} from '/src/context/StateContext';
+import { useGlobalContext } from '/src/context/StateContext';
 import axios from 'axios';
 
 function Posts({ props }) {
@@ -26,12 +26,12 @@ function Posts({ props }) {
   var month = months[date.getMonth()];
   var dateVal = date.getDate();
   var formattedDate = dateVal + '-' + (date.getMonth() + 1) + '-' + year;
-  const {User} = useGlobalContext();
-  
-  const refreshPage = ()=>{
+  const { User } = useGlobalContext();
+
+  const refreshPage = () => {
     window.location.reload();
   }
-  
+
   const updateComplaint = async () => {
     const { data } = await axios.get("http://localhost:4000/api/v1/updatecomplaint", { params: { complaint: props } });
     refreshPage();
@@ -43,7 +43,7 @@ function Posts({ props }) {
     console.log("Update description", desc);
     props.Description = desc;
     updateComplaint();
-    
+
   }
 
   return (
@@ -51,18 +51,29 @@ function Posts({ props }) {
       <Card className="m-3 backgroundcoloring PostBackground">
         <Card.Header className="PostTitle">
           <div className='PostHeader'>
-           
-            <p className='PostsIssue'> {props.Issue}</p>
             <div>
-              {props.Status ? <p style={{ color: "green", fontWeight: "bold", fontSize: "16px", letterSpacing: "1px" }}>Done</p> : <p style={{ color: "red", fontWeight: "bold", fontSize: "16px", letterSpacing: "1px" }}>Pending</p>}
-              <p style={{ color: "black", fontWeight: "bold", fontSize: "16px", letterSpacing: "1px" }}>{formattedDate}</p>
+              <label className='PostHeading'>Complaint</label>
+              <span className='PostsIssue'> {props.Issue}</span>
+            </div>
+            <div>
+              {props.Status ? <div>
+                <img src="/src/assests/greenCircle.png" height="20px" width="20px"></img>
+                <span style={{ color: "green", fontWeight: "bold", fontSize: "18px", letterSpacing: "2px" }}>Done</span>
+              </div>
+                :
+                <div>
+                  <img src="/src/assests/redCircle.png" height="20px" width="20px"></img>
+                  <span style={{ color: "red", fontWeight: "bold", fontSize: "18px", letterSpacing: "2px" }}>Pending</span>
+                </div>
+              }
+              <span style={{ color: "black", fontWeight: "bold", fontSize: "16px", letterSpacing: "1px" }}>{formattedDate}</span>
             </div>
           </div>
         </Card.Header>
         <Card.Body>
           <Card.Text className="PostDesc">
             <form
-            onSubmit={UpdateDescription}
+              onSubmit={UpdateDescription}
             >
               <p className='DescriptionTitle'>DESCRIPTION</p>
               <div style={{ display: "flex", justifyContent: "space-between" }}>

@@ -25,8 +25,6 @@ function AdminPosts({ props }) {
     const user = async () => {
         const { data } = await axios.get("http://localhost:4000/api/v1/singleUser", { params: { FlatNo: props.FlatNo } });
         const singleuser = data.user1[0];
-        console.log(data);
-        console.log(singleuser);
         setSingleUser(singleuser)
         return singleuser;
     }
@@ -34,7 +32,7 @@ function AdminPosts({ props }) {
     useEffect(() => {
         user()
     }, []);
-    /*const refreshPage = ()=>{
+    const refreshPage = ()=>{
       window.location.reload();
     }
     
@@ -42,32 +40,52 @@ function AdminPosts({ props }) {
       const { data } = await axios.get("http://localhost:4000/api/v1/updatecomplaint", { params: { complaint: props } });
       refreshPage();
     }
-  */
+
+    const deleteUserComplaint = async () =>{
+        const {data} = await axios.get("http://localhost:4000/api/v1/deletecomplaint", {params: {complaint: props}});
+        refreshPage();
+    }
+
     const UpdateComplaint = (e) => {
         e.preventDefault();
-        // const desc = document.getElementById((props._id).toString()).innerText;
-        // console.log("Update description", desc);
-        // props.Description = desc;
-        // updateComplaint();
-
+        if(props.Status === 0){
+        const Status = document.getElementById("Status").value;
+        console.log("Update Status", Status);
+        
+        props.Status = Status;
+        updateComplaint();
+        }
+        
+    }
+    
+    const DeleteComplaint = (e)=>{
+        e.preventDefault();
+        console.log("delete complaint")
+        deleteUserComplaint();
     }
 
     return (
         <>
-            <Card className="m-3 backgroundcoloring PostBackground">
+            <Card className="m-3 backgroundcoloring PostBackground1">
                 <form
-                    onSubmit={UpdateDescription}
+                    onSubmit={UpdateComplaint}
                 >
                     <Card.Header className="PostTitle">
                         <div className='PostHeader'>
-                            <div>
+                            <div style={{width:"90%"}}>
                                 <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between" }}>
+                                    <div>
                                     <label className='PostHeading'>Flat Number  </label>
                                     <span className='PostsIssue'>{singleUser.FlatNo}</span>
+                                    </div>
+                                    <div>
                                     <label className='PostHeading'>Name  </label>
                                     <span className='PostsIssue'>{singleUser.OwnerName}</span>
+                                    </div>
+                                    <div>
                                     <label className='PostHeading'>Mobile  </label>
                                     <span className='PostsIssue'>{singleUser.Mobile}</span>
+                                    </div>
                                 </div>
                                 <div style={{ textAlign: "left" }}>
                                     <label className='PostHeading'>Issue  </label>
@@ -76,7 +94,7 @@ function AdminPosts({ props }) {
                             </div>
 
                             <div>
-                                {props.Status ? <p style={{ color: "green", fontWeight: "bold", fontSize: "16px", letterSpacing: "1px" }}>Done</p> : <select name="Status" className='statusOptions'>
+                                {props.Status ? <div><img src="/src/assests/greenCircle.png" height="20px" width="20px"></img><span style={{ color: "green", fontWeight: "bold", fontSize: "16px", letterSpacing: "2px" }}>Done</span></div> : <select name="Status" id='Status' className='statusOptions'>
                                     <option value="0">
                                         Pending
                                     </option>
@@ -84,7 +102,7 @@ function AdminPosts({ props }) {
                                         Done
                                     </option>
                                 </select>/*<p style={{ color: "red", fontWeight: "bold", fontSize: "16px", letterSpacing: "1px" }}>Pending</p>*/}
-                                <p style={{ color: "black", fontWeight: "bold", fontSize: "16px", letterSpacing: "1px" }}>{props.Time}</p>
+                                <p style={{ color: "black", fontWeight: "bold", fontSize: "16px", letterSpacing: "1px", marginTop:"10px" }}>{props.Time + " Ago"} </p>
                             </div>
                         </div>
                     </Card.Header>

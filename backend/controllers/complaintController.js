@@ -60,11 +60,11 @@ exports.getUserComplaints = catchAsyncErrors(async(req,res,next) => {
 
 // Delete User Complaint
 exports.deleteComplaint = catchAsyncErrors(async(req,res,next) => {
-    const complaint1 = await Complaint.find({FlatNo: req.query.FlatNo, Issue: req.query.Issue, Description: req.query.Description});
+    const complaint1 = await Complaint.findById(req.query.complaint._id);
     if(!complaint1) {
         return next(new ErrorHandler("complaint not found",404));
     }
-    await complaint1[0].remove();
+    await complaint1.remove();
     res.status(200).json({
         success: true,
         message: "Complaint Deletion successful"
