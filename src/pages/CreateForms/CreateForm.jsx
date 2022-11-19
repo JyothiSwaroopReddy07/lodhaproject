@@ -1,3 +1,4 @@
+import { Alert } from "antd";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import './CreateForm.css';
@@ -6,7 +7,7 @@ import { useGlobalContext } from '/src/context/StateContext';
 
 function CreateForm() {
     const { User, setLoading, loading } = useGlobalContext();
-
+    const [duplicateForm, setDuplicateForm] = useState(0);
     const CreateForms = async (Title, Description, Link) => {
         setLoading(true);
         const { data } = await axios.post("http://localhost:4000/api/v1/form/new", {
@@ -14,7 +15,12 @@ function CreateForm() {
             Description: Description,
             Link: Link
         });
-        console.log("success");
+        if (data.success === false) {
+            setDuplicateForm(2);
+        }
+        else {
+            setDuplicateForm(1);
+        }
     }
     const CreateFormSubmit = (e) => {
         const Title = e.target.Title.value;
@@ -22,6 +28,9 @@ function CreateForm() {
         const Link = e.target.Link.value;
         e.preventDefault();
         CreateForms(Title, Description, Link);
+        e.target.Description.value = "";
+        e.target.Link.value = "";
+        e.target.Title.value = "";
     };
 
 
@@ -34,6 +43,11 @@ function CreateForm() {
                 <p id="title2">CREATE  GOOGLE-FORMS</p>
 
                 <div style={{ marginLeft: "55px", height: "3px", width: "250px", backgroundColor: "gold" }}></div>
+                {
+                    duplicateForm > 0 ? duplicateForm === 2 ? <Alert message="Error" type="error" description="Form Details Already Exists! Please try again" showIcon closable style={{ marginBottom: "20px", marginTop: "20px", width: "60%", letterSpacing: "2px", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px", marginLeft: "20%" }} />
+                        :
+                        <Alert message="Success" type="success" description="Form Details Posted Successfully!" showIcon closable style={{ marginBottom: "20px", marginTop: "20px", width: "60%", letterSpacing: "2px", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px", marginLeft: "20%" }} /> : <></>
+                }
                 <div class="container" >
                     <div class="row mx-0 justify-content-center">
                         <div class="col-md-10 col-lg-9 px-lg-2 col-xl-8 px-xl-0">
@@ -50,6 +64,7 @@ function CreateForm() {
                                         id="activity"
                                         class="form-control temp"
                                         placeholder="Form Title"
+                                        required
                                     />
                                 </label>
 
@@ -61,6 +76,7 @@ function CreateForm() {
                                         id="activity"
                                         class="form-control temp"
                                         placeholder="Form Link"
+                                        required
                                     />
                                 </label>
 
@@ -71,6 +87,7 @@ function CreateForm() {
                                         class="form-control temp"
                                         rows="3"
                                         placeholder="Survey Description"
+                                        required
                                     ></textarea>
                                 </label>
 

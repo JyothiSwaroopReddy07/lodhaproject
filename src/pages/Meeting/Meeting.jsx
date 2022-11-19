@@ -1,45 +1,62 @@
+import { Alert } from "antd";
 import axios from "axios";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import './Meeting.css';
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 import { useGlobalContext } from '/src/context/StateContext';
 
 function Meeting() {
   const { User, setLoading, loading } = useGlobalContext();
-
-    const CreateMeetingForm = async (Title, Description, Link, Host, Date, Time) => {
-        setLoading(true);
-        const { data } = await axios.post("http://localhost:4000/api/v1/meeting/new", {
-            Title: Title,
-            Description: Description,
-            Link: Link,
-            Host: Host,
-            Date: Date, 
-            Time: Time
-        });
-        console.log("success");
+  const [DuplicateMeeting, setDuplicateMeeting] = useState(0);
+  const CreateMeetingForm = async (Title, Description, Link, Host, Date, Time) => {
+    setLoading(true);
+    const { data } = await axios.post("http://localhost:4000/api/v1/meeting/new", {
+      Title: Title,
+      Description: Description,
+      Link: Link,
+      Host: Host,
+      Date: Date,
+      Time: Time
+    });
+    if (data.success === false) {
+      setDuplicateMeeting(2);
     }
-    const CreateMeetingSubmit= (e) => {
-        const Title = e.target.Title.value;
-        const Description = e.target.Description.value;
-        const Link = e.target.Link.value;
-        const Host = e.target.Host.value;
-        const Date = e.target.Date.value;
-        const Time = e.target.Time.value;
-        e.preventDefault();
-        CreateMeetingForm(Title, Description, Link, Host, Date, Time);
-    };
+    else {
+      setDuplicateMeeting(1);
+    }
+  }
+  const CreateMeetingSubmit = (e) => {
+    const Title = e.target.Title.value;
+    const Description = e.target.Description.value;
+    const Link = e.target.Link.value;
+    const Host = e.target.Host.value;
+    const Date = e.target.Date.value;
+    const Time = e.target.Time.value;
+    e.preventDefault();
+    CreateMeetingForm(Title, Description, Link, Host, Date, Time);
+    e.target.Title.value = "";
+    e.target.Description.value = "";
+    e.target.Link.value = "";
+    e.target.Host.value = "";
+    e.target.Date.value = "";
+    e.target.Time.value = "00:00";
+  };
 
 
 
   return (
     <>
-      <LoginNavBar/>
-       <div style={{ display: "flex" }}>
+      <LoginNavBar />
+      <div style={{ display: "flex" }}>
         <img src="/src/assests/meeting.png" style={{ height: "35px", width: "35px", marginTop: "105px", marginLeft: "50px", marginBottom: "0px" }}></img>
         <p id="userDashboardTitle">SET UP MEETING</p>
       </div>
       <div style={{ marginLeft: "55px", height: "3px", width: "275px", backgroundColor: "gold" }}></div>
+      {
+        DuplicateMeeting > 0 ? DuplicateMeeting === 2 ? <Alert message="Error" type="error" description="Meeting Details Already Exists! Please try again" showIcon closable style={{ marginBottom: "20px", marginTop: "20px", width: "60%", letterSpacing: "2px", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px", marginLeft: "20%" }} />
+          :
+          <Alert message="Success" type="success" description="Meeting Details Posted Successfully!" showIcon closable style={{ marginBottom: "20px", marginTop: "20px", width: "60%", letterSpacing: "2px", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px", marginLeft: "20%" }} /> : <></>
+      }
       <div class="container MeetingDiv">
         <div class="row mx-0 justify-content-center">
           <div class="col-md-10 col-lg-9 px-lg-2 col-xl-8 px-xl-0">
@@ -49,7 +66,7 @@ function Meeting() {
               className="w-100 rounded p-4 border MeetingSection"
             >
               <p id="MeetingFormTitle">MEETING DETAILS</p>
-              <div style={{ marginLeft: "0px", height: "3px", width: "200px", backgroundColor: "goldenrod" }}></div>
+              <div style={{ marginLeft: "0px", height: "2px", width: "98%", backgroundColor: "black" }}></div>
               <label class="d-block mb-4">
                 <span class="d-block mb-2 labels" style={{ marginTop: "40px" }}>Meeting Title</span>
                 <input
@@ -58,7 +75,7 @@ function Meeting() {
                   id="meetingTitle"
                   class="form-control textInput MeetingInput"
                   placeholder="Meeting Title"
-
+                  required
                 />
               </label>
 
@@ -70,6 +87,7 @@ function Meeting() {
                   rows="1"
                   class="form-control MeetingInput"
                   placeholder="Enter the Meeting Link "
+                  required
                 ></textarea>
               </label>
 
@@ -81,6 +99,7 @@ function Meeting() {
                   rows="3"
                   class="form-control MeetingInput"
                   placeholder="Enter the Meeting Description "
+                  required
                 ></textarea>
               </label>
 
@@ -92,6 +111,7 @@ function Meeting() {
                   class="form-control textInput MeetingInput"
                   id="meetingHost"
                   placeholder="Enter the Host Name"
+                  required
                 ></input>
               </label>
 
@@ -103,7 +123,7 @@ function Meeting() {
                   class="form-control MeetingInput"
                   id="meetingDate"
                   placeholder="Select Date"
-
+                  required
                 ></input>
               </label>
 
@@ -116,12 +136,13 @@ function Meeting() {
                   id="meetingTime"
                   placeholder="Select Time"
                   defaultValue="00:00"
+                  required
                 ></input>
               </label>
 
               <label class="d-block mb-4">
                 <span class="d-block mb-2 labels">Related Files</span>
-                <p style={{fontSize:"14px"}}>(.xlsx, .xls, images, .doc, .docx, .pdf are only accepted)</p>
+                <p style={{ fontSize: "14px" }}>(.xlsx, .xls, images, .doc, .docx, .pdf are only accepted)</p>
                 <input
                   name="meetingFiles"
                   type="file"
@@ -130,6 +151,7 @@ function Meeting() {
                   placeholder="Meeting Title"
                   multiple
                   accept=".xlsx,.xls,image/*,.doc, .docx,.pdf"
+                  
                 />
               </label>
 

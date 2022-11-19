@@ -49,7 +49,7 @@ function GoogleForms() {
                                         <p>{item.Title}</p>
                                     </span>
                                     <span className="FormView">
-                                        <button className="Viewbutton" style={{ padding: "3px", borderRadius: "5px", marginTop:"20px" }}>More &rarr;</button>
+                                        <button className="Viewbutton" style={{ padding: "3px", borderRadius: "5px", marginTop: "20px" }}>More &rarr;</button>
                                     </span>
                                 </div>
                             </Button>
@@ -81,7 +81,10 @@ function GoogleForms() {
 
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={handleHide}>Close</Button>
+                        <div style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}>
+                            <button className="btn btn-primary " type="submit" onClick={(e) => UpdateForm(e)}>Edit Form</button>
+                            <button className="btn btn-danger" type="submit" style={{ marginLeft: "50px" }} onClick={(e) => deletForm(e)}>Delete Form</button>
+                        </div>
                     </Modal.Footer>
                 </Modal>
             </div>

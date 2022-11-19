@@ -22,7 +22,7 @@
   padding: 6px 8px 6px 0px;
   text-decoration: none;
   font-size: 13px;
-  color: black;
+  color: black !important;
   font-weight: normal;
   display: block;
   border: none;
@@ -63,6 +63,11 @@
   padding-bottom: 0px;
   padding-top: 15px;
   text-align: center;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+  border-color: rgba(0,0,0,.125);
 }
 .DropDownHeader{
   text-align: center;

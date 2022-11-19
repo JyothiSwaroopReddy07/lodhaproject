@@ -11,14 +11,19 @@ exports.createComplaint = catchAsyncErrors(async(req,res,next)=> {
     const {Issue, Description, FlatNo} = req.body;
     const complaint1 = await Complaint.find({Issue: Issue, Description: Description, FlatNo: FlatNo})
     if(complaint1 && Object.keys(complaint1).length){
-        return next(new ErrorHandler("Complaint Already Exists",404));
+        res.status(201).json({
+          success: false,
+          message: "Complaint already exists"
+        });
     }
+    else{
     const complaint = await Complaint.create(req.body);
 
     res.status(201).json({
         success: true,
         complaint
     })
+   }
 });
 
 // Get All Complaints
