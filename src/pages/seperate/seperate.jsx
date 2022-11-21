@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Table, Input, Form, Popconfirm } from "antd";
 import axios from "axios";
-import './Seperate.css';
+import './seperate.css';
 import LoginNavBar from '/src/components/LoginNavBar/LoginNavBar'
 import 'antd/dist/antd.css';
 import Accordion from 'react-bootstrap/Accordion';

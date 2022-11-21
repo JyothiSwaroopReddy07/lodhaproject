@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
+import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App'
 import {AppProvider} from './context/StateContext'
@@ -8,6 +8,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
 		<AppProvider>
 		  <App />
-    </AppProvider>
+    	</AppProvider>
 	</React.StrictMode>
 )
