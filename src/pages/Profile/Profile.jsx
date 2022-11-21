@@ -50,53 +50,46 @@ function Profile() {
                     <div className="UserProfileDiv">
                         <p id="userProfileTitle">USER PROFILE</p>
 
-                        <div style={{ marginLeft: "55px", height: "3px", width: "150px", backgroundColor: "gold" }}></div>
                         <div style={{ display: "flex", justifyContent: "center" }}>
                             <img src="/src/assests/user.svg" id="userProfileImg" ></img>
                         </div>
                         <div className="ProfileInput" style={{marginTop:"40px"}}>
                             <p className="EditTitle">NAME</p>
-                            <div style={{ marginTop: "2px", height: "3px", width: "75px", backgroundColor: "gold" }}></div>
+                           
                             <input placeholder={user.OwnerName} name="OwnerName" className="EditInput"></input>
                              
                         </div>
                         <div className="ProfileInput">
                             <p className="EditTitle">EMAIL ADDRESS</p>
-                            <div style={{ marginTop: "2px", height: "3px", width: "150px", backgroundColor: "gold" }}></div>
                             <input placeholder={user.Email} name="Email" className="EditInput"></input>
                              
                         </div>
                         <div className="ProfileInput">
                             <p className="EditTitle">MOBILE NUMBER</p>
-                            <div style={{ marginTop: "2px", height: "3px", width: "175px", backgroundColor: "gold" }}></div>
                             
                             <input placeholder={user.Mobile} name="Mobile" className="EditInput"></input>
                              
                         </div>
                         <div className="ProfileInput">
                             <p className="EditTitle">BLOCK</p>
-                            <div style={{ marginTop: "2px", height: "3px", width: "75px", backgroundColor: "gold" }}></div>
                             
                             <input placeholder={user.Block} name="Block" className="EditInput"></input>
                              
                         </div>
                         <div className="ProfileInput">
                             <p className="EditTitle">FLAT NUMBER</p>
-                            <div style={{ marginTop: "2px", height: "3px", width: "150px", backgroundColor: "gold" }}></div>
                             <input placeholder={user.FlatNo} name="FlatNo" className="EditInput"></input>
                              
                         </div>
                         
                         <div className="ProfileInput" >
                             <p className="EditTitle">PROPERTY REGISTERED NAME</p>
-                            <div style={{ marginTop: "2px", height: "3px", width: "300px", backgroundColor: "gold" }}></div>
                             <input placeholder={user.RegisteredName} name="RegisteredName" className="EditInput"></input>
                              
                         </div>
 
                         <div className="ProfileInput" >
                             <p className="EditTitle">PARKING SLOT</p>
-                            <div style={{ marginTop: "2px", height: "3px", width: "150px", backgroundColor: "gold" }}></div>
                             <input placeholder={user.ParkingSlot} name="ParkingSlot" className="EditInput"></input>
                              
                         </div>

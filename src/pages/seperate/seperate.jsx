@@ -277,7 +277,7 @@ export default function Seperate() {
 
         <div style={{ marginLeft: "5px", height: "3px", width: "200px", backgroundColor: "gold" }}></div>
         <Accordion >
-          <Accordion.Item id="IssueAccord" style={{ marginTop: "50px", width: "90%", border: "2px solid #d3d3d3", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",  }}>
+          <Accordion.Item eventKey="0" id="IssueAccord" style={{ marginTop: "50px", width: "90%", border: "2px solid #d3d3d3", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",  }}>
             <Accordion.Header>
               <p className="IssueTitle">Add New Complaint Type</p>
             </Accordion.Header>
@@ -329,7 +329,7 @@ export default function Seperate() {
           size="large"
           style={{ width: "90%", marginTop: "50px", border: "1px solid black", borderRadius: "5px" }}
         />
-        <div className="container">
+        <div className="AdminPostsDiv">
         {
            filteredData.map(item => <AdminPosts props={item} />)
         }

@@ -17,6 +17,10 @@
     margin-bottom: 0;
     letter-spacing: 2px;
     margin-left: 50px !important;
+    text-decoration-line: underline;
+    text-decoration-color: gold;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 10px; 
 }
 
 #userProfileTitle:first-letter {
@@ -40,16 +44,23 @@
 .EditTitle {
     margin: auto;
     margin-top: 40px;
-    font-size: 25px;
+    font-size: 16px;
     color: black;
     letter-spacing: 1.5px;
+    text-decoration-line: underline;
+    text-decoration-color: gold;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 10px;
+    
 }
 
 .EditTitle:first-letter {
-    font-size: 30px;
+    font-size: 22px;
     font-weight: normal;
 
 }
+
+
 
 .EditInput {
     background-color: white;

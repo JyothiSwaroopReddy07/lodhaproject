@@ -39,7 +39,7 @@ export default function App() {
         <>
             <Router>
                 <Routes>
-                    <Route path='/' element={<Home />} />
+                    <Route path='/' element={JSON.parse(localStorage.getItem("isAuthenticated")) ? <LoggedHome/>: <Home />} />
                     <Route path='/login' element={<LoginSignUp />} />
                     <Route path='/forgotpassword' element={<ForgotPassword />} />
                     <Route path='/Seperate' element={<Seperate />} />

@@ -17,8 +17,8 @@
 .FormItems {
     position: absolute;
     margin: auto;
-   left:0;
-   right:0;
+    left: 0;
+    right: 0;
 
     margin-top: 0;
     width: 80%;
@@ -29,7 +29,7 @@
 
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    
+
 }
 
 .modalButton {
@@ -65,7 +65,37 @@
     width: 25%;
 }
 
-.Viewbutton:hover{
-background-color: rgb(233, 222, 156);
-color: black;
+.Viewbutton:hover {
+    background-color: rgb(233, 222, 156);
+    color: black !important;
+}
+
+.Viewbutton {
+    border: 1px solid black;
+    color: black !important;
+}
+
+
+#title,
+#Description {
+
+    padding: 10px;
+    border-radius: 5px;
+    margin-left:10px;
+    border: 1px solid black;
+    margin-top: 10px;
+}
+
+#link{
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+
+#titleOfForm, #DescriptionOfForm, #linkOfForm{
+    padding: 10px;
+    border-radius: 5px;
+    margin-left:10px;
+    margin-top: 10px;
 }
