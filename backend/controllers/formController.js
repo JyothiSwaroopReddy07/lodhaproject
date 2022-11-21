@@ -1,4 +1,4 @@
-const Form = require("../models/FormModel");
+const Form = require("../models/formModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
