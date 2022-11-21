@@ -67,9 +67,7 @@ function AdminPosts({ props }) {
     return (
         <>
             <Card className="m-3 backgroundcoloring PostBackground1">
-                <form
-                    onSubmit={UpdateComplaint}
-                >
+                <form>
                     <Card.Header className="PostTitle">
                         <div className='PostHeader'>
                             <div style={{width:"90%"}}>
