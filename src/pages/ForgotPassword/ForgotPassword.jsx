@@ -40,18 +40,22 @@ const ForgotPassword = () => {
 
               <form className="forgotPasswordForm" onSubmit={forgotPasswordSubmit} >
                 <div className="forgotPasswordEmail">
+                  <label>EMAIL</label>
                   <input
                     type="email"
                     placeholder="Email"
                     required
                     name="Email"
                   />
+                  <div>
+                  <label>FLAT NO</label>
                   <input
                     type="text"
                     placeholder="Flat Number"
                     required
                     name="FlatNo"
                   />
+                  </div>
                 </div>
                 <button type="submit">Update Password</button>
               </form>
